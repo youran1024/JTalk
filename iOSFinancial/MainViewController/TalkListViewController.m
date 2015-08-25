@@ -72,8 +72,6 @@
 
 - (void)viewWillLayoutSubviews
 {
-    
-//    self.toolbar.frame = CGRectMake(0, 0, APPScreenWidth, 40.0f);
 //    [self layoutViews];
     
     self.talkViewController.conversationMessageCollectionView.height = self.talkViewController.conversationMessageCollectionView.height - self.talkViewController.chatSessionInputBarControl.height;

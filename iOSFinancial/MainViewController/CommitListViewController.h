@@ -8,6 +8,11 @@
 
 #import "HTBaseTableViewController.h"
 
+
+/**
+ *  聊天室成员
+ */
+
 @interface CommitListViewController : HTBaseTableViewController
 
 

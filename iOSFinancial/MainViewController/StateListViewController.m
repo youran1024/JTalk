@@ -237,7 +237,6 @@
         SignListView *listView = [[SignListView alloc] init];
         listView.tag = __SignListCellTag;
         
-        
         listView.frame = cell.contentView.frame;
         listView.frame = CGRectInset(cell.contentView.frame, 15, 0);
         [cell addSubview:listView];

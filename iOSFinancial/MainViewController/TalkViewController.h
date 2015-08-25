@@ -9,6 +9,10 @@
 #import "BaseTalkViewController.h"
 #import <RongIMKit/RongIMKit.h>
 
+/**
+ *  聊天室
+ */
+
 @interface TalkViewController : RCConversationViewController <RCChatSessionInputBarControlDelegate>
 
 
