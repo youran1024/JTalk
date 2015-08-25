@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="lTd-7A-NMq" customClass="ChatRoomInfo">
+            <rect key="frame" x="0.0" y="0.0" width="354" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-d0-M53">
+                    <rect key="frame" x="15" y="8" width="55" height="55"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="OmV-FJ-Raq"/>
+                        <constraint firstAttribute="width" constant="55" id="xBB-IM-8k6"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHl-HK-RKB">
+                    <rect key="frame" x="0.0" y="69" width="354" height="1"/>
+                    <color key="backgroundColor" red="1" green="0.2096810821" blue="0.078323052690000006" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="xbA-9c-ppT"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hunter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4y-LU-aCL">
+                    <rect key="frame" x="80" y="26" width="49" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="243人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFq-og-5a4">
+                    <rect key="frame" x="299" y="26" width="41" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerY" secondItem="ZFq-og-5a4" secondAttribute="centerY" id="4dW-O7-LJL"/>
+                <constraint firstItem="gHl-HK-RKB" firstAttribute="leading" secondItem="lTd-7A-NMq" secondAttribute="leading" id="9hK-vi-e8W"/>
+                <constraint firstItem="d4y-LU-aCL" firstAttribute="leading" secondItem="Nye-d0-M53" secondAttribute="trailing" constant="10" id="9mC-rJ-wW7"/>
+                <constraint firstItem="d4y-LU-aCL" firstAttribute="top" secondItem="lTd-7A-NMq" secondAttribute="top" constant="8" id="Kon-jD-n6D"/>
+                <constraint firstAttribute="bottom" secondItem="gHl-HK-RKB" secondAttribute="bottom" id="LwQ-KV-nbf"/>
+                <constraint firstItem="Nye-d0-M53" firstAttribute="leading" secondItem="lTd-7A-NMq" secondAttribute="leading" constant="15" id="S4d-Cx-Tgp"/>
+                <constraint firstItem="Nye-d0-M53" firstAttribute="top" secondItem="lTd-7A-NMq" secondAttribute="top" constant="10" id="XiZ-7K-Eab"/>
+                <constraint firstItem="d4y-LU-aCL" firstAttribute="leading" secondItem="Nye-d0-M53" secondAttribute="trailing" constant="18" id="crx-xy-slu"/>
+                <constraint firstAttribute="trailing" secondItem="ZFq-og-5a4" secondAttribute="trailing" constant="15" id="fJJ-FO-o1U"/>
+                <constraint firstAttribute="centerY" secondItem="Nye-d0-M53" secondAttribute="centerY" id="qse-vJ-m0M"/>
+                <constraint firstAttribute="centerY" secondItem="d4y-LU-aCL" secondAttribute="centerY" id="riQ-7A-yu3"/>
+                <constraint firstItem="gHl-HK-RKB" firstAttribute="top" secondItem="Nye-d0-M53" secondAttribute="bottom" constant="10" id="t5s-NL-ejD"/>
+                <constraint firstAttribute="trailing" secondItem="gHl-HK-RKB" secondAttribute="trailing" id="vfb-D0-fdQ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="XiZ-7K-Eab"/>
+                    <exclude reference="t5s-NL-ejD"/>
+                    <exclude reference="Kon-jD-n6D"/>
+                    <exclude reference="crx-xy-slu"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="headerImageView" destination="Nye-d0-M53" id="nbO-7x-LlP"/>
+                <outlet property="lineView" destination="gHl-HK-RKB" id="Pbx-59-3Ey"/>
+                <outlet property="nameLabel" destination="d4y-LU-aCL" id="Vaa-nj-RO4"/>
+                <outlet property="tailLabel" destination="ZFq-og-5a4" id="XgL-Ds-4RI"/>
+            </connections>
+            <point key="canvasLocation" x="646" y="77.5"/>
+        </view>
+    </objects>
+</document>

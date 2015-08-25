@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
+            <connections>
+                <outlet property="backView1" destination="UxZ-U4-ev3" id="AcE-hz-AvE"/>
+                <outlet property="backView2" destination="EqN-JS-74F" id="5al-on-mos"/>
+                <outlet property="codeFiled" destination="sfX-1G-YgZ" id="Aa9-xw-JDW"/>
+                <outlet property="codeLabel" destination="faW-w8-udh" id="xn2-cn-i3N"/>
+                <outlet property="forgetButton" destination="K8v-1j-uEG" id="7wT-PM-ePt"/>
+                <outlet property="lineView1" destination="aYm-kG-OmA" id="znA-8y-jkl"/>
+                <outlet property="lineView2" destination="ejw-6H-N4W" id="Qeu-xT-Sxy"/>
+                <outlet property="lineViewHor" destination="bT3-Vu-j2h" id="dJv-Wx-jIo"/>
+                <outlet property="lineViewVer" destination="KOG-xd-FWV" id="VyF-KZ-HL2"/>
+                <outlet property="promptLabel" destination="gVa-Yu-YQx" id="er7-lE-Cd2"/>
+                <outlet property="telFiled" destination="Vqt-KX-xww" id="4Ny-vk-IFs"/>
+                <outlet property="telLabel" destination="2ot-x0-KqT" id="p27-jc-jTA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="weChatButton" destination="aCT-Js-PjF" id="wpz-Sl-Mz4"/>
+                <outlet property="weiBoButton" destination="c8C-Xi-xjf" id="b0Y-0j-9Vl"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="UxZ-U4-ev3">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="faW-w8-udh">
+                            <rect key="frame" x="18" y="74" width="82" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2ot-x0-KqT">
+                            <rect key="frame" x="18" y="21" width="82" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" id="bT3-Vu-j2h" userLabel="horLine">
+                            <rect key="frame" x="0.0" y="60" width="320" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.2096810821" blue="0.078323052690000006" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="Vqt-KX-xww">
+                            <rect key="frame" x="122" y="17" width="172" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="sfX-1G-YgZ">
+                            <rect key="frame" x="122" y="70" width="172" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                        </textField>
+                        <view contentMode="scaleToFill" id="KOG-xd-FWV" userLabel="verLine">
+                            <rect key="frame" x="113" y="0.0" width="1" height="112"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" red="1" green="0.2096810821" blue="0.078323052690000006" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="K8v-1j-uEG">
+                    <rect key="frame" x="18" y="120" width="75" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="忘记密码？">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="forgetButtonClicked" destination="-1" eventType="touchUpInside" id="5Ow-ij-csc"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="c8C-Xi-xjf">
+                    <rect key="frame" x="81" y="253" width="57" height="57"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="weiBo">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="weiBoButtonClicked:" destination="-1" eventType="touchUpInside" id="Kxh-T4-QV0"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aCT-Js-PjF">
+                    <rect key="frame" x="191" y="253" width="57" height="57"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="weChat">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="weChatButtonClicked:" destination="-1" eventType="touchUpInside" id="jzf-pV-Bs9"/>
+                    </connections>
+                </button>
+                <view hidden="YES" contentMode="scaleToFill" id="EqN-JS-74F">
+                    <rect key="frame" x="0.0" y="198" width="320" height="43"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快速登录" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gVa-Yu-YQx">
+                            <rect key="frame" x="126" y="11" width="68" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" id="aYm-kG-OmA" userLabel="line1">
+                            <rect key="frame" x="39" y="21" width="68" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                            <color key="backgroundColor" red="1" green="0.2096810821" blue="0.078323052690000006" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" id="ejw-6H-N4W" userLabel="line2">
+                            <rect key="frame" x="202" y="21" width="68" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                            <color key="backgroundColor" red="1" green="0.2096810821" blue="0.078323052690000006" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="305" y="161"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="weChat" width="56" height="56"/>
+        <image name="weiBo" width="56" height="56"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

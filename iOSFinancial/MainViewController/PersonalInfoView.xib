@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="LXi-1m-rdn" customClass="PersonalInfoView">
+            <rect key="frame" x="0.0" y="0.0" width="365" height="275"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gR2-7x-ekY">
+                    <rect key="frame" x="147" y="63" width="71" height="71"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="71" id="kzd-Tb-B5F"/>
+                        <constraint firstAttribute="width" constant="71" id="mHX-dg-LV1"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sex" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pn7-4j-zes" userLabel="sex">
+                    <rect key="frame" x="170" y="184" width="24" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="prompt" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T5k-ts-Muk" userLabel="prompt">
+                    <rect key="frame" x="159" y="217" width="47" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mzr-Oj-GTz" userLabel="name">
+                    <rect key="frame" x="162" y="149" width="41" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="gR2-7x-ekY" secondAttribute="centerX" id="2wf-DS-SSL"/>
+                <constraint firstItem="Pn7-4j-zes" firstAttribute="top" secondItem="Mzr-Oj-GTz" secondAttribute="bottom" constant="15" id="76I-O7-kC0"/>
+                <constraint firstItem="T5k-ts-Muk" firstAttribute="top" secondItem="Pn7-4j-zes" secondAttribute="bottom" constant="15" id="Gva-Ns-KV6"/>
+                <constraint firstAttribute="centerX" secondItem="Pn7-4j-zes" secondAttribute="centerX" id="RCF-9j-r3q"/>
+                <constraint firstAttribute="centerX" secondItem="T5k-ts-Muk" secondAttribute="centerX" id="Zaw-BF-95R"/>
+                <constraint firstItem="gR2-7x-ekY" firstAttribute="top" secondItem="LXi-1m-rdn" secondAttribute="top" constant="63" id="brc-5F-HfH"/>
+                <constraint firstItem="Mzr-Oj-GTz" firstAttribute="top" secondItem="gR2-7x-ekY" secondAttribute="bottom" constant="15" id="oUW-SP-x2o"/>
+                <constraint firstAttribute="centerX" secondItem="Mzr-Oj-GTz" secondAttribute="centerX" id="xAZ-5F-owh"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageView" destination="gR2-7x-ekY" id="1UF-kO-98K"/>
+                <outlet property="locationLabel" destination="Pn7-4j-zes" id="vML-xK-wk0"/>
+                <outlet property="nameLabel" destination="Mzr-Oj-GTz" id="adi-vL-99H"/>
+                <outlet property="promptLabel" destination="T5k-ts-Muk" id="IXF-cN-mLW"/>
+            </connections>
+            <point key="canvasLocation" x="177.5" y="271.5"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
