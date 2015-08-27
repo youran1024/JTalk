@@ -10,31 +10,31 @@
 	<string>iOSFinancial</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>A89AED3545DA42ECDED2BFFC0922F2317FDC1639</key>
-		<string>github.com:jiandanlicai/iOSFinancial.git</string>
+		<key>75C93EB92B3553A0D3F6D1724EF7C79357BAC9F6</key>
+		<string>github.com:youran1024/JTalk.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>iOSFinancial/iOSFinancial.xcworkspace</string>
+	<string>iOSFinancial.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>A89AED3545DA42ECDED2BFFC0922F2317FDC1639</key>
-		<string>../..</string>
+		<key>75C93EB92B3553A0D3F6D1724EF7C79357BAC9F6</key>
+		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:jiandanlicai/iOSFinancial.git</string>
+	<string>github.com:youran1024/JTalk.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>A89AED3545DA42ECDED2BFFC0922F2317FDC1639</string>
+	<string>75C93EB92B3553A0D3F6D1724EF7C79357BAC9F6</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>A89AED3545DA42ECDED2BFFC0922F2317FDC1639</string>
+			<string>75C93EB92B3553A0D3F6D1724EF7C79357BAC9F6</string>
 			<key>IDESourceControlWCCName</key>
-			<string>JianDanFinancial</string>
+			<string>JTalk</string>
 		</dict>
 	</array>
 </dict>

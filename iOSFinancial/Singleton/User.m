@@ -36,6 +36,7 @@ static NSString * const kIsBalanceIncomeOpen = @"kIsBalanceIncomeOpen";
     
     if (self) {
         _userInfo = [[UserInfoModel alloc] init];
+        [_userInfo readSynchronizeData];
     }
 
     return self;

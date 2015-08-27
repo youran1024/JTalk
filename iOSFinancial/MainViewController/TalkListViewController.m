@@ -52,16 +52,18 @@
 {
     [super viewDidLoad];
     
-    self.view.autoresizesSubviews = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    [self.view addSubview:self.toolbar];
+    self.view.autoresizesSubviews = NO;
 
     [self.view addSubview:self.pageScrollView];
+
+    [self.view addSubview:self.toolbar];
     
     [self addContentViewController];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidDissmiss) name:UIKeyboardDidHideNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidDissmiss) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidDissmiss) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidDissmiss) name:UIKeyboardWillHideNotification object:nil];
     
 }
 
@@ -170,7 +172,7 @@
 {
     if (!_pageScrollView) {
         CGFloat height = CGRectGetHeight(self.toolbar.frame);
-        _pageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, height, self.view.width, APPScreenHeight -  44 - height)];
+        _pageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, APPScreenHeight -  44)];
         _pageScrollView.autoresizingMask = UIViewAutoresizingNone;
         _pageScrollView.scrollsToTop = NO;
         _pageScrollView.bounces = NO;
@@ -195,6 +197,7 @@
 {
     if (!_toolbar) {
         _toolbar = [TalkListToolBar xibView];
+        _toolbar.backgroundColor = HTClearColor;
         _toolbar.autoresizingMask = UIViewAutoresizingNone;
         [_toolbar.talkButton setSelected:YES];
         _toolbar.frame = CGRectMake(0, 0, APPScreenWidth, 40);

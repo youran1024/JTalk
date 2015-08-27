@@ -113,7 +113,7 @@
     [self.view addSubview:backView];
     
     UILabel *label = [[UILabel alloc] init];
-    label.text = @"新密码";
+    label.text = @"设置密码";
     label.textColor = [UIColor jt_globleTextColor];
     [label sizeToFit];
     

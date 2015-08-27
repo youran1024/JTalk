@@ -114,6 +114,8 @@ static inline BOOL isEmpty(id thing) {
 #define __userInfoTmp   [User sharedUser].userInfoModelTmp
 #define __userInfo      [User sharedUser].userInfo
 #define __userInfoId    __userInfo.userID
+#define __isUserLogin   [User sharedUser].isLogin
+
 
 #define APPScreenFrame      [[UIScreen mainScreen] applicationFrame]
 #define APPScreenWidth      APPScreenFrame.size.width

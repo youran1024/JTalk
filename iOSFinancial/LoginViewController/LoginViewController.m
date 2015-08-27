@@ -53,17 +53,6 @@ static NSString *userPhone;
 
 @implementation LoginViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    if (self) {
-        self.runCount = 59;
-    }
-    
-    return self;
-}
-
 - (void)dealloc
 {
     [_timeRuner invalidate];
@@ -95,6 +84,7 @@ static NSString *userPhone;
     self = [super initWithNibName:nibNameOrNil bundle:nil];
     
     if (self) {
+        self.runCount = 59;
         self.loginViewType = loginViewType;
         self.user = [User sharedUser];
         self.userInfo = self.user.userInfoModelTmp;
@@ -200,6 +190,7 @@ static NSString *userPhone;
     
     _telFiled.textColor = [UIColor jt_globleTextColor];
     _codeLabel.textColor = [UIColor jt_globleTextColor];
+    _codeFiled.textColor = [UIColor jt_globleTextColor];
     
     if (_loginViewType == LoginViewTypeRegedit ||
         _loginViewType == LoginViewTypeFindPass) {
@@ -300,6 +291,13 @@ static NSString *userPhone;
         }];
     }
     
+}
+
+- (void)showPassViewController
+{
+    SetPassType type = _loginViewType == LoginViewTypeFindPass ? SetPassTypeReset : SetPassTypeNew;
+    SetNewPassViewController *setNewPass = [[SetNewPassViewController alloc] initWithSetPassType:type];
+    [self.navigationController pushViewController:setNewPass animated:YES];
 }
 
 //  MARK:忘记密码

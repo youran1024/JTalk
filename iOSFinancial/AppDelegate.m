@@ -81,7 +81,7 @@
     //  MARK:显示引导页
     [HTGuideManager showGuideViewWithDelegate:self];
     
-    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginSuccess) name:__USER_LOGIN_SUCCESS object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginSuccess) name:__USER_LOGIN_SUCCESS object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginOutSuccess) name:__USER_LOGINOUT_SUCCESS object:nil];
     
@@ -110,17 +110,7 @@
 //  MARK:用户登录成功
 - (void)userLoginSuccess
 {
-    UIViewController *viewController = self.window.rootViewController;
-    
-    self.tabBarController.view.alpha = 0.0f;
-    [UIView animateWithDuration:.25 animations:^{
-        viewController.view.alpha = 0;
-        self.tabBarController.view.alpha = 1.0f;
-        self.tabBarController.view.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1);
-    } completion:^(BOOL finished) {
-        self.window.rootViewController = self.tabBarController;
-    }];
-
+    [self rongYunInit];
 }
 
 //  MARK:用户注销成功
@@ -330,28 +320,32 @@
     //初始化融云SDK，
     [[RCIM sharedRCIM] initWithAppKey:__RongYunKey_];
  
+
+//    NSString *token = @"LvhvMGO8k+LHVATyYiup/+fCgUbrbGP7LiGzGZpG9Jz/16Axj4qg14+5BLS1v0BMfhn6y9gDDkl4yIMJbySJgNiJQlfi4r9cRIAiubQjsB9hwYt/cE3edw==";
+
     User *user = [User sharedUser];
     UserInfoModel *userInfo = user.userInfo;
     
-    RCUserInfo *_currentUserInfo =
-    [[RCUserInfo alloc] initWithUserId:userInfo.userID
-                                  name:userInfo.userName
-                              portrait:userInfo.userPhoto];
-
-    [RCIMClient sharedRCIMClient].currentUserInfo = _currentUserInfo;
-    
-    NSString *token = @"LvhvMGO8k+LHVATyYiup/+fCgUbrbGP7LiGzGZpG9Jz/16Axj4qg14+5BLS1v0BMfhn6y9gDDkl4yIMJbySJgNiJQlfi4r9cRIAiubQjsB9hwYt/cE3edw==";
-    
-    [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
-        NSLog(@"%@", userId);
+    if (user.isLogin) {
         
-    } error:^(RCConnectErrorCode status) {
-        NSLog(@"status%ld", (long)status);
+        RCUserInfo *_currentUserInfo =
+        [[RCUserInfo alloc] initWithUserId:userInfo.userID
+                                      name:userInfo.userName
+                                  portrait:userInfo.userPhoto];
         
-    } tokenIncorrect:^{
-        NSLog(@"token incorrect");
+        [RCIMClient sharedRCIMClient].currentUserInfo = _currentUserInfo;
         
-    }];
+        [[RCIM sharedRCIM] connectWithToken:userInfo.userToken success:^(NSString *userId) {
+            NSLog(@"%@", userId);
+            
+        } error:^(RCConnectErrorCode status) {
+            NSLog(@"status%ld", (long)status);
+            
+        } tokenIncorrect:^{
+            NSLog(@"token incorrect");
+            
+        }];
+    }
 }
 
 - (void)shareSDKInit

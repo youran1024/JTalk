@@ -86,7 +86,6 @@ static dispatch_group_t http_request_operation_completion_group() {
         NSError *error = nil;
         self.responseObject = [self.responseSerializer responseObjectForResponse:self.response data:self.responseData error:&error];
         if (error) {
-            NSLog(@"HTserializerError:%@", error);
             self.responseSerializationError = error;
         }
     }

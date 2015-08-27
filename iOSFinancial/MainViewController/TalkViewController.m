@@ -35,18 +35,16 @@
     self.navigationController.navigationBar.barTintColor = [UIColor jt_barTintColor];
 }
 
+
+
 - (void)viewDidLoad
 {
-    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+    
     [super viewDidLoad];
     
     [self.chatSessionInputBarControl setInputBarType:RCChatSessionInputBarControlDefaultType style:RC_CHAT_INPUT_BAR_STYLE_CONTAINER_EXTENTION];
     
-}
-
-- (void)keyboardDidDissmiss
-{
-    [self viewWillLayoutSubviews];
 }
 
 /*

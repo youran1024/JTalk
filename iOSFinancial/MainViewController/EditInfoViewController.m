@@ -109,9 +109,14 @@
         
         NSInteger responseCode = [[dict stringForKey:@"code"] integerValue];
         if (responseCode == 200) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:__USER_LOGIN_SUCCESS object:nil];
+            
             [weakSelf showHudSuccessView:@"注册成功"];
-            userInfo.userToken = [dict stringForKey:@""];
-            userInfo.userID = [dict stringForKey:@""];
+            
+            userInfo.userToken = [dict stringForKey:@"token"];
+            userInfo.userID = [dict stringForKey:@"user_id"];
+            [[User sharedUser] exchangeUserInfo];
             
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
         }

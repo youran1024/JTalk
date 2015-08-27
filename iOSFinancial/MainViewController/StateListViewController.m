@@ -50,9 +50,6 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     self.navigationController.navigationBar.hidden = YES;
     
-    if (self.dataArray.count == 0) {
-        [self.refreshHeaderView beginRefreshing];
-    }
 }
 
 - (void)viewDidLoad {
@@ -76,7 +73,7 @@
     
     [self addTableHeaderView];
     
-    if ([User sharedUser].isLogin) {
+    if (__isUserLogin) {
         [self.refreshHeaderView beginRefreshing];
     }
 
@@ -255,9 +252,14 @@
     __weakSelf;
     [listView setSignClickBlock:^(SignModel *model, UIButton *button) {
         //  单击了标签
-        [self recoderUserClickWord:button.titleLabel.text];
+//        [weakSelf recoderUserClickWord:button.titleLabel.text];
         
-        [weakSelf showTalkListViewController:model];
+        //  创建聊天室
+        [weakSelf createGroupWithTitle:button.titleLabel.text andModel:model];
+    
+//        [self joinGroupByGroupId:[model.title toMD5] andGroupName:model.title andModel:model];
+//                [self showTalkListViewController:model];
+        
     }];
     
     [listView setChangeAnotherBlock:^(UIButton *button) {
@@ -280,20 +282,54 @@
 }
 
 //  MARK:创建聊天室
-- (void)createGroup
+- (void)createGroupWithTitle:(NSString *)title andModel:(SignModel *)model
 {
-    HTBaseRequest *request = [HTBaseRequest createGroupWithGroupName:self.title];
+    [self showHudWaitingView:PromptTypeWating];
+    HTBaseRequest *request = [HTBaseRequest createGroupWithGroupName:title];
     
+    __weakSelf;
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dict = request.responseJSONObject;
         NSInteger code = [[dict stringIntForKey:@"code"] integerValue];
         
         if (code == 200) {
-            
+            [weakSelf joinGroupByGroupId:[model.title toMD5] andGroupName:model.title andModel:model];
         }
         
     }];
+}
 
+//  加入群组
+- (void)joinGroupByGroupId:(NSString *)groupId andGroupName:(NSString *)groupName andModel:(SignModel *)model
+{
+    __weakSelf;
+    [[RCIMClient sharedRCIMClient] joinGroup:groupId groupName:groupName success:^{
+        [weakSelf removeHudInManaual];
+        [weakSelf performSelectorOnMainThread:@selector(showTalkListViewController:) withObject:model waitUntilDone:YES];
+    } error:^(RCErrorCode status) {
+        [weakSelf showHudErrorView:@"加入失败，请重试!"];
+    }];
+}
+
+//  MARK:聊天室Controller
+- (void)showTalkListViewController:(SignModel *)model
+{
+        TalkViewController *conversationVC = [[TalkViewController alloc] init];
+        conversationVC.view.backgroundColor = HTRedColor;
+        conversationVC.conversationType = ConversationType_GROUP; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
+        conversationVC.targetId = [model.title toMD5]; // 接收者的 targetId，这里为举例。
+        conversationVC.userName = model.title;
+        conversationVC.title = model.title; // 会话的 title。
+    
+        conversationVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:conversationVC animated:YES];
+    
+        return;
+    
+    TalkListViewController *talkVc = [[TalkListViewController alloc] init];
+    talkVc.signModel = model;
+    talkVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:talkVc animated:YES];
 }
 
 //  MARK:程序状态的存储和恢复
@@ -306,27 +342,6 @@
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder
 {
    self.dataArray = [coder decodeObjectForKey:@"selfDataArray"];
-}
-
-//  MARK:聊天室Controller
-- (void)showTalkListViewController:(SignModel *)model
-{
-//    TalkViewController *conversationVC = [[TalkViewController alloc] init];
-//    conversationVC.view.backgroundColor = HTRedColor;
-//    conversationVC.conversationType =ConversationType_PRIVATE; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
-//    conversationVC.targetId = @"55d81cd1b217c414ea07eb9c"; // 接收者的 targetId，这里为举例。
-//    conversationVC.userName = @"Mr.Yang"; // 接受者的 username，这里为举例。
-//    conversationVC.title = @"Mr.Yang_Hello"; // 会话的 title。
-//    
-//    conversationVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:conversationVC animated:YES];
-//    
-//    return;
-    
-    TalkListViewController *talkVc = [[TalkListViewController alloc] init];
-    talkVc.signModel = model;
-    talkVc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:talkVc animated:YES];
 }
 
 #pragma mark - Views

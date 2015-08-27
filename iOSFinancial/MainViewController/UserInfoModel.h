@@ -34,11 +34,16 @@ typedef NS_ENUM(NSInteger, UserLoginType) {
 @property (nonatomic, strong)   NSArray *signHistoryArray;
 
 
+//  读取缓存
+- (void)readSynchronizeData;
+
+//  userModel和临时的userTmpModel 交换数据信息
 - (void)exchangeUserInfoWithTmp:(UserInfoModel *)infoModel;
 
 //  会影响用户缓存
 - (void)clearUserInfoData;
 
 
+- (void)synchronize;
 
 @end

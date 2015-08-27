@@ -40,7 +40,6 @@ static NSString *userInfoPrompt = @"userInfoPrompt";
     self = [super init];
     
     if (self) {
-        [self readSynchronizeData];
         if (self.userID.length == 0) {
             //  未登录，默认值
             self.userLoginType = UserLoginTypePhone;
