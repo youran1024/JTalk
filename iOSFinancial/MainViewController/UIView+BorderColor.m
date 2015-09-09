@@ -19,7 +19,7 @@
 - (void)borderRandamColor
 {
     self.layer.borderColor = [UIColor randomColor].CGColor;
-    self.layer.borderWidth = 2.0f;
+    self.layer.borderWidth = 4.0f;
 }
 
 @end

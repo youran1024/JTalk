@@ -15,6 +15,7 @@
 #import "UIBarButtonExtern.h"
 #import "HTBaseRequest+Requests.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <Qiniu/QiniuSDK.h>
 
 
 #define ORIGINAL_MAX_WIDTH 640.0f
@@ -165,6 +166,8 @@
     
     UserInfoModel *userInfo = user.userInfoModelTmp;
     
+    userInfo.userPrompt = _selectionInfoCell.placeHolderView.text;
+    
     if (!userInfo.userPhoto) {
         [self showHudErrorView:@"请设置头像"];
         return;
@@ -175,6 +178,30 @@
         return;
     }
     
+    //  先上传头像到七牛云存储
+    [self uploadHeaderImage:userInfo.userPhotoImage byUser:user];
+}
+
+- (void)uploadHeaderImage:(UIImage *)image byUser:(User *)user
+{
+    QNUploadManager *upManager = [[QNUploadManager alloc] init];
+    NSData *data = UIImageJPEGRepresentation(image, .9);
+    NSString *token = @"";
+    __weakSelf;
+    [upManager putData:data key:@"hello" token:token
+              complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+                  NSLog(@"%@", info);
+                  NSLog(@"%@", resp);
+                  
+                  // 保存用户头像地址 (七牛要设置成 公开的 )
+                  user.userInfo.userPhoto = key;
+                  [weakSelf doRegeditOrModify:user];
+                  
+              } option:nil];
+}
+
+- (void)doRegeditOrModify:(User *)user
+{
     if (user.isLogin) {
         
         //  修改个人信息
@@ -183,7 +210,7 @@
     }else {
         [self doRegeitRequest];
     }
- 
+
 }
 
 //  头像视图
@@ -331,7 +358,7 @@
 - (UITableViewCell *)infoCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HTInfoCell *infoCell = [HTInfoCell newCell];
-
+    _selectionInfoCell = infoCell;
     infoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
@@ -352,8 +379,6 @@
     
     if (indexPath.row != 3) {
         _selectionCell = (HTEditCell *)[tableView cellForRowAtIndexPath:indexPath];
-    }else {
-        _selectionInfoCell = (HTInfoCell *)[tableView cellForRowAtIndexPath:indexPath];
     }
     
     if (indexPath.row == 1) {
@@ -383,7 +408,6 @@
         [self.navigationController pushViewController:loaction animated:YES];
     }
 }
-
 
 #pragma mark -
 

@@ -47,9 +47,13 @@
 {
     [super viewWillAppear:animated];
     
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     self.navigationController.navigationBar.hidden = YES;
     
+    if (self.dataArray.count == 0) {
+        [self showHudWaitingView:PromptTypeWating];
+    }
+    
+    [self requestHotWordList];
 }
 
 - (void)viewDidLoad {
@@ -73,10 +77,13 @@
     
     [self addTableHeaderView];
     
-    if (__isUserLogin) {
-        [self.refreshHeaderView beginRefreshing];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginSuccess) name:__USER_LOGIN_SUCCESS object:nil];
+    
+}
 
+- (void)userLoginSuccess
+{
+//    [self requestHotWordList];
 }
 
 //  MARK:下拉刷新
@@ -90,6 +97,7 @@
     HTBaseRequest *request = [HTBaseRequest hotWordList];
     
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        [self removeHudInManaual];
         [self endRefresh];
         
         [self parseHotSignListData:[request.responseJSONObject arrayForKey:@"result"]];
@@ -250,15 +258,10 @@
     [listView refreWithModel:[self.dataArray objectAtIndex:indexPath.section]];
     
     __weakSelf;
+    //  单击了标签
     [listView setSignClickBlock:^(SignModel *model, UIButton *button) {
-        //  单击了标签
-//        [weakSelf recoderUserClickWord:button.titleLabel.text];
-        
         //  创建聊天室
         [weakSelf createGroupWithTitle:button.titleLabel.text andModel:model];
-    
-//        [self joinGroupByGroupId:[model.title toMD5] andGroupName:model.title andModel:model];
-//                [self showTalkListViewController:model];
         
     }];
     
@@ -305,7 +308,22 @@
     __weakSelf;
     [[RCIMClient sharedRCIMClient] joinGroup:groupId groupName:groupName success:^{
         [weakSelf removeHudInManaual];
-        [weakSelf performSelectorOnMainThread:@selector(showTalkListViewController:) withObject:model waitUntilDone:YES];
+        
+        [weakSelf recoderUserClickWord:groupName];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [weakSelf showTalkListViewController:model];
+        });
+        
+        RCGroup *group = [[RCGroup alloc] initWithGroupId:[model.title toMD5] groupName:model.title portraitUri:nil];
+        
+        [[RCIMClient sharedRCIMClient] syncGroups:@[group] success:^{
+            // success
+
+        } error:^(RCErrorCode status) {
+            
+        }];
+        
     } error:^(RCErrorCode status) {
         [weakSelf showHudErrorView:@"加入失败，请重试!"];
     }];
@@ -314,17 +332,18 @@
 //  MARK:聊天室Controller
 - (void)showTalkListViewController:(SignModel *)model
 {
-        TalkViewController *conversationVC = [[TalkViewController alloc] init];
-        conversationVC.view.backgroundColor = HTRedColor;
-        conversationVC.conversationType = ConversationType_GROUP; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
-        conversationVC.targetId = [model.title toMD5]; // 接收者的 targetId，这里为举例。
-        conversationVC.userName = model.title;
-        conversationVC.title = model.title; // 会话的 title。
+    TalkViewController *conversationVC = [[TalkViewController alloc] init];
+    conversationVC.conversationType = ConversationType_GROUP; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
+    conversationVC.targetId = [model.title toMD5]; // 接收者的 targetId，这里为举例。
+    conversationVC.userName = model.title;
+    conversationVC.title = model.title; // 会话的 title。
+    conversationVC.groupTitle = model.title;
     
-        conversationVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:conversationVC animated:YES];
+    conversationVC.hidesBottomBarWhenPushed = YES;
     
-        return;
+    [self.navigationController pushViewController:conversationVC animated:YES];
+    
+    return;
     
     TalkListViewController *talkVc = [[TalkListViewController alloc] init];
     talkVc.signModel = model;
@@ -341,7 +360,8 @@
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder
 {
-   self.dataArray = [coder decodeObjectForKey:@"selfDataArray"];
+    self.dataArray = [coder decodeObjectForKey:@"selfDataArray"];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Views

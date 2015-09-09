@@ -188,9 +188,22 @@
 		92F01EA51AF4A58F00957F7C /* HTPercentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F01EA41AF4A58F00957F7C /* HTPercentView.m */; };
 		92F559111AE9F3F10074A52A /* HTVersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F559101AE9F3F10074A52A /* HTVersionManager.m */; };
 		92FBF0981B8C44B300E56EF9 /* UIView+BorderColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FBF0971B8C44B300E56EF9 /* UIView+BorderColor.m */; };
+		92FCF57E1B94015800644EEA /* RCDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCF57D1B94015800644EEA /* RCDataBaseManager.m */; };
+		92FCF5811B94019200644EEA /* RCDRCIMDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCF5801B94019200644EEA /* RCDRCIMDataSource.m */; };
+		92FCF5A41B9405AB00644EEA /* DBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCF5981B9405AB00644EEA /* DBHelper.m */; };
+		92FCF5A51B9405AB00644EEA /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCF59A1B9405AB00644EEA /* FMDatabase.m */; };
+		92FCF5A61B9405AB00644EEA /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCF59C1B9405AB00644EEA /* FMDatabaseAdditions.m */; };
+		92FCF5A71B9405AB00644EEA /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCF59E1B9405AB00644EEA /* FMDatabasePool.m */; };
+		92FCF5A81B9405AB00644EEA /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCF5A01B9405AB00644EEA /* FMDatabaseQueue.m */; };
+		92FCF5A91B9405AB00644EEA /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCF5A31B9405AB00644EEA /* FMResultSet.m */; };
+		92FCF5AC1B9409B900644EEA /* RCDGroupInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCF5AB1B9409B900644EEA /* RCDGroupInfo.m */; };
+		92FCF5B21B940AD800644EEA /* RCDUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCF5B11B940AD800644EEA /* RCDUserInfo.m */; };
+		92FCF5B51B9550C200644EEA /* TalkSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCF5B41B9550C200644EEA /* TalkSettingViewController.m */; };
 		92FEF6D91B8343C30090C09D /* SearchHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FEF6D81B8343C30090C09D /* SearchHistoryViewController.m */; };
 		92FEF6DD1B8348140090C09D /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FEF6DC1B8348140090C09D /* UserInfoCell.m */; };
 		92FEF6DF1B8348250090C09D /* UserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92FEF6DE1B8348250090C09D /* UserInfoCell.xib */; };
+		92FF34C91B901D5B00D03FF7 /* RCDChatListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FF34C81B901D5B00D03FF7 /* RCDChatListCell.m */; };
+		92FF34CC1B904A6E00D03FF7 /* SystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FF34CB1B904A6E00D03FF7 /* SystemConfig.m */; };
 		92FFE4141B79D929003B57A9 /* UserLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FFE4131B79D929003B57A9 /* UserLocationViewController.m */; };
 		92FFE4181B79D943003B57A9 /* LoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FFE4171B79D943003B57A9 /* LoadingCell.m */; };
 		92FFE41A1B79D94D003B57A9 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92FFE4191B79D94D003B57A9 /* LoadingCell.xib */; };
@@ -512,11 +525,38 @@
 		92F559101AE9F3F10074A52A /* HTVersionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTVersionManager.m; path = ../singleton/HTVersionManager.m; sourceTree = "<group>"; };
 		92FBF0961B8C44B300E56EF9 /* UIView+BorderColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+BorderColor.h"; path = "../MainViewController/UIView+BorderColor.h"; sourceTree = "<group>"; };
 		92FBF0971B8C44B300E56EF9 /* UIView+BorderColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+BorderColor.m"; path = "../MainViewController/UIView+BorderColor.m"; sourceTree = "<group>"; };
+		92FCF57C1B94015800644EEA /* RCDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDataBaseManager.h; sourceTree = "<group>"; };
+		92FCF57D1B94015800644EEA /* RCDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDataBaseManager.m; sourceTree = "<group>"; };
+		92FCF57F1B94019200644EEA /* RCDRCIMDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDRCIMDataSource.h; sourceTree = "<group>"; };
+		92FCF5801B94019200644EEA /* RCDRCIMDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDRCIMDataSource.m; sourceTree = "<group>"; };
+		92FCF5971B9405AB00644EEA /* DBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHelper.h; sourceTree = "<group>"; };
+		92FCF5981B9405AB00644EEA /* DBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHelper.m; sourceTree = "<group>"; };
+		92FCF5991B9405AB00644EEA /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		92FCF59A1B9405AB00644EEA /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		92FCF59B1B9405AB00644EEA /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		92FCF59C1B9405AB00644EEA /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		92FCF59D1B9405AB00644EEA /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		92FCF59E1B9405AB00644EEA /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		92FCF59F1B9405AB00644EEA /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		92FCF5A01B9405AB00644EEA /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		92FCF5A11B9405AB00644EEA /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		92FCF5A21B9405AB00644EEA /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		92FCF5A31B9405AB00644EEA /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		92FCF5AA1B9409B900644EEA /* RCDGroupInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDGroupInfo.h; sourceTree = "<group>"; };
+		92FCF5AB1B9409B900644EEA /* RCDGroupInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDGroupInfo.m; sourceTree = "<group>"; };
+		92FCF5B01B940AD800644EEA /* RCDUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDUserInfo.h; sourceTree = "<group>"; };
+		92FCF5B11B940AD800644EEA /* RCDUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDUserInfo.m; sourceTree = "<group>"; };
+		92FCF5B31B9550C200644EEA /* TalkSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkSettingViewController.h; sourceTree = "<group>"; };
+		92FCF5B41B9550C200644EEA /* TalkSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkSettingViewController.m; sourceTree = "<group>"; };
 		92FEF6D71B8343C30090C09D /* SearchHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHistoryViewController.h; sourceTree = "<group>"; };
 		92FEF6D81B8343C30090C09D /* SearchHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchHistoryViewController.m; sourceTree = "<group>"; };
 		92FEF6DB1B8348140090C09D /* UserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoCell.h; sourceTree = "<group>"; };
 		92FEF6DC1B8348140090C09D /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
 		92FEF6DE1B8348250090C09D /* UserInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoCell.xib; sourceTree = "<group>"; };
+		92FF34C71B901D5B00D03FF7 /* RCDChatListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDChatListCell.h; sourceTree = "<group>"; };
+		92FF34C81B901D5B00D03FF7 /* RCDChatListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDChatListCell.m; sourceTree = "<group>"; };
+		92FF34CA1B904A6E00D03FF7 /* SystemConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemConfig.h; path = iOSFinancial/Singleton/SystemConfig.h; sourceTree = SOURCE_ROOT; };
+		92FF34CB1B904A6E00D03FF7 /* SystemConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemConfig.m; path = iOSFinancial/Singleton/SystemConfig.m; sourceTree = SOURCE_ROOT; };
 		92FFE4121B79D929003B57A9 /* UserLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocationViewController.h; sourceTree = "<group>"; };
 		92FFE4131B79D929003B57A9 /* UserLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocationViewController.m; sourceTree = "<group>"; };
 		92FFE4161B79D943003B57A9 /* LoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingCell.h; sourceTree = "<group>"; };
@@ -1065,6 +1105,8 @@
 			children = (
 				92442FEA1B82E76C006E3290 /* TalkViewController.h */,
 				92442FEB1B82E76C006E3290 /* TalkViewController.m */,
+				92FCF5B31B9550C200644EEA /* TalkSettingViewController.h */,
+				92FCF5B41B9550C200644EEA /* TalkSettingViewController.m */,
 			);
 			name = TalkViewController;
 			sourceTree = "<group>";
@@ -1260,6 +1302,8 @@
 			isa = PBXGroup;
 			children = (
 				92B47FE11B6F0FB900AF9A2D /* Views */,
+				92FF34C71B901D5B00D03FF7 /* RCDChatListCell.h */,
+				92FF34C81B901D5B00D03FF7 /* RCDChatListCell.m */,
 				92B47FCE1B6F08B600AF9A2D /* TalkedFriendsVIewController.h */,
 				92B47FCF1B6F08B600AF9A2D /* TalkedFriendsVIewController.m */,
 			);
@@ -1394,6 +1438,8 @@
 			children = (
 				92EB85461AC5132700A80E03 /* User.h */,
 				92EB85471AC5132700A80E03 /* User.m */,
+				92FF34CA1B904A6E00D03FF7 /* SystemConfig.h */,
+				92FF34CB1B904A6E00D03FF7 /* SystemConfig.m */,
 			);
 			name = Singleton;
 			path = singleton;
@@ -1413,6 +1459,7 @@
 		92D2A2AC1AC3E31500C9A4AE /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				92FCF5961B9405AB00644EEA /* FMDB */,
 				928C974C1B846B0900D4CDD5 /* JSONKit */,
 				9211AF721B7AF74D00B7FD9F /* VPImageCropper */,
 				920C09941B74C0A700A8CC30 /* SMS_SDK */,
@@ -1429,6 +1476,14 @@
 		92D5777C1ACBB7C30070DC76 /* MainController */ = {
 			isa = PBXGroup;
 			children = (
+				92FCF5B01B940AD800644EEA /* RCDUserInfo.h */,
+				92FCF5B11B940AD800644EEA /* RCDUserInfo.m */,
+				92FCF5AA1B9409B900644EEA /* RCDGroupInfo.h */,
+				92FCF5AB1B9409B900644EEA /* RCDGroupInfo.m */,
+				92FCF57F1B94019200644EEA /* RCDRCIMDataSource.h */,
+				92FCF5801B94019200644EEA /* RCDRCIMDataSource.m */,
+				92FCF57C1B94015800644EEA /* RCDataBaseManager.h */,
+				92FCF57D1B94015800644EEA /* RCDataBaseManager.m */,
 				92442FB71B817ADE006E3290 /* Model */,
 				928C974A1B843A0800D4CDD5 /* UnionViewController */,
 				92B47FD61B6F093400AF9A2D /* StateListViewController */,
@@ -1491,6 +1546,26 @@
 				92F01EA41AF4A58F00957F7C /* HTPercentView.m */,
 			);
 			name = HTPercentView;
+			sourceTree = "<group>";
+		};
+		92FCF5961B9405AB00644EEA /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				92FCF5971B9405AB00644EEA /* DBHelper.h */,
+				92FCF5981B9405AB00644EEA /* DBHelper.m */,
+				92FCF5991B9405AB00644EEA /* FMDatabase.h */,
+				92FCF59A1B9405AB00644EEA /* FMDatabase.m */,
+				92FCF59B1B9405AB00644EEA /* FMDatabaseAdditions.h */,
+				92FCF59C1B9405AB00644EEA /* FMDatabaseAdditions.m */,
+				92FCF59D1B9405AB00644EEA /* FMDatabasePool.h */,
+				92FCF59E1B9405AB00644EEA /* FMDatabasePool.m */,
+				92FCF59F1B9405AB00644EEA /* FMDatabaseQueue.h */,
+				92FCF5A01B9405AB00644EEA /* FMDatabaseQueue.m */,
+				92FCF5A11B9405AB00644EEA /* FMDB.h */,
+				92FCF5A21B9405AB00644EEA /* FMResultSet.h */,
+				92FCF5A31B9405AB00644EEA /* FMResultSet.m */,
+			);
+			path = FMDB;
 			sourceTree = "<group>";
 		};
 		92FEF6D61B8343A20090C09D /* SearchHistoryViewController */ = {
@@ -1739,11 +1814,14 @@
 				926811CE1ADE86DD00FAB0A2 /* ContainerViewController.m in Sources */,
 				921DD2F21AEB67AF0004251F /* UIColor+HTExtension.m in Sources */,
 				9211AF751B7AF74D00B7FD9F /* VPImageCropperViewController.m in Sources */,
+				92FCF5811B94019200644EEA /* RCDRCIMDataSource.m in Sources */,
 				92442FBD1B817B1C006E3290 /* UserInfoModel.m in Sources */,
 				92F01EA11AF46A7600957F7C /* HTCircleView.m in Sources */,
 				927848651B7449A60021562A /* IndexLoginViewController.m in Sources */,
 				92EB85881AC561E400A80E03 /* HTNavigationController.m in Sources */,
 				921DD2F41AEB67AF0004251F /* UIView+Animation.m in Sources */,
+				92FCF5A71B9405AB00644EEA /* FMDatabasePool.m in Sources */,
+				92FCF5AC1B9409B900644EEA /* RCDGroupInfo.m in Sources */,
 				920C09931B74ABD600A8CC30 /* SetNewPassViewController.m in Sources */,
 				922CB5A81AC9789700C4A438 /* MJRefreshHeaderView.m in Sources */,
 				921DD2F61AEB67AF0004251F /* UIView+Prompting.m in Sources */,
@@ -1753,8 +1831,11 @@
 				921DD2F01AEB67AF0004251F /* NSString+URLEncoding.m in Sources */,
 				92BD02B41AEF430E00758530 /* Buttons.m in Sources */,
 				92442FFA1B832027006E3290 /* PersonalInfoView.m in Sources */,
+				92FCF5A81B9405AB00644EEA /* FMDatabaseQueue.m in Sources */,
+				92FCF5B51B9550C200644EEA /* TalkSettingViewController.m in Sources */,
 				92442FF01B831521006E3290 /* CommitListCell.m in Sources */,
 				921DD2ED1AEB67AF0004251F /* NSString+IsValidate.m in Sources */,
+				92FCF5A51B9405AB00644EEA /* FMDatabase.m in Sources */,
 				921DD2F51AEB67AF0004251F /* UIView+BFExtension.m in Sources */,
 				92442FCA1B81DD06006E3290 /* SignListView.m in Sources */,
 				9296B2751B720CDD0053B157 /* HTEditCell.m in Sources */,
@@ -1764,6 +1845,7 @@
 				921DD2EE1AEB67AF0004251F /* NSString+LunchName.m in Sources */,
 				92442FC01B81B4DC006E3290 /* HTBaseRequest+Requests.m in Sources */,
 				926811D11ADE870000FAB0A2 /* HTSeparateView.m in Sources */,
+				92FF34C91B901D5B00D03FF7 /* RCDChatListCell.m in Sources */,
 				921DD2F31AEB67AF0004251F /* UIImage+Stretch.m in Sources */,
 				9296B26A1B71B8B90053B157 /* ManageSignListViewController.m in Sources */,
 				921DD2EA1AEB67AF0004251F /* NSDate+BFExtension.m in Sources */,
@@ -1778,6 +1860,7 @@
 				921DD2C61AEB67310004251F /* ButtonCell.m in Sources */,
 				92DA92E51B42511900AACF1D /* UIViewController+ViewControllers.m in Sources */,
 				926812821AE8CE5700FAB0A2 /* NSString+BaseURL.m in Sources */,
+				92FF34CC1B904A6E00D03FF7 /* SystemConfig.m in Sources */,
 				92B4800B1B6F713000AF9A2D /* SettingViewController.m in Sources */,
 				84D9FB051AE77DC500C5AAA8 /* AttributedLabel.m in Sources */,
 				922CB5981AC9786B00C4A438 /* HTBaseTableViewController.m in Sources */,
@@ -1791,15 +1874,18 @@
 				921DD2F11AEB67AF0004251F /* UIAlertView+RWBlock.m in Sources */,
 				9296B2711B72005C0053B157 /* EditInfoViewController.m in Sources */,
 				92B47FE71B6F113200AF9A2D /* TalkedFriendsCell.m in Sources */,
+				92FCF5A41B9405AB00644EEA /* DBHelper.m in Sources */,
 				922CB5A71AC9789700C4A438 /* MJRefreshFooterView.m in Sources */,
 				92871C7B1AF75D6E002EC9F6 /* HTSelectionView.m in Sources */,
 				921DD28D1AEB65790004251F /* HTBaseTableControl.m in Sources */,
 				92FFE4181B79D943003B57A9 /* LoadingCell.m in Sources */,
 				9296B2651B71B88D0053B157 /* AddCustomSignViewController.m in Sources */,
+				92FCF57E1B94015800644EEA /* RCDataBaseManager.m in Sources */,
 				921DD2EC1AEB67AF0004251F /* NSString+BFExtension.m in Sources */,
 				92442FD51B82E17F006E3290 /* TalkListViewController.m in Sources */,
 				92B480051B6F6B3400AF9A2D /* MCBadgeView.m in Sources */,
 				92EB85851AC561C800A80E03 /* HTTabBarController.m in Sources */,
+				92FCF5B21B940AD800644EEA /* RCDUserInfo.m in Sources */,
 				927848691B7454D00021562A /* LoginViewController.m in Sources */,
 				92442FF61B831FC4006E3290 /* PersonalViewController.m in Sources */,
 				92DA92791B3C164800AACF1D /* UIView+NoneDataView.m in Sources */,
@@ -1824,7 +1910,9 @@
 				92B47FD91B6F095800AF9A2D /* StateListViewController.m in Sources */,
 				921DD2F91AEB68070004251F /* CustomIOS7AlertView.m in Sources */,
 				926811C21ADE570900FAB0A2 /* HTGuideManager.m in Sources */,
+				92FCF5A91B9405AB00644EEA /* FMResultSet.m in Sources */,
 				921DD3081AEB695F0004251F /* HTWebViewController.m in Sources */,
+				92FCF5A61B9405AB00644EEA /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1972,7 +2060,6 @@
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/Sina",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/LianLianPay",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMessage_Sdk_1.1.0",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/WeChatSDK",
@@ -2013,7 +2100,6 @@
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/Sina",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/LianLianPay",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMessage_Sdk_1.1.0",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/WeChatSDK",

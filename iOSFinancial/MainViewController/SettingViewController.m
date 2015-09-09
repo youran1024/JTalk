@@ -12,7 +12,7 @@
 #import <UMengFeedback/UMFeedback.h>
 #import "SearchHistoryViewController.h"
 #import "UserInfoCell.h"
-
+#import <RongIMKit/RongIMKit.h>
 
 
 @interface SettingViewController ()
@@ -192,6 +192,7 @@
 //  MARK:用户退出按钮
 - (void)userLoginOut
 {
+    [[RCIM sharedRCIM] disconnect];
     User *user = [User sharedUser];
     [user clearUserData];
     

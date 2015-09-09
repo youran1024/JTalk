@@ -27,10 +27,11 @@ PODS:
   - JSBadgeView (1.4.1)
   - Masonry (0.6.2)
   - MBProgressHUD (0.9.1)
+  - MJExtension (2.5.9)
   - Qiniu (7.0.12):
     - AFNetworking (~> 2.0)
     - HappyDNS (~> 0.1)
-  - RongCloudIMKit (2.2.8)
+  - RongCloudIMKit (2.2.9)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - JSBadgeView
   - Masonry
   - MBProgressHUD (~> 0.9.1)
+  - MJExtension
   - Qiniu (~> 7.0)
   - RongCloudIMKit
   - SDWebImage (~> 3.7)
@@ -60,8 +62,9 @@ SPEC CHECKSUMS:
   JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
   Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MJExtension: 2330aeb6c83428c820749290bf766e81827cda65
   Qiniu: 1fb5191b3bc1edb65b2da3d905b8281e15bd1d5c
-  RongCloudIMKit: c55309fcd08c8202d59baeed3f2ef75f84c7da8a
+  RongCloudIMKit: 2a629ea29945569b2662f403c89a52040a887d2e
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   UMengAnalytics-NO-IDFA: e41024644de702e450093ef043af20b5fbe06cbc
   UMengFeedback: 5283cc0e324dffca4dd54c4abb3cbded56487817

@@ -7,13 +7,13 @@
 //
 
 #import "HTBaseTableViewController.h"
-
+#import <RongIMKit/RongIMKit.h>
 
 /**
  *  Tabbar 第二页卡 聊天历史
  */
 
-@interface TalkedFriendsVIewController : HTBaseTableViewController
+@interface TalkedFriendsVIewController : RCConversationListViewController
 
 
 

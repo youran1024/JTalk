@@ -12,11 +12,50 @@
 
 @interface CommitListViewController ()
 
+@property (nonatomic, assign) NSInteger pageIndex;
+
 @end
 
 @implementation CommitListViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.showRefreshHeaderView = YES;
+    self.showRefreshFooterView = YES;
+    
+    _pageIndex = 0;
+    
+    [self requestTalkListPeople];
+    
+}
 
+- (void)refreshViewBeginRefresh:(MJRefreshBaseView *)baseView
+{
+    [self showHudWaitingView:PromptTypeWating];
+    [self requestTalkListPeople];
+}
+
+- (void)requestTalkListPeople
+{
+    HTBaseRequest *request = [HTBaseRequest groupUserList:[_groupTitle toMD5] andPageIndex:_pageIndex];
+    
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        [self removeHudInManaual];
+        [self endRefresh];
+        NSDictionary *dic = request.responseJSONObject;
+        NSInteger code = [[dic stringForKey:@"code"] integerValue];
+        if (code == 200) {
+            _pageIndex++;
+            
+        }
+    } failure:^(YTKBaseRequest *request) {
+        [self endRefresh];
+        
+    }];
+    
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

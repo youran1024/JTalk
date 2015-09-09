@@ -15,5 +15,13 @@
 
 @interface TalkViewController : RCConversationViewController <RCChatSessionInputBarControlDelegate>
 
+/**
+ *  会话数据模型
+ */
+@property (strong,nonatomic) RCConversationModel *conversation;
+
+//  聊天群组标题
+@property (nonatomic, copy) NSString *groupTitle;
+
 
 @end

@@ -62,7 +62,7 @@
 
 - (void)requestFailed:(YTKBaseRequest *)request
 {
-    NSLog(@"requestFalied:%@/%@", request.baseUrl, request.requestUrl);
+    NSLog(@"requestFalied:%@%@", request.baseUrl, request.requestUrl);
     
     HTBaseViewController *viewController = [self viewControllerOnScreen];
     

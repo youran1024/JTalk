@@ -13,6 +13,7 @@
 #import "TalkListViewController.h"
 #import "PersonalInfoView.h"
 #import "UIView+BorderColor.h"
+#import "TalkViewController.h"
 
 
 @interface PersonalViewController ()
@@ -67,6 +68,33 @@
     self.showRefreshHeaderView = YES;
     [self.refreshHeaderView makeWhite];
     
+    [self findNavigationItemButtonView];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [self findNavigationItemButtonView];
+    [self clearBackBarButtonItemTitle];
+}
+
+- (void)findNavigationItemButtonView
+{
+    NSArray *views = self.navigationController.navigationBar.subviews;
+    
+    for (UIView *obj in views) {
+        if ([obj isKindOfClass:NSClassFromString(@"UINavigationItemButtonView")]) {
+//            obj.hidden = YES;
+        }
+    }
+}
+
+#pragma mark -
+- (void)clearBackBarButtonItemTitle
+{
+    //  左侧返回标题为空
+    UIBarButtonItem *returnButtonItem = [[UIBarButtonItem alloc] init];
+    returnButtonItem.title = @" ";
+    self.navigationItem.backBarButtonItem = returnButtonItem;
 }
 
 - (void)refreshViewBeginRefresh:(MJRefreshBaseView *)baseView
@@ -76,9 +104,12 @@
 
 - (void)requestUserInfo
 {
+    if (isEmpty(_userId)) {
+        NSAssert(isEmpty(_userId), @"userid is empty");
+        return;
+    }
     
-#warning fixMe
-    HTBaseRequest *request = [HTBaseRequest otherUserInfo:__userInfoId];
+    HTBaseRequest *request = [HTBaseRequest otherUserInfo:_userId];
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         [self endRefresh];
         NSDictionary *dict = request.responseJSONObject;
@@ -98,8 +129,8 @@
     _signListModel = [[SignListModel alloc] init];
     [_signListModel parseWithDictionary:dict];
     [_signListView refreWithModel:_signListModel];
-    
-    [self.userInfoModel parseWithDictionary:dict];
+    self.userInfoModel.userID = _userId;
+    [self.userInfoModel parseWithDictionaryWithOutSync:dict];
     
     [self configPersonalViewInfo];
 }
@@ -260,6 +291,19 @@
 
 - (void)showTalkListViewController:(SignModel *)model
 {
+    TalkViewController *conversationVC = [[TalkViewController alloc] init];
+    conversationVC.conversationType = ConversationType_GROUP; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
+    conversationVC.targetId = [model.title toMD5]; // 接收者的 targetId，这里为举例。
+    conversationVC.userName = model.title;
+    conversationVC.title = model.title; // 会话的 title。
+    conversationVC.groupTitle = model.title;
+    
+    conversationVC.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:conversationVC animated:YES];
+    
+    return;
+    
     TalkListViewController *talkVc = [[TalkListViewController alloc] init];
     talkVc.signModel = model;
     [self.navigationController pushViewController:talkVc animated:YES];
@@ -297,9 +341,18 @@
 //  MARK:聊天按钮
 - (void)talkButtonClicked:(UIButton *)button
 {
+    if (!_userInfoModel) {
+        [self showHudAuto:@"请刷新当前页面后重试"];
+        return;
+    }
     
+    TalkViewController *conversationVC = [[TalkViewController alloc] init];
+    conversationVC.conversationType = ConversationType_PRIVATE; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
+    conversationVC.targetId = _userInfoModel.userID; // 接收者的 targetId，这里为举例。
+    conversationVC.userName = _userInfoModel.userName;
+    conversationVC.title = _userInfoModel.userName; // 会话的 title。
     
-    
+    [self.navigationController pushViewController:conversationVC animated:YES];
 }
 
 

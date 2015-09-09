@@ -8,6 +8,7 @@ pod 'DateTools'
 pod 'Masonry'
 pod 'JSBadgeView'
 #pod 'MJRefresh'
+pod 'MJExtension'
 
 #  友盟统计 无IDFA版SDK
 pod 'UMengAnalytics-NO-IDFA'

@@ -34,6 +34,9 @@ typedef NS_ENUM(NSInteger, UserLoginType) {
 @property (nonatomic, strong)   NSArray *signHistoryArray;
 
 
+//  非登陆用户的数据结构用这个
+- (void)parseWithDictionaryWithOutSync:(NSDictionary *)dic;
+
 //  读取缓存
 - (void)readSynchronizeData;
 

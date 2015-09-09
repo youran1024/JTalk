@@ -21,4 +21,6 @@
 
 + (UIBarButtonItem *)buttonWithTitle:(NSString *)title target:(id)target andSelector:(SEL)selector;
 
++ (UIBarButtonItem *)buttonWithImage:(NSString *)image target:(id)target andSelector:(SEL)selector;
+
 @end

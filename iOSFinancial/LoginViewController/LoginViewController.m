@@ -152,9 +152,9 @@ static NSString *userPhone;
             //  登陆成功
             [self showHudSuccessView:@"登录成功"];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:__USER_LOGIN_SUCCESS object:nil];
-            
             [[User sharedUser].userInfo parseWithDictionary:dict];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:__USER_LOGIN_SUCCESS object:nil];
             
             [self dismissViewControllerAnimated:YES completion:nil];
         }

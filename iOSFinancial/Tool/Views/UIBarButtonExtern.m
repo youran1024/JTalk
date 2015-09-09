@@ -57,4 +57,15 @@
     return [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
++ (UIBarButtonItem *)buttonWithImage:(NSString *)imageStr target:(id)target andSelector:(SEL)selector
+{
+    UIImage *image = HTImage(imageStr);
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button sizeToFit];
+    [button setImage:image forState:UIControlStateNormal];
+    [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    
+    return [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
 @end

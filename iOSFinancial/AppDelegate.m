@@ -30,26 +30,25 @@
 //  融云
 #import <RongIMKit/RongIMKit.h>
 #import "NSString+BFExtension.h"
-
+#import "RCDataBaseManager.h"
+#import "RCDRCIMDataSource.h"
 //  友盟反馈
 #import <UMFeedback.h>
 #import <UMOpus.h>
-
 #import "IndexLoginViewController.h"
 #import "HTBaseRequest+Requests.h"
 #import "JSONKit.h"
+#import "UIAlertView+RWBlock.h"
+
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define _IPHONE80_ 80000
 
 
-@interface AppDelegate () <HTGuideManagerDelegate>
+@interface AppDelegate () <HTGuideManagerDelegate, RCIMReceiveMessageDelegate, RCIMConnectionStatusDelegate>
 {
     
-    
-    
 }
-
 
 @end
 
@@ -75,13 +74,13 @@
     //  MARK:远程推送
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
-        [self handleRemoteNotification:userInfo];
+        
     }
     
     //  MARK:显示引导页
     [HTGuideManager showGuideViewWithDelegate:self];
     
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginSuccess) name:__USER_LOGIN_SUCCESS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginSuccess) name:__USER_LOGIN_SUCCESS object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginOutSuccess) name:__USER_LOGINOUT_SUCCESS object:nil];
     
@@ -110,7 +109,7 @@
 //  MARK:用户登录成功
 - (void)userLoginSuccess
 {
-    [self rongYunInit];
+    [self rongYunConnection];
 }
 
 //  MARK:用户注销成功
@@ -118,8 +117,6 @@
 {
     [self presentUserLoginIndexViewControllerAnimated:YES];
 }
-
-//  ----------------------------------------------------------------------------------------------------
 
 //  MARK:UMeng Key and setting
 - (void)setUMengpushSetting:(NSDictionary *)launchOptions
@@ -142,26 +139,6 @@
     
 }
 
-//  远程推送
-- (void)handleRemoteNotification:(NSDictionary *)userInfo
-{
-    NSString *model = [userInfo stringForKey:@"model"];
-    NSString *action = [userInfo stringForKey:@"action"];
-    
-    if ([model isEqualToString:@"discover"]) {
-        //  open webview
-        
-    }else if ([model isEqualToString:@"project"]) {
-        //  open project detail
-        if (action.length > 0) {
-            
-            
-        }else {
-
-        }
-    }
-}
-
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [UMessage registerDeviceToken:deviceToken];
@@ -172,12 +149,10 @@
     [UMessage didReceiveRemoteNotification:userInfo];
     
     if ([application applicationState] == UIApplicationStateInactive) {
-        [self handleRemoteNotification:userInfo];
         
         
     }else {
         //  MARK:应用内前台运行时收到推送 暂不处理
-        
         
     }
 }
@@ -205,6 +180,25 @@
     return YES;
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    
+    int unreadMsgCount = [[RCIMClient sharedRCIMClient] getUnreadCount:@[
+                                                                         @(ConversationType_PRIVATE),
+                                                                         @(ConversationType_DISCUSSION),
+                                                                         @(ConversationType_APPSERVICE),
+                                                                         @(ConversationType_PUBLICSERVICE),
+                                                                         @(ConversationType_GROUP)
+                                                                         ]];
+    application.applicationIconBadgeNumber = unreadMsgCount;
+}
+
+-(void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
+{
+    if ([message.content isMemberOfClass:[RCInformationNotificationMessage class]]) {
+        
+    }
+}
+
 #pragma mark GuideManager Delegate
 - (void)guideManagerWantDisappear:(HTGuideManager *)guideManager
 {
@@ -212,6 +206,45 @@
     guideManager = nil;
 }
 
+#pragma mark - RCIMReceiveMessageDelegate
+#pragma mark - 
+
+// MARK:网络状态的变化
+/**
+ * 网络状态变化。
+ *
+ *  @param status 网络状态。
+ */
+- (void)onRCIMConnectionStatusChanged:(RCConnectionStatus)status {
+    
+    User *user = [User sharedUser];
+    
+    if (status == ConnectionStatus_KICKED_OFFLINE_BY_OTHER_CLIENT) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"提示"
+                              message:@"您"
+                              @"的帐号在别的设备上登录，您被迫下线！"
+                              delegate:nil
+                              cancelButtonTitle:@"知道了"
+                              otherButtonTitles:nil, nil];
+        [alert show];
+        
+        [user doLoginOut];
+    
+    } else if (status == ConnectionStatus_TOKEN_INCORRECT) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alertView =
+            [[UIAlertView alloc] initWithTitle:nil
+                                       message:@"Token已过期，请重新登录"
+                                      delegate:nil
+                             cancelButtonTitle:@"确定"
+                             otherButtonTitles:nil, nil];
+            [alertView show];
+            
+            [user doLoginOut];
+        });
+    }
+}
 
 #pragma mark - Appdelegate
 #pragma mark -
@@ -222,10 +255,10 @@
     [self setAppStyle];
     
     //  MARK:融云
-      [self rongYunInit];
+    [self rongYunInit];
     
     //  MARK:崩溃监测
-        [self setBuglyReport];
+    [self setBuglyReport];
     
     //  MARK:短信
     [self smsSDKInit];
@@ -245,7 +278,6 @@
 }
 
 //  MARK: Setting
-
 - (void)setAppStyle
 {
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],NSFontAttributeName : [UIFont systemFontOfSize:18]}];
@@ -312,17 +344,8 @@
     [SMS_SDK registerApp:@"9714408bd484" withSecret:@"a1f086c784801056efcc857e974119d4"];
 }
 
-
-- (void)rongYunInit
+- (void)rongYunConnection
 {
-    //vnroth0krcr4o  key
-    
-    //初始化融云SDK，
-    [[RCIM sharedRCIM] initWithAppKey:__RongYunKey_];
- 
-
-//    NSString *token = @"LvhvMGO8k+LHVATyYiup/+fCgUbrbGP7LiGzGZpG9Jz/16Axj4qg14+5BLS1v0BMfhn6y9gDDkl4yIMJbySJgNiJQlfi4r9cRIAiubQjsB9hwYt/cE3edw==";
-
     User *user = [User sharedUser];
     UserInfoModel *userInfo = user.userInfo;
     
@@ -344,13 +367,26 @@
         } tokenIncorrect:^{
             NSLog(@"token incorrect");
             
+            [user doLoginOut];
         }];
     }
+
+}
+
+- (void)rongYunInit
+{
+    //初始化融云SDK，
+    [[RCIM sharedRCIM] initWithAppKey:__RongYunKey_];
+    [RCIM sharedRCIM].receiveMessageDelegate = self;
+    [[RCIM sharedRCIM] setConnectionStatusDelegate:self];
+    [RCIM sharedRCIM].userInfoDataSource = RCDDataSource;
+    [RCIM sharedRCIM].groupInfoDataSource = RCDDataSource;
+    
+    [self rongYunConnection];
 }
 
 - (void)shareSDKInit
 {
-    
     [ShareSDK registerApp:@"api20"];//字符串api20为您的ShareSDK的AppKey
     
     //添加新浪微博应用 注册网址 http://open.weibo.com

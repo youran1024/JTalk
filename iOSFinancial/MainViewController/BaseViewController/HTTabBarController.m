@@ -40,8 +40,6 @@
     self.tabBar.translucent = NO;
     self.tabBar.clipsToBounds = YES;
     
-    UITabBarItem *item = [[self.tabBar items] objectAtIndex:1];
-    item.badgeValue = @"12";
 }
 
 - (NSArray *)subViewControllers
@@ -53,7 +51,9 @@
     HTNavigationController *nav2 = [[HTNavigationController alloc] initWithRootViewController:stateVC];
     [viewControllers addObject:nav2];
     
-    TalkedFriendsVIewController *talkVC = [[TalkedFriendsVIewController alloc] init];
+    NSArray *conversations = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_APPSERVICE), @(ConversationType_PUBLICSERVICE),@(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+//    NSArray *collectionConversations = @[@(ConversationType_GROUP)];
+    TalkedFriendsVIewController *talkVC = [[TalkedFriendsVIewController alloc] initWithDisplayConversationTypes:conversations collectionConversationType:nil];
     talkVC.tabBarItem = [self tabbarItemWithTitle:@"" andItemImage:@"commit"];
     HTNavigationController *nav = [[HTNavigationController alloc] initWithRootViewController:talkVC];
     [viewControllers addObject:nav];

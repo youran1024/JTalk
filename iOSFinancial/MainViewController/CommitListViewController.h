@@ -15,6 +15,6 @@
 
 @interface CommitListViewController : HTBaseTableViewController
 
-
+@property (nonatomic, copy) NSString *groupTitle;
 
 @end

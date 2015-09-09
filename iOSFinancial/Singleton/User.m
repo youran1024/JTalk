@@ -44,7 +44,7 @@ static NSString * const kIsBalanceIncomeOpen = @"kIsBalanceIncomeOpen";
 
 - (BOOL)isLogin
 {
-    _isLogin = !isEmpty(_userInfo.userID);
+    _isLogin = !isEmpty(_userInfo.userToken);
     return _isLogin;
 }
 
@@ -68,6 +68,15 @@ static NSString * const kIsBalanceIncomeOpen = @"kIsBalanceIncomeOpen";
 {
     _userInfoModelTmp = nil;
     _userInfoModelTmp = [self.userInfo copy];
+}
+
+- (UserInfoModel *)userInfo
+{
+    if (!_userInfo) {
+        _userInfo = [[UserInfoModel alloc] init];
+    }
+    
+    return _userInfo;
 }
 
 #pragma mark - Login Out

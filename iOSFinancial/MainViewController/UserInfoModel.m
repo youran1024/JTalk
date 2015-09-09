@@ -31,6 +31,7 @@ static NSString *userInfoPrompt = @"userInfoPrompt";
     model.userPhoto = self.userPhoto;
     model.userPhotoImage = self.userPhotoImage;
     model.userPhone = self.userPhone;
+    model.userPrompt = self.userPrompt;
     
     return model;
 }
@@ -51,7 +52,7 @@ static NSString *userInfoPrompt = @"userInfoPrompt";
     return self;
 }
 
-- (void)parseWithDictionary:(NSDictionary *)dic
+- (void)parseWithDictionary:(NSDictionary *)dic withSynce:(BOOL)sync
 {
     self.userID = [dic stringForKey:@"user_id"];
     self.userToken = [dic stringForKey:@"token"];
@@ -63,7 +64,19 @@ static NSString *userInfoPrompt = @"userInfoPrompt";
     self.userPrompt = [dic stringForKey:@"signature"];
     self.userPhoto = [dic stringForKey:@"photo"];
     
-    [self synchronize];
+    if (sync) {
+        [self synchronize];
+    }
+}
+
+- (void)parseWithDictionary:(NSDictionary *)dic
+{
+    [self parseWithDictionary:dic withSynce:YES];
+}
+
+- (void)parseWithDictionaryWithOutSync:(NSDictionary *)dic
+{
+    [self parseWithDictionary:dic withSynce:NO];
 }
 
 - (void)readSynchronizeData

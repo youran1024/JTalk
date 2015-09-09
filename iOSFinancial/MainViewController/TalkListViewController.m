@@ -52,9 +52,9 @@
 {
     [super viewDidLoad];
     
+    self.extendedLayoutIncludesOpaqueBars = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    
-    self.view.autoresizesSubviews = NO;
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
     [self.view addSubview:self.pageScrollView];
 
@@ -86,8 +86,7 @@
     if (!_selectionControllers) {
         
         TalkViewController *conversationVC = [[TalkViewController alloc] init];
-        conversationVC.view.backgroundColor = HTRedColor;
-        conversationVC.conversationType =ConversationType_PRIVATE; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
+        conversationVC.conversationType =ConversationType_GROUP; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
         conversationVC.targetId = @"55d81cd1b217c414ea07eb9c"; // 接收者的 targetId，这里为举例。
         conversationVC.userName = @"Mr.Yang"; // 接受者的 username，这里为举例。
         conversationVC.title = @"Mr.Yang_Hello"; // 会话的 title。
@@ -122,7 +121,6 @@
         
         controller.view.frame = CGRectMake(viewWidth * index, 0, viewWidth, viewHeight);
     }
-    
 }
 
 - (void)addContentViewController
@@ -171,7 +169,6 @@
 - (UIScrollView *)pageScrollView
 {
     if (!_pageScrollView) {
-        CGFloat height = CGRectGetHeight(self.toolbar.frame);
         _pageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, APPScreenHeight -  44)];
         _pageScrollView.autoresizingMask = UIViewAutoresizingNone;
         _pageScrollView.scrollsToTop = NO;
@@ -197,7 +194,6 @@
 {
     if (!_toolbar) {
         _toolbar = [TalkListToolBar xibView];
-        _toolbar.backgroundColor = HTClearColor;
         _toolbar.autoresizingMask = UIViewAutoresizingNone;
         [_toolbar.talkButton setSelected:YES];
         _toolbar.frame = CGRectMake(0, 0, APPScreenWidth, 40);

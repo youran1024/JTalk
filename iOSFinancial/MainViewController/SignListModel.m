@@ -102,7 +102,8 @@ static NSString *kSignListShowSign = @"kSignListShowSign";
 
 - (NSInteger)changeNextPage
 {
-    NSAssert(_signArray.count > self.pageSize, @"数组最小不能小过分页大小");
+    
+//    NSAssert(_signArray.count > self.pageSize, @"数组最小不能小过分页大小");
     
     NSMutableArray *array = [NSMutableArray array];
 
