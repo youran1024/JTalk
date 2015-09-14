@@ -45,7 +45,6 @@ static NSString *userInfoPrompt = @"userInfoPrompt";
             //  未登录，默认值
             self.userLoginType = UserLoginTypePhone;
             self.userSex = @"男";
-            self.userPhoto = @"https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=d406487d0108283868588f54dea49d33/fd039245d688d43f74ed72907b1ed21b0ef43b08.jpg";
         }
     }
 

@@ -10,4 +10,6 @@
 
 @interface TalkSettingViewController : HTBaseTableViewController
 
+@property (nonatomic, copy) NSString *groupId;
+
 @end

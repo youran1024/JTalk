@@ -180,6 +180,8 @@
 		92DA92791B3C164800AACF1D /* UIView+NoneDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92DA92781B3C164800AACF1D /* UIView+NoneDataView.m */; };
 		92DA92E21B414ED200AACF1D /* libUMessage_Sdk_1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DA92E01B414ED200AACF1D /* libUMessage_Sdk_1.1.0.a */; };
 		92DA92E51B42511900AACF1D /* UIViewController+ViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = 92DA92E41B42511900AACF1D /* UIViewController+ViewControllers.m */; };
+		92DDD2751BA6DA5700FB68FF /* LongTapUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92DDD2741BA6DA5700FB68FF /* LongTapUserView.m */; };
+		92DDD2771BA6DA6700FB68FF /* LongTapUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92DDD2761BA6DA6700FB68FF /* LongTapUserView.xib */; };
 		92EB85481AC5132700A80E03 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EB85471AC5132700A80E03 /* User.m */; };
 		92EB85851AC561C800A80E03 /* HTTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EB85841AC561C800A80E03 /* HTTabBarController.m */; };
 		92EB85881AC561E400A80E03 /* HTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EB85871AC561E400A80E03 /* HTNavigationController.m */; };
@@ -507,6 +509,9 @@
 		92DA92E11B414ED200AACF1D /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		92DA92E31B42511900AACF1D /* UIViewController+ViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ViewControllers.h"; sourceTree = "<group>"; };
 		92DA92E41B42511900AACF1D /* UIViewController+ViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ViewControllers.m"; sourceTree = "<group>"; };
+		92DDD2731BA6DA5700FB68FF /* LongTapUserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongTapUserView.h; sourceTree = "<group>"; };
+		92DDD2741BA6DA5700FB68FF /* LongTapUserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongTapUserView.m; sourceTree = "<group>"; };
+		92DDD2761BA6DA6700FB68FF /* LongTapUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LongTapUserView.xib; sourceTree = "<group>"; };
 		92EB85461AC5132700A80E03 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = iOSFinancial/Singleton/User.h; sourceTree = SOURCE_ROOT; };
 		92EB85471AC5132700A80E03 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = iOSFinancial/Singleton/User.m; sourceTree = SOURCE_ROOT; };
 		92EB857E1AC5517400A80E03 /* JTalk-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JTalk-Prefix.pch"; sourceTree = "<group>"; };
@@ -1103,6 +1108,7 @@
 		92442FE91B82E738006E3290 /* TalkViewController */ = {
 			isa = PBXGroup;
 			children = (
+				92DDD2721BA6DA3200FB68FF /* View */,
 				92442FEA1B82E76C006E3290 /* TalkViewController.h */,
 				92442FEB1B82E76C006E3290 /* TalkViewController.m */,
 				92FCF5B31B9550C200644EEA /* TalkSettingViewController.h */,
@@ -1503,6 +1509,16 @@
 			path = UMessage_Sdk_1.1.0;
 			sourceTree = "<group>";
 		};
+		92DDD2721BA6DA3200FB68FF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92DDD2761BA6DA6700FB68FF /* LongTapUserView.xib */,
+				92DDD2731BA6DA5700FB68FF /* LongTapUserView.h */,
+				92DDD2741BA6DA5700FB68FF /* LongTapUserView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		92EB85821AC5609000A80E03 /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1744,6 +1760,7 @@
 				9228C9891B72FA0D008E3608 /* city.plist in Resources */,
 				92FFE41C1B79DB76003B57A9 /* citydict.plist in Resources */,
 				920C09781B74970D00A8CC30 /* ShareSDKLocalizable.strings in Resources */,
+				92DDD2771BA6DA6700FB68FF /* LongTapUserView.xib in Resources */,
 				92442FC61B81CC5E006E3290 /* SearchBarView.xib in Resources */,
 				92442FFC1B83203B006E3290 /* PersonalInfoView.xib in Resources */,
 				9296B2771B720CEB0053B157 /* HTEditCell.xib in Resources */,
@@ -1877,6 +1894,7 @@
 				92FCF5A41B9405AB00644EEA /* DBHelper.m in Sources */,
 				922CB5A71AC9789700C4A438 /* MJRefreshFooterView.m in Sources */,
 				92871C7B1AF75D6E002EC9F6 /* HTSelectionView.m in Sources */,
+				92DDD2751BA6DA5700FB68FF /* LongTapUserView.m in Sources */,
 				921DD28D1AEB65790004251F /* HTBaseTableControl.m in Sources */,
 				92FFE4181B79D943003B57A9 /* LoadingCell.m in Sources */,
 				9296B2651B71B88D0053B157 /* AddCustomSignViewController.m in Sources */,

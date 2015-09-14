@@ -15,6 +15,5 @@
 
 @interface TalkListViewController : HTBaseViewController
 
-@property (nonatomic, weak) SignModel *signModel;
 
 @end

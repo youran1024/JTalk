@@ -39,6 +39,7 @@
 #import "HTBaseRequest+Requests.h"
 #import "JSONKit.h"
 #import "UIAlertView+RWBlock.h"
+#import "SystemConfig.h"
 
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -58,6 +59,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     [self initFinishLaunch:application andOption:launchOptions];
+   
+    //  获取图片地址， 获取七牛Token
+    [[SystemConfig defaultConfig] synchronize];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
@@ -79,6 +83,8 @@
     
     //  MARK:显示引导页
     [HTGuideManager showGuideViewWithDelegate:self];
+    
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginSuccess) name:__USER_LOGIN_SUCCESS object:nil];
     
@@ -302,6 +308,9 @@
     [[UISwitch appearance] setOnTintColor:[UIColor jt_barTintColor]];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+                                                         forBarMetrics:UIBarMetricsDefault];
 }
 
 //   友盟设置

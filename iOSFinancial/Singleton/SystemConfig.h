@@ -12,10 +12,12 @@
 
 @property (nonatomic, copy) NSString *firstIndexBackImage;
 @property (nonatomic, copy) NSString *personalBackImage;
+@property (nonatomic, copy) NSString *qiniuCloudToken;
 
-+ (SystemConfig *)sharedConfig;
 
++ (SystemConfig *)defaultConfig;
 
+- (void)synchronize;
 
 @end
 

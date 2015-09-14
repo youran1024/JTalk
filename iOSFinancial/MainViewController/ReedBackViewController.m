@@ -26,6 +26,7 @@
     [self.view addSubview:self.textView1];
     self.textView1.placeholder = @"非常感谢您的支持, 辛苦~";
     
+    [self.textView1 becomeFirstResponder];
     /*
     UIButton *btn = [Sundry BigBtnWithHihtY:_textView1.bottom + 10 withTitle:@"提交"];
     [self.view addSubview:btn];

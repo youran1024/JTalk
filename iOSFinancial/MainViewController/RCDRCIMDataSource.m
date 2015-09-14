@@ -47,7 +47,7 @@
 {
     //开发者调用自己的服务器接口获取所属群组信息，同步给融云服务器，也可以直接
     //客户端创建，然后同步
-
+    
 }
 
 -(void) syncFriendList:(void (^)(NSMutableArray* friends))completion
@@ -63,6 +63,30 @@
         return;
     
     //开发者调自己的服务器接口根据userID异步请求数据
+    HTBaseRequest *request = [HTBaseRequest requestGroupInfo];
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
+        NSDictionary *dic = request.responseJSONObject;
+        NSInteger code = [[dic stringForKey:@"code"] integerValue];
+        if (code == 200) {
+            NSArray * array = [dic arrayForKey:@"result"];
+            NSString *groupName;
+            for (NSDictionary *dic in array) {
+                NSString *group_id = [dic stringForKey:@"group_id"];
+                if ([group_id isEqualToString:groupId]) {
+                    groupName = [dic stringForKey:@"group_name"];
+                    break;
+                }
+            }
+            
+            RCGroup *group = [[RCGroup alloc] initWithGroupId:groupId groupName:groupName portraitUri:@"app_icon"];
+            completion(group);
+        }
+        
+    } failure:^(YTKBaseRequest *request) {
+        
+        
+    }];
     
 }
  
@@ -88,9 +112,11 @@
 
     
 }
+
 - (void)cacheAllGroup:(void (^)())completion
 {
-
+    
+    
 }
 
 - (void)cacheAllFriends:(void (^)())completion

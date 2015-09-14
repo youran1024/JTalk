@@ -62,6 +62,7 @@
     return request;
 }
 
+
 /**
  *  其他用户信息
  */
@@ -203,6 +204,15 @@
     return request;
 }
 
++ (HTBaseRequest *)requestGroupInfo
+{
+    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/user/group"];
+    [request addUserId];
+    request.requestMethod = YTKRequestMethodGet;
+    
+    return request;
+}
+
 // 群成员列表
 + (HTBaseRequest *)groupUserList:(NSString *)groupId andPageIndex:(NSInteger)index
 {
@@ -229,6 +239,20 @@
     HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/user/report"];
     [request addUserId];
     [request addPostValue:reportUserId forKey:@"report_user_id"];
+    
+    return request;
+}
+
+
+/**
+ *  系统设置
+ */
+
++ (HTBaseRequest *)requestSystemSetting
+{
+    HTBaseRequest   *request = [HTBaseRequest requestWithURL:@"/sys/setting"];
+    [request addUserId];
+    request.requestMethod = YTKRequestMethodGet;
     
     return request;
 }
@@ -275,7 +299,6 @@
 {
     [self addValue:__userInfoId forKey:@"user_id"];
 }
-
 
 
 

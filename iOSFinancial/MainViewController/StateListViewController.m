@@ -17,6 +17,8 @@
 #import "TalkListViewController.h"
 #import "HTBaseRequest+Requests.h"
 #import "TalkViewController.h"
+#import "SystemConfig.h"
+#import "NSDate+BFExtension.h"
 
 
 @interface StateListViewController () <UITextFieldDelegate>
@@ -28,6 +30,7 @@
 @property (nonatomic, strong)   SignListModel *singListModel;
 @property (nonatomic, strong)   NSMutableArray *dataArray;
 @property (nonatomic, strong)   UILabel *titleLabel;
+@property (nonatomic, strong)   NSDate *refreshDate;
 
 @end
 
@@ -54,6 +57,12 @@
     }
     
     [self requestHotWordList];
+    
+    if (_refreshDate) {
+        _refreshLabel.text = HTSTR(@"%@", [_refreshDate labelString]);
+    }else {
+        _refreshLabel.text = @"";
+    }
 }
 
 - (void)viewDidLoad {
@@ -68,7 +77,10 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonExtern buttonWithTitle:@"DIY" target:self andSelector:@selector(addSign)];
     */
     
-    UIImageView *backImageView = [[UIImageView alloc] initWithImage:HTImage(@"findMoreImage1")];
+    SystemConfig *system = [SystemConfig defaultConfig];
+    NSString *imageStr = system.firstIndexBackImage;
+    
+    UIImageView *backImageView = [[UIImageView alloc] initWithImage:HTImage(imageStr)];
     _backImageView = backImageView;
     backImageView.width = self.view.width;
     backImageView.height = self.view.width;
@@ -83,7 +95,7 @@
 
 - (void)userLoginSuccess
 {
-//    [self requestHotWordList];
+    [self requestHotWordList];
 }
 
 //  MARK:下拉刷新
@@ -101,6 +113,9 @@
         [self endRefresh];
         
         [self parseHotSignListData:[request.responseJSONObject arrayForKey:@"result"]];
+        
+        _refreshDate = [NSDate date];
+        _refreshLabel.text = @"刚刚";
         
     } failure:^(YTKBaseRequest *request) {
         [self endRefresh];
@@ -142,7 +157,8 @@
     NSString *word = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if (!isEmpty(word)) {
-        [self recoderUserClickWord:word];
+        [textField resignFirstResponder];
+        [self createGroupWithTitle:word];
     }
     
     return YES;
@@ -261,7 +277,7 @@
     //  单击了标签
     [listView setSignClickBlock:^(SignModel *model, UIButton *button) {
         //  创建聊天室
-        [weakSelf createGroupWithTitle:button.titleLabel.text andModel:model];
+        [weakSelf createGroupWithTitle:button.titleLabel.text];
         
     }];
     
@@ -281,11 +297,13 @@
     
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         
+    } failure:^(YTKBaseRequest *request) {
+        
     }];
 }
 
-//  MARK:创建聊天室
-- (void)createGroupWithTitle:(NSString *)title andModel:(SignModel *)model
+//  MARK:创建并加入聊天室
+- (void)createGroupWithTitle:(NSString *)title
 {
     [self showHudWaitingView:PromptTypeWating];
     HTBaseRequest *request = [HTBaseRequest createGroupWithGroupName:title];
@@ -296,14 +314,14 @@
         NSInteger code = [[dict stringIntForKey:@"code"] integerValue];
         
         if (code == 200) {
-            [weakSelf joinGroupByGroupId:[model.title toMD5] andGroupName:model.title andModel:model];
+            [weakSelf joinGroupByGroupId:[title toMD5] andGroupName:title];
         }
         
     }];
 }
 
 //  加入群组
-- (void)joinGroupByGroupId:(NSString *)groupId andGroupName:(NSString *)groupName andModel:(SignModel *)model
+- (void)joinGroupByGroupId:(NSString *)groupId andGroupName:(NSString *)groupName
 {
     __weakSelf;
     [[RCIMClient sharedRCIMClient] joinGroup:groupId groupName:groupName success:^{
@@ -312,10 +330,10 @@
         [weakSelf recoderUserClickWord:groupName];
         
         dispatch_sync(dispatch_get_main_queue(), ^{
-            [weakSelf showTalkListViewController:model];
+            [weakSelf showTalkListViewController:groupName];
         });
         
-        RCGroup *group = [[RCGroup alloc] initWithGroupId:[model.title toMD5] groupName:model.title portraitUri:nil];
+        RCGroup *group = [[RCGroup alloc] initWithGroupId:[groupName toMD5] groupName:groupName portraitUri:nil];
         
         [[RCIMClient sharedRCIMClient] syncGroups:@[group] success:^{
             // success
@@ -330,25 +348,18 @@
 }
 
 //  MARK:聊天室Controller
-- (void)showTalkListViewController:(SignModel *)model
+- (void)showTalkListViewController:(NSString *)title
 {
     TalkViewController *conversationVC = [[TalkViewController alloc] init];
     conversationVC.conversationType = ConversationType_GROUP; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
-    conversationVC.targetId = [model.title toMD5]; // 接收者的 targetId，这里为举例。
-    conversationVC.userName = model.title;
-    conversationVC.title = model.title; // 会话的 title。
-    conversationVC.groupTitle = model.title;
+    conversationVC.targetId = [title toMD5]; // 接收者的 targetId，这里为举例。
+    conversationVC.userName = title;
+    conversationVC.title = title; // 会话的 title。
+    conversationVC.groupTitle = title;
     
     conversationVC.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:conversationVC animated:YES];
-    
-    return;
-    
-    TalkListViewController *talkVc = [[TalkListViewController alloc] init];
-    talkVc.signModel = model;
-    talkVc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:talkVc animated:YES];
 }
 
 //  MARK:程序状态的存储和恢复
@@ -409,7 +420,6 @@
 {
     if (!_refreshLabel) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(40, 8, 200, 20.0f)];
-        label.text = @"1分钟前刷新";
         label.font = HTFont(15.0f);
         label.textColor = [UIColor whiteColor];
         label.backgroundColor = [UIColor clearColor];

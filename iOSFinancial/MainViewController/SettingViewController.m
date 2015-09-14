@@ -98,8 +98,13 @@
     UserInfoModel *userInfo = [User sharedUser].userInfo;
     
     if (indexPath.section == 0) {
-
-        [self.infoCell.headerImageView sd_setImageWithURL:HTURL(userInfo.userPhoto) placeholderImage:HTImage(@"app_icon")];
+        
+        if (userInfo.userPhotoImage) {
+            self.infoCell.headerImageView.image = userInfo.userPhotoImage;
+        }else {
+            [self.infoCell.headerImageView sd_setImageWithURL:HTURL(userInfo.userPhoto) placeholderImage:HTImage(@"app_icon")];
+        }
+        
         self.infoCell.nameLabel.text = userInfo.userName;
         
         return self.infoCell;

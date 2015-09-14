@@ -14,6 +14,7 @@
 #import "PersonalInfoView.h"
 #import "UIView+BorderColor.h"
 #import "TalkViewController.h"
+#import "SystemConfig.h"
 
 
 @interface PersonalViewController ()
@@ -68,33 +69,13 @@
     self.showRefreshHeaderView = YES;
     [self.refreshHeaderView makeWhite];
     
-    [self findNavigationItemButtonView];
+    [self.refreshHeaderView beginRefreshing];
 }
 
 - (void)viewWillLayoutSubviews
 {
-    [self findNavigationItemButtonView];
-    [self clearBackBarButtonItemTitle];
-}
-
-- (void)findNavigationItemButtonView
-{
-    NSArray *views = self.navigationController.navigationBar.subviews;
-    
-    for (UIView *obj in views) {
-        if ([obj isKindOfClass:NSClassFromString(@"UINavigationItemButtonView")]) {
-//            obj.hidden = YES;
-        }
-    }
-}
-
-#pragma mark -
-- (void)clearBackBarButtonItemTitle
-{
-    //  左侧返回标题为空
-    UIBarButtonItem *returnButtonItem = [[UIBarButtonItem alloc] init];
-    returnButtonItem.title = @" ";
-    self.navigationItem.backBarButtonItem = returnButtonItem;
+    [super viewWillLayoutSubviews];
+    _personalInfoView.height = 100;
 }
 
 - (void)refreshViewBeginRefresh:(MJRefreshBaseView *)baseView
@@ -127,8 +108,10 @@
 - (void)parseWithDictionary:(NSDictionary *)dict
 {
     _signListModel = [[SignListModel alloc] init];
-    [_signListModel parseWithDictionary:dict];
+    [_signListModel parseWithPersonalArray:[dict arrayForKey:@"user_words"]];
     [_signListView refreWithModel:_signListModel];
+    
+    
     self.userInfoModel.userID = _userId;
     [self.userInfoModel parseWithDictionaryWithOutSync:dict];
     
@@ -137,7 +120,11 @@
 
 - (void)addBackImageView
 {
-    UIImageView *backImageView = [[UIImageView alloc] initWithImage:HTImage(@"personal1")];
+    SystemConfig *system = [SystemConfig defaultConfig];
+    NSString *imageStr = system.personalBackImage;
+    
+    UIImageView *backImageView = [[UIImageView alloc] initWithImage:HTImage(imageStr)];
+    
     backImageView.contentMode = UIViewContentModeScaleAspectFill;
     _backImageView = backImageView;
     backImageView.width = APPScreenWidth;
@@ -167,10 +154,13 @@
 
 - (void)configPersonalViewInfo
 {
+    self.personalInfoView.height = APPScreenWidth;
     [self.personalInfoView.imageView sd_setImageWithURL:HTURL(_userInfoModel.userPhoto) placeholderImage:HTImage(@"app_icon")];
     self.personalInfoView.nameLabel.text = _userInfoModel.userName;
     self.personalInfoView.promptLabel.text = HTSTR(@"%@, %@", _userInfoModel.userSex, _userInfoModel.userLocation);
     self.personalInfoView.locationLabel.text = _userInfoModel.userPrompt;
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark -
@@ -301,12 +291,6 @@
     conversationVC.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:conversationVC animated:YES];
-    
-    return;
-    
-    TalkListViewController *talkVc = [[TalkListViewController alloc] init];
-    talkVc.signModel = model;
-    [self.navigationController pushViewController:talkVc animated:YES];
 }
 
 #pragma mark - 

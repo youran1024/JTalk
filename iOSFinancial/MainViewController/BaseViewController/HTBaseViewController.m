@@ -446,7 +446,7 @@ typedef void (^AlertViewBlock)(UIAlertView *alertView, NSInteger buttonIndex);
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
         for (int i = 0; i < buttonTitles.count; i++) {
-            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:[buttonTitles objectAtIndex:i] style:(i < buttonTitles.count - 1 ? UIAlertActionStyleDefault: UIAlertActionStyleDestructive) handler:^(UIAlertAction *action) {
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:[buttonTitles objectAtIndex:i] style:(i < buttonTitles.count - 1 ? UIAlertActionStyleDefault: UIAlertActionStyleCancel) handler:^(UIAlertAction *action) {
                 if (handler) {
                     handler(nil , i);
                 }

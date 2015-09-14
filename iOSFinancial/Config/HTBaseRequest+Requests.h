@@ -60,6 +60,9 @@
 //  创建群组
 + (HTBaseRequest *)createGroupWithGroupName:(NSString *)groupName;
 
+//  获取群组信息
++ (HTBaseRequest *)requestGroupInfo;
+
 //  获取群组内的成员列表
 + (HTBaseRequest *)groupUserList:(NSString *)groupId andPageIndex:(NSInteger)index;
 
@@ -68,6 +71,13 @@
 
 //  群外举报用户
 + (HTBaseRequest *)reportUser:(NSString *)reportUserId;
+
+
+/**
+ *  系统设置
+ */
+
++ (HTBaseRequest *)requestSystemSetting;
 
 
 @end

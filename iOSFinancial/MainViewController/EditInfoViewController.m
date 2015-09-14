@@ -16,6 +16,7 @@
 #import "HTBaseRequest+Requests.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Qiniu/QiniuSDK.h>
+#import "SystemConfig.h"
 
 
 #define ORIGINAL_MAX_WIDTH 640.0f
@@ -168,9 +169,16 @@
     
     userInfo.userPrompt = _selectionInfoCell.placeHolderView.text;
     
-    if (!userInfo.userPhoto) {
-        [self showHudErrorView:@"请设置头像"];
-        return;
+    if (user.isLogin) {
+        if (isEmpty(userInfo.userPhoto)) {
+            [self showHudErrorView:@"请设置头像"];
+            return;
+        }
+    }else {
+        if (!userInfo.userPhotoImage) {
+            [self showHudErrorView:@"请设置头像"];
+            return;
+        }
     }
     
     if (!userInfo.userName) {
@@ -178,23 +186,30 @@
         return;
     }
     
-    //  先上传头像到七牛云存储
-    [self uploadHeaderImage:userInfo.userPhotoImage byUser:user];
+    if (userInfo.userPhotoImage) {
+        //  先上传头像到七牛云存储
+        [self uploadHeaderImage:userInfo.userPhotoImage byUser:user];
+    }else {
+        [self doRegeditOrModify:user];
+    }
 }
 
 - (void)uploadHeaderImage:(UIImage *)image byUser:(User *)user
 {
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
     NSData *data = UIImageJPEGRepresentation(image, .9);
-    NSString *token = @"";
+    NSString *token = [SystemConfig defaultConfig].qiniuCloudToken;
+    
     __weakSelf;
-    [upManager putData:data key:@"hello" token:token
+    [upManager putData:data key:[[[NSDate date] description] toMD5] token:token
               complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
                   NSLog(@"%@", info);
                   NSLog(@"%@", resp);
                   
-                  // 保存用户头像地址 (七牛要设置成 公开的 )
-                  user.userInfo.userPhoto = key;
+                  // 保存用户头像地址
+                  user.userInfoModelTmp.userPhoto = HTSTR(@"%@/%@", qiNiuCloudServerURL, key);
+                  user.userInfoModelTmp.userPhotoImage = image;
+                  
                   [weakSelf doRegeditOrModify:user];
                   
               } option:nil];

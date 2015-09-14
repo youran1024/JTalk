@@ -100,6 +100,24 @@ static NSString *kSignListShowSign = @"kSignListShowSign";
     [self changeNextPage];
 }
 
+- (void)parseWithPersonalArray:(NSArray *)array
+{
+    self.title = @"历史标签";
+    self.signType = SignTagTypeNormal;
+    
+    NSMutableArray *mutArray = [NSMutableArray array];
+    for (NSString *title in array) {
+        SignModel *model = [[SignModel alloc] init];
+        model.title = title;
+        [mutArray addObject:model];
+    }
+    
+    self.signArray = [NSArray arrayWithArray:mutArray];
+    
+    [self changeNextPage];
+
+}
+
 - (NSInteger)changeNextPage
 {
     

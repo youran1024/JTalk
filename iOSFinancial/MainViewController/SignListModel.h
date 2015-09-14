@@ -17,6 +17,8 @@
 //  正在显示的标签数组
 @property (nonatomic, strong, readonly) NSArray *showSignList;
 
+//  个人页面的解析
+- (void)parseWithPersonalArray:(NSArray *)array;
 
 //  换一批
 - (NSInteger)changeNextPage;

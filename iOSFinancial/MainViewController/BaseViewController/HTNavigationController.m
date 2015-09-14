@@ -62,9 +62,12 @@
     
     UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                 action:@selector(paningGestureReceive:)];
-//    [recognizer delaysTouchesBegan];
+    [recognizer delaysTouchesBegan];
     recognizer.delaysTouchesBegan = YES;
+    
+    /*
     [self.view addGestureRecognizer:recognizer];
+     */
     
     //  关闭系统侧滑手势
     self.interactivePopGestureRecognizer.enabled = NO;
