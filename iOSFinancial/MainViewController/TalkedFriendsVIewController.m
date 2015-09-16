@@ -52,36 +52,26 @@
     self.showConnectingStatusOnNavigatorBar = NO;
 }
 
-//- (void)setNavigationItemTitleView {
-//    
-//    if (self.isEnteredToCollectionViewController) {
-//        return;
-//    }
-//    
-//    UILabel *titleView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 44)];
-//    titleView.backgroundColor = [UIColor clearColor];
-//    titleView.font = [UIFont boldSystemFontOfSize:19];
-//    titleView.textColor = [UIColor whiteColor];
-//    titleView.textAlignment = NSTextAlignmentCenter;
-//    titleView.text = @"会话";
-//    self.tabBarController.navigationItem.titleView = titleView;
-//    
-//}
-
-#pragma mark -
-- (void)clearBackBarButtonItemTitle
-{
-    //  左侧返回标题为空
-    UIBarButtonItem *returnButtonItem = [[UIBarButtonItem alloc] init];
-    returnButtonItem.title = @"";
-    self.navigationItem.backBarButtonItem = returnButtonItem;
+- (void)setNavigationItemTitleView {
+    
+    if (self.isEnteredToCollectionViewController) {
+        return;
+    }
+    
+    UILabel *titleView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 44)];
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont boldSystemFontOfSize:19];
+    titleView.textColor = [UIColor whiteColor];
+    titleView.textAlignment = NSTextAlignmentCenter;
+    titleView.text = @"会话";
+    self.tabBarController.navigationItem.titleView = titleView;
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self clearBackBarButtonItemTitle];
 }
 
 - (void)notifyUpdateUnreadMessageCount

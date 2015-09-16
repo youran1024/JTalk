@@ -9,6 +9,7 @@
 #import "SignListView.h"
 #import "SignModel.h"
 #import "UIView+LabelSign.h"
+#import "UIView+NoneDataView.h"
 
 #define __SignListViewPageCount__ 6
 
@@ -56,7 +57,7 @@
 - (void)createSignListView
 {
     NSArray *signs = _signListModel.showSignList;
-    
+
     int i = 0;
     CGFloat largeWith = (APPScreenWidth - 60.0f) / 2.0f;
     CGFloat signTop = 15 + 20 + 10.0f;
@@ -109,6 +110,13 @@
 
 - (void)createView
 {
+    NSArray *signs = _signListModel.showSignList;
+    
+    if (signs.count == 0) {
+        [self showNoneDataView];
+        return;
+    }
+    
     [self addSubview:self.titleLabel];
     
     _titleLabel.text = _signListModel.title;

@@ -35,8 +35,13 @@
     [self.cancelButton setTitleColor:[UIColor jt_globleTextColor] forState:UIControlStateNormal];
     [self.pullBackButton setTitleColor:[UIColor jt_lightGrayColor] forState:UIControlStateNormal];
     
-    self.pullBackButton.right = self.width - 80.0f;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
     
+    self.pullBackButton.right = self.width - 20.0f;
 }
 
 - (IBAction)pullBackButton:(id)sender

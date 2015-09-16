@@ -155,7 +155,7 @@
         return;
     }
     
-    point.y -= self.imageView.height / 4.0f;
+//    point.y -= self.imageView.height / 4.0f;
     self.imageView.center = point;
     
     point.y += _imageView.height / 2.0f;

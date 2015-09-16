@@ -225,20 +225,23 @@
 }
 
 //  群里举报用户
-+ (HTBaseRequest *)reportUserInGroup:(NSString *)reportUserId
++ (HTBaseRequest *)reportUserInGroup:(NSString *)reportUserId andReportType:(NSInteger)type
 {
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/user/report"];
+    //  1.色情， 2.广告 3.骚扰 4.诈骗
+    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/group/user/report"];
     [request addUserId];
     [request addPostValue:reportUserId forKey:@"report_user_id"];
-
+    [request addPostValue:@(type) forKey:@"type"];
+    
     return request;
 }
 
-+ (HTBaseRequest *)reportUser:(NSString *)reportUserId
++ (HTBaseRequest *)reportUser:(NSString *)reportUserId anReportType:(NSInteger)type
 {
     HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/user/report"];
     [request addUserId];
     [request addPostValue:reportUserId forKey:@"report_user_id"];
+    [request addPostValue:@(type) forKey:@"type"];
     
     return request;
 }

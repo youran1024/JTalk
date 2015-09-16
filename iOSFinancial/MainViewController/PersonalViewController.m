@@ -17,6 +17,8 @@
 #import "SystemConfig.h"
 
 
+#define __HeaderView_Height_Offset   100
+
 @interface PersonalViewController ()
 
 @property (nonatomic, strong)   UIImageView *backImageView;
@@ -35,6 +37,16 @@
 @end
 
 @implementation PersonalViewController
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return UIStatusBarAnimationFade;
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -72,12 +84,6 @@
     [self.refreshHeaderView beginRefreshing];
 }
 
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    _personalInfoView.height = 100;
-}
-
 - (void)refreshViewBeginRefresh:(MJRefreshBaseView *)baseView
 {
     [self requestUserInfo];
@@ -107,6 +113,8 @@
 
 - (void)parseWithDictionary:(NSDictionary *)dict
 {
+    self.balckType = [[dict stringForKey:@"black_type"] integerValue];
+    
     _signListModel = [[SignListModel alloc] init];
     [_signListModel parseWithPersonalArray:[dict arrayForKey:@"user_words"]];
     [_signListView refreWithModel:_signListModel];
@@ -128,7 +136,7 @@
     backImageView.contentMode = UIViewContentModeScaleAspectFill;
     _backImageView = backImageView;
     backImageView.width = APPScreenWidth;
-    backImageView.height = APPScreenWidth;
+    backImageView.height = APPScreenWidth - __HeaderView_Height_Offset - 20;
     [self.view addSubview:backImageView];
     [self.view bringSubviewToFront:self.tableView];
 }
@@ -154,7 +162,6 @@
 
 - (void)configPersonalViewInfo
 {
-    self.personalInfoView.height = APPScreenWidth;
     [self.personalInfoView.imageView sd_setImageWithURL:HTURL(_userInfoModel.userPhoto) placeholderImage:HTImage(@"app_icon")];
     self.personalInfoView.nameLabel.text = _userInfoModel.userName;
     self.personalInfoView.promptLabel.text = HTSTR(@"%@, %@", _userInfoModel.userSex, _userInfoModel.userLocation);
@@ -164,11 +171,9 @@
 }
 
 #pragma mark -
-
 /*
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
     CGPoint point = scrollView.contentOffset;
     CGFloat offset = point.y / 100.0f > .5 ? .5 : point.y / 100.0f;
     offset = 1.0f - offset > 1.0f ? 1.0f - offset : 1.0f;
@@ -183,11 +188,14 @@
     if (offset > 0) {
         self.backImageView.top = -offset;
     }
-
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (self.balckType) {
+        return 0;
+    }
+    
     return 1;
 }
 
@@ -267,30 +275,90 @@
     [listView setSignClickBlock:^(SignModel *model, UIButton *button) {
         //  单击了标签
         
-        [weakSelf showTalkListViewController:model];
+        [weakSelf createGroupWithTitle:model.title];
     }];
     
     [listView setChangeAnotherBlock:^(UIButton *button) {
         //  单击了更换
-        
         
     }];
     
     return cell;
 }
 
-- (void)showTalkListViewController:(SignModel *)model
+//  MARK:创建并加入聊天室
+- (void)createGroupWithTitle:(NSString *)title
+{
+    [self showHudWaitingView:PromptTypeWating];
+    HTBaseRequest *request = [HTBaseRequest createGroupWithGroupName:title];
+    
+    __weakSelf;
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSDictionary *dict = request.responseJSONObject;
+        NSInteger code = [[dict stringIntForKey:@"code"] integerValue];
+        
+        if (code == 200) {
+            [weakSelf joinGroupByGroupId:[title toMD5] andGroupName:title];
+        }
+        
+    }];
+}
+
+//  加入群组
+- (void)joinGroupByGroupId:(NSString *)groupId andGroupName:(NSString *)groupName
+{
+    __weakSelf;
+    [[RCIMClient sharedRCIMClient] joinGroup:groupId groupName:groupName success:^{
+        [weakSelf removeHudInManaual];
+        
+        [weakSelf recoderUserClickWord:groupName];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [weakSelf showTalkListViewController:groupName];
+        });
+        
+        /*
+         //  同步群组数据
+         RCGroup *group = [[RCGroup alloc] initWithGroupId:[groupName toMD5] groupName:groupName portraitUri:nil];
+         [[RCIMClient sharedRCIMClient] syncGroups:@[group] success:^{
+         // success
+         
+         } error:^(RCErrorCode status) {
+         
+         }];
+         
+         */
+        
+    } error:^(RCErrorCode status) {
+        [weakSelf showHudErrorView:@"加入失败，请重试!"];
+    }];
+}
+
+//  MARK:聊天室Controller
+- (void)showTalkListViewController:(NSString *)title
 {
     TalkViewController *conversationVC = [[TalkViewController alloc] init];
     conversationVC.conversationType = ConversationType_GROUP; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
-    conversationVC.targetId = [model.title toMD5]; // 接收者的 targetId，这里为举例。
-    conversationVC.userName = model.title;
-    conversationVC.title = model.title; // 会话的 title。
-    conversationVC.groupTitle = model.title;
+    conversationVC.targetId = [title toMD5]; // 接收者的 targetId，这里为举例。
+    conversationVC.userName = title;
+    conversationVC.title = title; // 会话的 title。
+    conversationVC.groupTitle = title;
     
     conversationVC.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:conversationVC animated:YES];
+}
+
+//  MARK:记录用户点击过的标签
+- (void)recoderUserClickWord:(NSString *)word
+{
+    HTBaseRequest *request = [HTBaseRequest recoderUserSearchWord:word];
+    
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
+    } failure:^(YTKBaseRequest *request) {
+        
+    }];
 }
 
 #pragma mark - 
@@ -345,7 +413,7 @@
     if (!_personalInfoView) {
         _personalInfoView = [PersonalInfoView xibView];
         _personalInfoView.width = APPScreenWidth;
-        _personalInfoView.height = APPScreenWidth;
+        _personalInfoView.height = APPScreenWidth - __HeaderView_Height_Offset;
     }
     
     return _personalInfoView;

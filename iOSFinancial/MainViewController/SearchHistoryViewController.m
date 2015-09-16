@@ -8,7 +8,7 @@
 
 #import "SearchHistoryViewController.h"
 #import "TalkListViewController.h"
-
+#import "TalkViewController.h"
 
 @interface SearchHistoryViewController ()
 
@@ -119,9 +119,17 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    TalkListViewController *talk = [[TalkListViewController alloc] init];
-    [self.navigationController pushViewController:talk animated:YES];
+    NSString *title = [self.dataArray objectAtIndex:indexPath.row];
+    TalkViewController *conversationVC = [[TalkViewController alloc] init];
+    conversationVC.conversationType = ConversationType_GROUP; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
+    conversationVC.targetId = [title toMD5]; // 接收者的 targetId，这里为举例。
+    conversationVC.userName = title;
+    conversationVC.title = title; // 会话的 title。
+    conversationVC.groupTitle = title;
     
+    conversationVC.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:conversationVC animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

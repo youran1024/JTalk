@@ -29,8 +29,8 @@
     LoadingStateView *view = [[LoadingStateView alloc] initWithFrame:self.bounds];
     view.tag = LoadingStateViewTag;
     view.image = HTImage(@"nonedataImage");
-    view.promptStr = @"简单理财";
-    view.backgroundColor = [UIColor colorWithHEX:0xcccccc];
+    view.promptStr = @"";
+    view.backgroundColor = [UIColor clearColor]; //[UIColor colorWithHEX:0xcccccc];
     [view setLoadingState:LoadingStateNoneCustome];
     
     return view;

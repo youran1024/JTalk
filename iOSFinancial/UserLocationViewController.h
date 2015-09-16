@@ -7,6 +7,8 @@
 //
 
 #import "HTBaseTableViewController.h"
+#import <CoreLocation/CoreLocation.h>
+
 
 typedef void(^GetCityNameBlock)(NSString *cityName);
 

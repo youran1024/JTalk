@@ -333,14 +333,17 @@
             [weakSelf showTalkListViewController:groupName];
         });
         
+        /*
+        //  同步群组数据
         RCGroup *group = [[RCGroup alloc] initWithGroupId:[groupName toMD5] groupName:groupName portraitUri:nil];
-        
         [[RCIMClient sharedRCIMClient] syncGroups:@[group] success:^{
             // success
 
         } error:^(RCErrorCode status) {
             
         }];
+         
+         */
         
     } error:^(RCErrorCode status) {
         [weakSelf showHudErrorView:@"加入失败，请重试!"];

@@ -26,9 +26,11 @@
     if (loading) {
         _indicatorView.hidden = NO;
         [_indicatorView startAnimating];
+        self.textLabel.hidden = YES;
     }else {
         [_indicatorView stopAnimating];
         _indicatorView.hidden = YES;
+        self.textLabel.hidden = NO;
     }
 }
 

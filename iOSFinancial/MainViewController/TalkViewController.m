@@ -116,6 +116,10 @@
 
 - (void)didLongPressCellPortrait:(NSString *)userId
 {
+    if ([userId isEqualToString:__userInfoId]) {
+        return;
+    }
+    
     HTBaseRequest *request = [HTBaseRequest otherUserInfo:userId];
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dic = request.responseJSONObject;
@@ -226,32 +230,33 @@
                                                                      delegate:self
                                                             cancelButtonTitle:@"取消"
                                                        destructiveButtonTitle:nil
-                                                            otherButtonTitles:@"垃圾广告", @"淫秽色情", @"骚扰", @"资料不当", nil];
+                                                            otherButtonTitles: @"淫秽色情", @"垃圾广告", @"骚扰", @"诈骗", nil];
             choiceSheet.tag = pullBackResionTag;
             
             [choiceSheet showInView:self.view];
             
-        }else {
+        }else if (buttonIndex == 1){
             //  屏蔽
             [self sendPullBlackRequestWithPrompt:YES];
         }
         
     }else {
-        //  屏蔽并举报用户
-        [self sendPullBlackRequestWithPrompt:NO];
-        
-        [self reportUserReqeust];
-        
+        if (buttonIndex != 4) {
+            //  屏蔽并举报用户
+            [self sendPullBlackRequestWithPrompt:NO];
+            
+            [self reportUserReqeust:buttonIndex];
+        }
     }
 }
 
-- (void)reportUserReqeust
+- (void)reportUserReqeust:(NSInteger)type
 {
     NSString *userId = self.tapUserView.userId;
     
     [self.view showHudWaitingView:PromptTypeWating];
     
-    HTBaseRequest *request = [HTBaseRequest reportUserInGroup:userId];
+    HTBaseRequest *request = [HTBaseRequest reportUserInGroup:userId andReportType:type];
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dic = request.responseJSONObject;
         NSInteger code = [[dic stringIntForKey:@"code"] integerValue];

@@ -60,8 +60,10 @@
 
     [self initFinishLaunch:application andOption:launchOptions];
    
-    //  获取图片地址， 获取七牛Token
-    [[SystemConfig defaultConfig] synchronize];
+    if (__isUserLogin) {
+        //  获取图片地址， 获取七牛Token
+        [[SystemConfig defaultConfig] synchronize];
+    }
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
@@ -116,6 +118,9 @@
 - (void)userLoginSuccess
 {
     [self rongYunConnection];
+    
+    //  获取图片地址， 获取七牛Token
+    [[SystemConfig defaultConfig] synchronize];
 }
 
 //  MARK:用户注销成功

@@ -67,10 +67,10 @@
 + (HTBaseRequest *)groupUserList:(NSString *)groupId andPageIndex:(NSInteger)index;
 
 //  举报用户
-+ (HTBaseRequest *)reportUserInGroup:(NSString *)reportUserId;
++ (HTBaseRequest *)reportUserInGroup:(NSString *)reportUserId andReportType:(NSInteger)type;
 
 //  群外举报用户
-+ (HTBaseRequest *)reportUser:(NSString *)reportUserId;
++ (HTBaseRequest *)reportUser:(NSString *)reportUserId anReportType:(NSInteger)type;
 
 
 /**

@@ -8,7 +8,7 @@
 
 #import "UserLocationViewController.h"
 #import "LoadingCell.h"
-#import <CoreLocation/CoreLocation.h>
+
 
 @interface UserLocationViewController () <CLLocationManagerDelegate>
 
@@ -30,8 +30,12 @@
 {
     [super viewWillAppear:animated];
     
-    [self.locationManager startUpdatingLocation];
-    
+    if ([CLLocationManager locationServicesEnabled]) {
+        [self.locationManager startUpdatingLocation];
+        
+    }else {
+        [self showAlert:@"尚未开启定位服务"];
+    }
 }
 
 - (void)viewDidLoad
@@ -74,8 +78,17 @@
         for (CLPlacemark * placemark in placemarks) {
             
             NSDictionary *loactionDic = [placemark addressDictionary];
-            _locationCity = [loactionDic stringForKey:@"State"];
+            NSString *city = [loactionDic stringForKey:@"State"];
+            NSString *subLocality = [loactionDic stringForKey:@"subLocality"];
+            _locationCity = HTSTR(@"%@ %@", city, subLocality);
             
+            /*
+            NSArray *keys = [loactionDic allKeys];
+            for (NSString *KEY in keys) {
+                NSLog(@"%@", KEY);
+                NSLog(@"%@", [loactionDic stringForKey:KEY]);
+            }
+            */
         }
         
         if (weakSelf.cityBlcok) {
@@ -84,8 +97,32 @@
             [weakSelf.tableView reloadData];
         }
     }];
-    
 }
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined:
+            
+            if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+                
+                [self.locationManager requestWhenInUseAuthorization]; 
+                [self.locationManager requestAlwaysAuthorization];
+                
+            }
+            break;
+        default:
+            break;
+            
+            
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
+}
+
 #pragma mark -
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -142,6 +179,13 @@
         if (!isEmpty(self.locationCity)) {
             self.loadingCell.textLabel.text = self.locationCity;
             self.loadingCell.loading = NO;
+        }else {
+            if ([CLLocationManager locationServicesEnabled]) {
+                self.loadingCell.textLabel.text = @"定位中...";
+                self.loadingCell.loading = YES;
+            }else {
+                self.loadingCell.textLabel.text = @"尚未开启定位服务";
+            }
         }
         
         return self.loadingCell;

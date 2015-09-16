@@ -49,6 +49,7 @@
     [super viewWillAppear:animated];
     
     [_pickerView remove];
+    
 }
 
 - (void)viewDidLoad
@@ -65,15 +66,20 @@
         
     }else {
         //  用户没有登录，需要定位
-        __weakSelf;
-        _userLocationController = [[UserLocationViewController alloc] init];
-        [_userLocationController getCityNameWithBlock:^(NSString *cityName) {
-            weakSelf.locationCity = cityName;
-            
-            user.userInfoModelTmp.userLocation = _locationCity;
-            
-            [weakSelf.tableView reloadData];
-        }];
+        if ([CLLocationManager locationServicesEnabled]) {
+            __weakSelf;
+            _userLocationController = [[UserLocationViewController alloc] init];
+            [_userLocationController getCityNameWithBlock:^(NSString *cityName) {
+                weakSelf.locationCity = cityName;
+                
+                user.userInfoModelTmp.userLocation = _locationCity;
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.tableView reloadData];
+                });
+                
+            }];
+        }
     }
 
     UserInfoModel *userInfo = user.userInfoModelTmp;
@@ -116,6 +122,7 @@
             
             [weakSelf showHudSuccessView:@"注册成功"];
             
+            dict = [dict dictionaryForKey:@"result"];
             userInfo.userToken = [dict stringForKey:@"token"];
             userInfo.userID = [dict stringForKey:@"user_id"];
             [[User sharedUser] exchangeUserInfo];
@@ -213,6 +220,7 @@
                   [weakSelf doRegeditOrModify:user];
                   
               } option:nil];
+    
 }
 
 - (void)doRegeditOrModify:(User *)user
@@ -225,7 +233,7 @@
     }else {
         [self doRegeitRequest];
     }
-
+    
 }
 
 //  头像视图
@@ -360,7 +368,11 @@
             if (!isEmpty(_locationCity)) {
                 editCell.textField.text = _locationCity;
             }else {
-                editCell.textField.text = @"定位中...";
+                if ([CLLocationManager locationServicesEnabled]) {
+                    editCell.textField.text = @"定位中...";
+                }else {
+                    editCell.textField.text = @"尚未开启定位服务";
+                }
             }
         }
         
