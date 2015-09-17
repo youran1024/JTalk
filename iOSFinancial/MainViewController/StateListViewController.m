@@ -52,11 +52,10 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
-    if (self.dataArray.count == 0) {
+    if (self.dataArray.count == 0 && __isUserLogin) {
         [self showHudWaitingView:PromptTypeWating];
+        [self requestHotWordList];
     }
-    
-    [self requestHotWordList];
     
     if (_refreshDate) {
         _refreshLabel.text = HTSTR(@"%@", [_refreshDate labelString]);

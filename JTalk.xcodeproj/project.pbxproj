@@ -125,6 +125,8 @@
 		92442FF61B831FC4006E3290 /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92442FF51B831FC4006E3290 /* PersonalViewController.m */; };
 		92442FFA1B832027006E3290 /* PersonalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92442FF91B832027006E3290 /* PersonalInfoView.m */; };
 		92442FFC1B83203B006E3290 /* PersonalInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92442FFB1B83203B006E3290 /* PersonalInfoView.xib */; };
+		9253F7511BAA64EB0007BD88 /* IndexLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9253F7501BAA64EB0007BD88 /* IndexLoginView.xib */; };
+		9253F7531BAA6C750007BD88 /* IndexLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9253F7521BAA6C750007BD88 /* IndexLoginViewController.xib */; };
 		926811C21ADE570900FAB0A2 /* HTGuideManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 926811C11ADE570900FAB0A2 /* HTGuideManager.m */; };
 		926811C51ADE571E00FAB0A2 /* HTUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 926811C41ADE571E00FAB0A2 /* HTUserDefault.m */; };
 		926811CB1ADE868C00FAB0A2 /* HTSelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 926811CA1ADE868C00FAB0A2 /* HTSelectionController.m */; };
@@ -409,6 +411,8 @@
 		92442FF81B832027006E3290 /* PersonalInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoView.h; sourceTree = "<group>"; };
 		92442FF91B832027006E3290 /* PersonalInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoView.m; sourceTree = "<group>"; };
 		92442FFB1B83203B006E3290 /* PersonalInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalInfoView.xib; sourceTree = "<group>"; };
+		9253F7501BAA64EB0007BD88 /* IndexLoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexLoginView.xib; sourceTree = "<group>"; };
+		9253F7521BAA6C750007BD88 /* IndexLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexLoginViewController.xib; sourceTree = "<group>"; };
 		926811C01ADE570900FAB0A2 /* HTGuideManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTGuideManager.h; sourceTree = "<group>"; };
 		926811C11ADE570900FAB0A2 /* HTGuideManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTGuideManager.m; sourceTree = "<group>"; };
 		926811C31ADE571E00FAB0A2 /* HTUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTUserDefault.h; sourceTree = "<group>"; };
@@ -1147,6 +1151,14 @@
 			name = PersonInfoView;
 			sourceTree = "<group>";
 		};
+		9253F74F1BAA64DA0007BD88 /* IndexLoginVIew */ = {
+			isa = PBXGroup;
+			children = (
+				9253F7501BAA64EB0007BD88 /* IndexLoginView.xib */,
+			);
+			name = IndexLoginVIew;
+			sourceTree = "<group>";
+		};
 		9268127C1AE8CE5700FAB0A2 /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -1162,8 +1174,10 @@
 		927848621B7449970021562A /* LoginViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9253F74F1BAA64DA0007BD88 /* IndexLoginVIew */,
 				927848631B7449A60021562A /* IndexLoginViewController.h */,
 				927848641B7449A60021562A /* IndexLoginViewController.m */,
+				9253F7521BAA6C750007BD88 /* IndexLoginViewController.xib */,
 				927848661B7454D00021562A /* LoginViewController.h */,
 				927848671B7454D00021562A /* LoginViewController.m */,
 				927848681B7454D00021562A /* LoginViewController.xib */,
@@ -1738,11 +1752,13 @@
 				846EE4E91B01FFB400F0AE4E /* UMSLoginViewController.xib in Resources */,
 				920C09841B74970D00A8CC30 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				920C097F1B74970D00A8CC30 /* WeiboSDK.bundle in Resources */,
+				9253F7511BAA64EB0007BD88 /* IndexLoginView.xib in Resources */,
 				92442FE41B82E360006E3290 /* talkButtonHigh@2x.png in Resources */,
 				846EE4EF1B01FFB400F0AE4E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				846EE4E51B01FFB400F0AE4E /* UMSCommentInputController.xib in Resources */,
 				92442FE11B82E360006E3290 /* commitButton@2x.png in Resources */,
 				922CB5A41AC9789700C4A438 /* MJRefresh.bundle in Resources */,
+				9253F7531BAA6C750007BD88 /* IndexLoginViewController.xib in Resources */,
 				92FFE41A1B79D94D003B57A9 /* LoadingCell.xib in Resources */,
 				846EE4E21B01FFB400F0AE4E /* UMSocialLocalizable.strings in Resources */,
 				920C097D1B74970D00A8CC30 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,

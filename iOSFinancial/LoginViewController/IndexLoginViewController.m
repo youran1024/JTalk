@@ -8,13 +8,19 @@
 
 #import "IndexLoginViewController.h"
 #import "LoginViewController.h"
-
+#import "SystemConfig.h"
 
 
 @interface IndexLoginViewController ()
 
-@property (nonatomic, strong)   UIButton *loginButton;
-@property (nonatomic, strong)   UIButton *regeditButton;
+@property (nonatomic, strong) IBOutlet  UIButton *loginButton;
+@property (nonatomic, strong) IBOutlet  UIButton *regeditButton;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *promptLabel;
+
+@property (nonatomic, strong) IBOutlet UIView *topLine;
+@property (nonatomic, strong) IBOutlet UIView *bottomLine;
 
 @end
 
@@ -25,15 +31,27 @@
 {
     [super viewDidLoad];
     
-    [self.view addSubview:self.regeditButton];
-    [self.view addSubview:self.loginButton];
+    [self initView];
+}
+
+- (void)initView
+{
+    self.titleLabel.textColor = HTHexColor(0x555555);
+    
+    self.promptLabel.textColor = HTHexColor(0x2e2d2d);
+    
+    self.topLine.backgroundColor = HTHexColor(0x818282);
+    self.bottomLine.backgroundColor = HTHexColor(0x818282);
+    
+    [self.loginButton setTitleColor:[UIColor jt_globleTextColor] forState:UIControlStateNormal];
+    [self.regeditButton setTitleColor:[UIColor jt_globleTextColor] forState:UIControlStateNormal];
     
 }
 
 //  重写左上角的关闭按钮
 - (void)addCloseBarbutton
 {
-
+    
 }
 
 - (void)viewWillLayoutSubviews
@@ -49,7 +67,7 @@
 
 #pragma mark - 
 #pragma mark ButtonClicked
-- (void)loginButtonClicked:(UIButton *)button
+- (IBAction)loginButtonClicked:(UIButton *)button
 {
     LoginViewController *loginVc = [[LoginViewController alloc] initWithNibName:@"LoginViewController"andViewType:LoginViewTypeLogin];
     
@@ -57,34 +75,12 @@
 
 }
 
-- (void)regeditButtonClicked:(UIButton *)button
+- (IBAction)regeditButtonClicked:(UIButton *)button
 {
     LoginViewController *loginVc = [[LoginViewController alloc] initWithNibName:@"LoginViewController"
                                                                     andViewType:LoginViewTypeRegedit];
     
     [self.navigationController pushViewController:loginVc animated:YES];
-}
-
-- (UIButton *)loginButton
-{
-    if (!_loginButton) {
-        _loginButton = [self customButton];
-        [_loginButton setTitle:@"登录" forState:UIControlStateNormal];
-        [_loginButton addTarget:self action:@selector(loginButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    return _loginButton;
-}
-
-- (UIButton *)regeditButton
-{
-    if (!_regeditButton) {
-        _regeditButton = [self customButton];
-        [_regeditButton setTitle:@"注册" forState:UIControlStateNormal];
-        [_regeditButton addTarget:self action:@selector(regeditButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    return _regeditButton;
 }
 
 - (UIButton *)customButton

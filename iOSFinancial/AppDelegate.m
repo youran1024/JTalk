@@ -60,10 +60,8 @@
 
     [self initFinishLaunch:application andOption:launchOptions];
    
-    if (__isUserLogin) {
-        //  获取图片地址， 获取七牛Token
-        [[SystemConfig defaultConfig] synchronize];
-    }
+    //  获取图片地址， 获取七牛Token
+    [[SystemConfig defaultConfig] synchronize];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
@@ -74,7 +72,7 @@
     User *user = [User sharedUser];
     if (!user.isLogin) {
 
-        [self presentUserLoginIndexViewControllerAnimated:YES];
+        [self presentUserLoginIndexViewControllerAnimated:NO];
     }
     
     //  MARK:远程推送
@@ -97,7 +95,7 @@
 
 - (void)presentUserLoginIndexViewControllerAnimated:(BOOL)animated
 {
-    UIViewController *loginViewController = [[IndexLoginViewController alloc] init];
+    UIViewController *loginViewController = [[IndexLoginViewController alloc] initWithNibName:@"IndexLoginViewController" bundle:nil];
     HTNavigationController *nav = [[HTNavigationController alloc] initWithRootViewController:loginViewController];
     
     [self.tabBarController presentViewController:nav animated:animated completion:^{

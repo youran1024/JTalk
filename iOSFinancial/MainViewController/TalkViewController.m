@@ -236,18 +236,32 @@
             [choiceSheet showInView:self.view];
             
         }else if (buttonIndex == 1){
-            //  屏蔽
-            [self sendPullBlackRequestWithPrompt:YES];
+            //
+            [self pullToBlackList];
         }
         
     }else {
         if (buttonIndex != 4) {
-            //  屏蔽并举报用户
-            [self sendPullBlackRequestWithPrompt:NO];
             
+            [self pullToBlackList];
+            //  举报
             [self reportUserReqeust:buttonIndex];
         }
     }
+}
+
+- (void)pullToBlackList
+{
+    //  屏蔽
+    [self sendPullBlackRequestWithPrompt:NO];
+    
+    //  拉黑
+    [[RCIMClient sharedRCIMClient] addToBlacklist:self.tapUserView.userId success:^{
+        
+    } error:^(RCErrorCode status) {
+        
+    }];
+
 }
 
 - (void)reportUserReqeust:(NSInteger)type

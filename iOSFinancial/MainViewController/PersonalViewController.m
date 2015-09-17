@@ -32,6 +32,12 @@
 @property (nonatomic, strong)   UserInfoModel *userInfoModel;
 
 //  当前人与要聊天的人得关系， 拉黑， 朋友， 。。。。
+
+//  0 可以正常聊天
+//  1 表示我将别人拉黑
+//  2 表示别人将我拉黑
+//  3 表示互相拉黑
+
 @property (nonatomic, assign)   NSInteger balckType;
 
 @end
@@ -115,6 +121,11 @@
 {
     self.balckType = [[dict stringForKey:@"black_type"] integerValue];
     
+    if ([self.userId isEqualToString:__userInfoId]) {
+        //  如果是自己则可以跟自己聊天
+        self.balckType = 0;
+    }
+    
     _signListModel = [[SignListModel alloc] init];
     [_signListModel parseWithPersonalArray:[dict arrayForKey:@"user_words"]];
     [_signListView refreWithModel:_signListModel];
@@ -192,7 +203,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (self.balckType) {
+    if (self.balckType > 0) {
         return 0;
     }
     

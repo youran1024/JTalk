@@ -15,6 +15,7 @@
 #import "UIView+Animation.h"
 #import "User.h"
 #import "HTBaseRequest+Requests.h"
+#import "SystemConfig.h"
 
 
 @interface LoginViewController ()
@@ -97,6 +98,8 @@ static NSString *userPhone;
     [super viewDidLoad];
     
     [self awakeFromNib];
+    
+    [[SystemConfig defaultConfig] synchronize];
     
     UIBarButtonItem *item = nil;
     if (_loginViewType == LoginViewTypeLogin) {

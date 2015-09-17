@@ -254,12 +254,12 @@
 + (HTBaseRequest *)requestSystemSetting
 {
     HTBaseRequest   *request = [HTBaseRequest requestWithURL:@"/sys/setting"];
+    request.shouldShowErrorMsg = NO;
     [request addUserId];
     request.requestMethod = YTKRequestMethodGet;
     
     return request;
 }
-
 
 /**
  *  Functions
