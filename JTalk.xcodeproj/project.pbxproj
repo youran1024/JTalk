@@ -1696,7 +1696,7 @@
 				TargetAttributes = {
 					92D2A27C1AC3DF7B00C9A4AE = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 3T4BLT5L4D;
+						DevelopmentTeam = WJ39GR2PR6;
 					};
 				};
 			};
@@ -2086,9 +2086,9 @@
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.JTalkCompany.JTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxxxtalk.JTalk;
 				PRODUCT_NAME = JTalk;
-				PROVISIONING_PROFILE = "e5aadc9e-3ccc-46c8-b42d-cbba7f588a8a";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2129,9 +2129,9 @@
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/WeChatSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.JTalkCompany.JTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxxxtalk.JTalk;
 				PRODUCT_NAME = JTalk;
-				PROVISIONING_PROFILE = "e5aadc9e-3ccc-46c8-b42d-cbba7f588a8a";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
