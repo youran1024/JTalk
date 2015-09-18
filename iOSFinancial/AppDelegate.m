@@ -57,6 +57,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    
+    [self initFinishLaunch:application andOption:launchOptions];
+   
     if ([application
          respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings
@@ -65,6 +68,7 @@
                                                                   UIUserNotificationTypeAlert)
                                                 categories:nil];
         [application registerUserNotificationSettings:settings];
+        
     } else {
         UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
         UIRemoteNotificationTypeAlert |
@@ -72,8 +76,6 @@
         [application registerForRemoteNotificationTypes:myTypes];
     }
     
-    [self initFinishLaunch:application andOption:launchOptions];
-   
     //  获取图片地址， 获取七牛Token
     [[SystemConfig defaultConfig] synchronize];
     
@@ -97,8 +99,6 @@
     
     //  MARK:显示引导页
     [HTGuideManager showGuideViewWithDelegate:self];
-    
-    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginSuccess) name:__USER_LOGIN_SUCCESS object:nil];
     
@@ -139,27 +139,6 @@
 - (void)userLoginOutSuccess
 {
     [self presentUserLoginIndexViewControllerAnimated:YES];
-}
-
-//  MARK:UMeng Key and setting
-- (void)setUMengpushSetting:(NSDictionary *)launchOptions
-{
-    //set AppKey and AppSecret
-    [UMessage startWithAppkey:@"54f52161fd98c52c280001a0" launchOptions:launchOptions];
-    [UMessage setAutoAlert:NO];
-    
-    if(UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
-    {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
-        [UMessage registerRemoteNotificationAndUserNotificationSettings:settings];
-        
-    }else {
-        
-        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
-         |UIRemoteNotificationTypeSound
-         |UIRemoteNotificationTypeAlert];
-    }
-    
 }
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
@@ -456,7 +435,29 @@
     [ShareSDK connectWeChatWithAppId:WeiXinAppKey
                            appSecret:WeiXinAppSecreat
                            wechatCls:[WXApi class]];
+}
+
+
+//  MARK:UMeng Key and setting
+- (void)setUMengpushSetting:(NSDictionary *)launchOptions
+{
+    //set AppKey and AppSecret
+    [UMessage startWithAppkey:@"54f52161fd98c52c280001a0" launchOptions:launchOptions];
+    [UMessage setAutoAlert:NO];
+    
+    if(UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")){
+        
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
+        [UMessage registerRemoteNotificationAndUserNotificationSettings:settings];
+        
+    }else {
+        
+        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
+         |UIRemoteNotificationTypeSound
+         |UIRemoteNotificationTypeAlert];
+    }
     
 }
+
 
 @end
