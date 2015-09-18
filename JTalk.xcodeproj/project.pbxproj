@@ -125,7 +125,6 @@
 		92442FF61B831FC4006E3290 /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92442FF51B831FC4006E3290 /* PersonalViewController.m */; };
 		92442FFA1B832027006E3290 /* PersonalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92442FF91B832027006E3290 /* PersonalInfoView.m */; };
 		92442FFC1B83203B006E3290 /* PersonalInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92442FFB1B83203B006E3290 /* PersonalInfoView.xib */; };
-		9253F7511BAA64EB0007BD88 /* IndexLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9253F7501BAA64EB0007BD88 /* IndexLoginView.xib */; };
 		9253F7531BAA6C750007BD88 /* IndexLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9253F7521BAA6C750007BD88 /* IndexLoginViewController.xib */; };
 		926811C21ADE570900FAB0A2 /* HTGuideManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 926811C11ADE570900FAB0A2 /* HTGuideManager.m */; };
 		926811C51ADE571E00FAB0A2 /* HTUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 926811C41ADE571E00FAB0A2 /* HTUserDefault.m */; };
@@ -159,6 +158,7 @@
 		9296B2791B72118C0053B157 /* HTInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9296B2781B72118C0053B157 /* HTInfoCell.xib */; };
 		9296B27C1B7211970053B157 /* HTInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9296B27B1B7211970053B157 /* HTInfoCell.m */; };
 		92A41EE31B26D4030036DC58 /* HTADScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A41EE21B26D4030036DC58 /* HTADScrollView.m */; };
+		92A84F4D1BABC8490016457A /* serviceProtocol.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 92A84F4C1BABC8490016457A /* serviceProtocol.pdf */; settings = {ASSET_TAGS = (); }; };
 		92B47FD01B6F08B600AF9A2D /* TalkedFriendsVIewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B47FCF1B6F08B600AF9A2D /* TalkedFriendsVIewController.m */; };
 		92B47FD51B6F093000AF9A2D /* ChatRoomJoinerList.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B47FD41B6F093000AF9A2D /* ChatRoomJoinerList.m */; };
 		92B47FD91B6F095800AF9A2D /* StateListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B47FD81B6F095800AF9A2D /* StateListViewController.m */; };
@@ -411,7 +411,6 @@
 		92442FF81B832027006E3290 /* PersonalInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoView.h; sourceTree = "<group>"; };
 		92442FF91B832027006E3290 /* PersonalInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoView.m; sourceTree = "<group>"; };
 		92442FFB1B83203B006E3290 /* PersonalInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalInfoView.xib; sourceTree = "<group>"; };
-		9253F7501BAA64EB0007BD88 /* IndexLoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexLoginView.xib; sourceTree = "<group>"; };
 		9253F7521BAA6C750007BD88 /* IndexLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexLoginViewController.xib; sourceTree = "<group>"; };
 		926811C01ADE570900FAB0A2 /* HTGuideManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTGuideManager.h; sourceTree = "<group>"; };
 		926811C11ADE570900FAB0A2 /* HTGuideManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTGuideManager.m; sourceTree = "<group>"; };
@@ -471,6 +470,7 @@
 		9296B27B1B7211970053B157 /* HTInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTInfoCell.m; sourceTree = "<group>"; };
 		92A41EE11B26D4030036DC58 /* HTADScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTADScrollView.h; sourceTree = "<group>"; };
 		92A41EE21B26D4030036DC58 /* HTADScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTADScrollView.m; sourceTree = "<group>"; };
+		92A84F4C1BABC8490016457A /* serviceProtocol.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = serviceProtocol.pdf; sourceTree = "<group>"; };
 		92B47FCE1B6F08B600AF9A2D /* TalkedFriendsVIewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkedFriendsVIewController.h; sourceTree = "<group>"; };
 		92B47FCF1B6F08B600AF9A2D /* TalkedFriendsVIewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkedFriendsVIewController.m; sourceTree = "<group>"; };
 		92B47FD31B6F093000AF9A2D /* ChatRoomJoinerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatRoomJoinerList.h; sourceTree = "<group>"; };
@@ -1154,7 +1154,6 @@
 		9253F74F1BAA64DA0007BD88 /* IndexLoginVIew */ = {
 			isa = PBXGroup;
 			children = (
-				9253F7501BAA64EB0007BD88 /* IndexLoginView.xib */,
 			);
 			name = IndexLoginVIew;
 			sourceTree = "<group>";
@@ -1427,6 +1426,7 @@
 		92D2A27F1AC3DF7B00C9A4AE /* iOSFinancial */ = {
 			isa = PBXGroup;
 			children = (
+				92A84F4C1BABC8490016457A /* serviceProtocol.pdf */,
 				92D2A2901AC3DF7B00C9A4AE /* Images.xcassets */,
 				9228C9781B72FA0D008E3608 /* city.plist */,
 				92EB857E1AC5517400A80E03 /* JTalk-Prefix.pch */,
@@ -1746,13 +1746,13 @@
 				846EE4E71B01FFB400F0AE4E /* UMShareEditViewController.xib in Resources */,
 				92871C7C1AF75D6E002EC9F6 /* selectionBlue@2x.png in Resources */,
 				92FEF6DF1B8348250090C09D /* UserInfoCell.xib in Resources */,
+				92A84F4D1BABC8490016457A /* serviceProtocol.pdf in Resources */,
 				846EE4EC1B01FFB400F0AE4E /* UMSocialSDKResourcesNew.bundle in Resources */,
 				92B47FE31B6F0FD100AF9A2D /* TalkedFriendsTopView.xib in Resources */,
 				92B47FF51B6F37E900AF9A2D /* ChatRoomInfo.xib in Resources */,
 				846EE4E91B01FFB400F0AE4E /* UMSLoginViewController.xib in Resources */,
 				920C09841B74970D00A8CC30 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				920C097F1B74970D00A8CC30 /* WeiboSDK.bundle in Resources */,
-				9253F7511BAA64EB0007BD88 /* IndexLoginView.xib in Resources */,
 				92442FE41B82E360006E3290 /* talkButtonHigh@2x.png in Resources */,
 				846EE4EF1B01FFB400F0AE4E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				846EE4E51B01FFB400F0AE4E /* UMSCommentInputController.xib in Resources */,
@@ -2073,6 +2073,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -2113,6 +2114,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",

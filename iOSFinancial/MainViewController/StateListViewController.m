@@ -113,8 +113,8 @@
         
         [self parseHotSignListData:[request.responseJSONObject arrayForKey:@"result"]];
         
-        _refreshDate = [NSDate date];
-        _refreshLabel.text = @"刚刚";
+        self.refreshDate = [NSDate date];
+        self.refreshLabel.text = @"刚刚";
         
     } failure:^(YTKBaseRequest *request) {
         [self endRefresh];

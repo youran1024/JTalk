@@ -155,7 +155,7 @@ static HTGuideManager *__guideManager = nil;
     [keyWindow addSubview:self.pageControl];
     
     self.pageControl.left = (APPScreenWidth - self.pageControl.width) / 2.0f;
-    self.pageControl.bottom = RealScreenHeight - (is35Inch ? 10 : 20);
+    self.pageControl.bottom = RealScreenHeight - (is35Inch ? 10 : 10);
     
     _guideScrollView.alpha = 0;
     

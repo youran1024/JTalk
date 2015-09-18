@@ -10,12 +10,14 @@
 #import "UIBarButtonExtern.h"
 #import "EditInfoViewController.h"
 #import "HTBaseRequest+Requests.h"
+#import "HTWebViewController.h"
 
 
 @interface SetNewPassViewController ()
 
 @property (nonatomic, strong)   UITextField *textField;
 @property (nonatomic, assign)   SetPassType setPassType;
+@property (nonatomic, strong)   UILabel *protocalLabel;
 
 @end
 
@@ -129,6 +131,12 @@
     [backView addSubview:self.textField];
     self.textField.left = lineView.right + 10;
     self.textField.centerY = backView.centerY;
+    
+    if (_setPassType == SetPassTypeNew) {
+        [self.view addSubview:self.protocalLabel];
+        self.protocalLabel.top = self.textField.bottom + 10;
+        self.protocalLabel.right = self.view.width - 15;
+    }
 }
 
 - (UITextField *)textField
@@ -142,6 +150,39 @@
     }
     
     return _textField;
+}
+
+- (UILabel *)protocalLabel
+{
+    if (!_protocalLabel) {
+        _protocalLabel = [[UILabel alloc] init];
+        _protocalLabel.font = [UIFont systemFontOfSize:12.0f];
+        _protocalLabel.textColor = [UIColor jt_lightGrayColor];
+        NSString *text = @"点击下一步表示同意隐私条款及使用协议";
+        NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:text];
+        [string addAttribute:NSForegroundColorAttributeName value:[UIColor jt_barTintColor] range:NSMakeRange(9, 9)];
+        
+        _protocalLabel.attributedText = string;
+        [_protocalLabel sizeToFit];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(protocalTap)];
+        [_protocalLabel addGestureRecognizer:tap];
+        _protocalLabel.userInteractionEnabled = YES;
+    }
+    
+    return _protocalLabel;
+}
+
+- (void)protocalTap
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"serviceProtocol" ofType:@"pdf"];
+    NSURL *url = [NSURL fileURLWithPath:path];
+    
+    HTWebViewController *webView = [[HTWebViewController alloc] init];
+    webView.url = url;
+    webView.titleStr = @"软件服务协议";
+    
+    [self.navigationController pushViewController:webView animated:YES];
 }
 
 - (NSString *)title

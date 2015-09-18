@@ -277,6 +277,7 @@ static NSString *userPhone;
 //  MARK:完成手机号， 下一步
 - (void)regeitNextStep
 {
+    //  是重新设置密码 还是 注册过程中得设置密码
     if (_loginViewType == LoginViewTypeFindPass ||
         _loginViewType == LoginViewTypeRegedit) {
         
