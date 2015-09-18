@@ -660,7 +660,7 @@ typedef void (^AlertViewBlock)(UIAlertView *alertView, NSInteger buttonIndex);
     return NO;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
 }

@@ -6,11 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "me_selected@2x.png"
+      "filename" : "me_selected@2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "我深色.png",
       "scale" : "3x"
     }
   ],

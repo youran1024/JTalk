@@ -17,7 +17,6 @@
 + (UIBarButtonItem *)nopBarButtonItem
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button addTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *flexSpacer = [[UIBarButtonItem alloc] initWithCustomView:button];
     flexSpacer.width = __IOS7_NAVI_SPACE;

@@ -144,7 +144,6 @@
 		92871C811AF75D85002EC9F6 /* HTBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92871C801AF75D85002EC9F6 /* HTBaseRequest.m */; };
 		92871C841AF761C3002EC9F6 /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92871C831AF761C3002EC9F6 /* LoginRequest.m */; };
 		928860E61B297F810060502D /* UILabel+FlickerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 928860E51B297F810060502D /* UILabel+FlickerNumber.m */; };
-		928C974F1B846B0900D4CDD5 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 928C974E1B846B0900D4CDD5 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		928C97521B85834900D4CDD5 /* UIView+LabelSign.m in Sources */ = {isa = PBXBuildFile; fileRef = 928C97511B85834900D4CDD5 /* UIView+LabelSign.m */; };
 		9296B25C1B70C9680053B157 /* ShareTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9296B25B1B70C9670053B157 /* ShareTitleView.m */; };
 		9296B25F1B70CBCC0053B157 /* ChatRoomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9296B25E1B70CBCC0053B157 /* ChatRoomCell.xib */; };
@@ -445,8 +444,6 @@
 		92871C831AF761C3002EC9F6 /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
 		928860E41B297F810060502D /* UILabel+FlickerNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FlickerNumber.h"; sourceTree = "<group>"; };
 		928860E51B297F810060502D /* UILabel+FlickerNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FlickerNumber.m"; sourceTree = "<group>"; };
-		928C974D1B846B0900D4CDD5 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		928C974E1B846B0900D4CDD5 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		928C97501B85834900D4CDD5 /* UIView+LabelSign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LabelSign.h"; sourceTree = "<group>"; };
 		928C97511B85834900D4CDD5 /* UIView+LabelSign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LabelSign.m"; sourceTree = "<group>"; };
 		9296B25A1B70C9670053B157 /* ShareTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareTitleView.h; sourceTree = "<group>"; };
@@ -1245,15 +1242,6 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		928C974C1B846B0900D4CDD5 /* JSONKit */ = {
-			isa = PBXGroup;
-			children = (
-				928C974D1B846B0900D4CDD5 /* JSONKit.h */,
-				928C974E1B846B0900D4CDD5 /* JSONKit.m */,
-			);
-			path = JSONKit;
-			sourceTree = "<group>";
-		};
 		9296B25D1B70CBBA0053B157 /* ChatRoomCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1480,7 +1468,6 @@
 			isa = PBXGroup;
 			children = (
 				92FCF5961B9405AB00644EEA /* FMDB */,
-				928C974C1B846B0900D4CDD5 /* JSONKit */,
 				9211AF721B7AF74D00B7FD9F /* VPImageCropper */,
 				920C09941B74C0A700A8CC30 /* SMS_SDK */,
 				920C09501B74970D00A8CC30 /* ShareSDK */,
@@ -1704,7 +1691,7 @@
 		92D2A2751AC3DF7B00C9A4AE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Mr.Yang;
 				TargetAttributes = {
 					92D2A27C1AC3DF7B00C9A4AE = {
@@ -1835,7 +1822,6 @@
 				928C97521B85834900D4CDD5 /* UIView+LabelSign.m in Sources */,
 				92442FE81B82E729006E3290 /* CommitListViewController.m in Sources */,
 				921DD2CB1AEB67310004251F /* RedPointLabel.m in Sources */,
-				928C974F1B846B0900D4CDD5 /* JSONKit.m in Sources */,
 				92B47FF31B6F37CC00AF9A2D /* ChatRoomInfo.m in Sources */,
 				92B47FFE1B6F611C00AF9A2D /* UIBarButtonItem+Badge.m in Sources */,
 				92442FDA1B82E216006E3290 /* TalkListToolBar.m in Sources */,
@@ -2004,6 +1990,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 先生 杨 (C8FXD8VZBU)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2099,6 +2086,7 @@
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/WeChatSDK",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.JTalkCompany.JTalk;
 				PRODUCT_NAME = JTalk;
 				PROVISIONING_PROFILE = "e5aadc9e-3ccc-46c8-b42d-cbba7f588a8a";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2141,6 +2129,7 @@
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/WeChatSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JTalkCompany.JTalk;
 				PRODUCT_NAME = JTalk;
 				PROVISIONING_PROFILE = "e5aadc9e-3ccc-46c8-b42d-cbba7f588a8a";
 				TARGETED_DEVICE_FAMILY = 1;

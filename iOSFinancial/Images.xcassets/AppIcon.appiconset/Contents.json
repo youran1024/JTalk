@@ -21,7 +21,7 @@
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "logo白色128-2.png",
+      "filename" : "logo180-4.png",
       "scale" : "2x"
     },
     {
@@ -45,13 +45,13 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "logo66.png",
+      "filename" : "logo180-3.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "logo180-1.png",
+      "filename" : "logo180-2.png",
       "scale" : "3x"
     },
     {
@@ -87,7 +87,7 @@
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "logo180.png",
+      "filename" : "logo152.png",
       "scale" : "2x"
     }
   ],
