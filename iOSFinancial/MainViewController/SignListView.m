@@ -33,7 +33,7 @@
     if (self) {
         
         self.backgroundColor = [UIColor whiteColor];
-        self.layer.borderColor = [UIColor colorWithHEX:0xb0b0b0].CGColor;
+        self.layer.borderColor = [UIColor jt_lineColor].CGColor;
         self.layer.borderWidth = 1.0f;
         self.layer.cornerRadius = 3.0f;
     }

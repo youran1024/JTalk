@@ -45,7 +45,7 @@
 
 + (UIColor *)jt_lineColor
 {
-    return [UIColor colorWithHEX:0xf9f8f8];
+    return [UIColor colorWithHEX: 0xe6e6e6];
 }
 
 + (UIColor *)jt_barTintColor
