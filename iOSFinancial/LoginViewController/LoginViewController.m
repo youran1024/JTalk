@@ -54,6 +54,13 @@ static NSString *userPhone;
 
 @implementation LoginViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.hidden = NO;
+}
+
 - (void)dealloc
 {
     [_timeRuner invalidate];

@@ -16,6 +16,12 @@
     self.layer.borderColor = HTRedColor.CGColor;
 }
 
+- (void)borderColor:(UIColor *)color andWidth:(CGFloat)width
+{
+    self.layer.borderWidth = width;
+    self.layer.borderColor = color.CGColor;
+}
+
 - (void)cornerRadius5
 {
     self.layer.cornerRadius = 5.0f;

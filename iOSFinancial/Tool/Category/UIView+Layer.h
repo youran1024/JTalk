@@ -10,6 +10,8 @@
 
 @interface UIView (Layer)
 
+- (void)borderColor:(UIColor *)color andWidth:(CGFloat)width;
+
 - (void)borderColors;
 
 - (void)cornerRadius5;

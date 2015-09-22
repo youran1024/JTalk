@@ -22,6 +22,7 @@
 {
     [super viewDidLoad];
     
+    /*
     NSArray *gestures = [self.navigationController.view gestureRecognizers];
     
     for (UIGestureRecognizer *obj in gestures) {
@@ -32,6 +33,7 @@
             
         }
     }
+    */
     
     self.showRefreshHeaderView = YES;
     

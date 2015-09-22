@@ -414,8 +414,10 @@
         
         HTEditCell *cell = (HTEditCell *)[tableView cellForRowAtIndexPath:indexPath];
         NSString *sex = cell.textField.text;
+        
         if ([sex isEqualToString:@"男"]) {
             cell.textField.text = @"女";
+            
         }else {
             cell.textField.text = @"男";
         }
@@ -437,7 +439,6 @@
 }
 
 #pragma mark -
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];

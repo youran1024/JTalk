@@ -289,18 +289,6 @@
     return cell;
 }
 
-//  MARK:记录用户点击过的标签
-- (void)recoderUserClickWord:(NSString *)word
-{
-    HTBaseRequest *request = [HTBaseRequest recoderUserSearchWord:word];
-    
-    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
-        
-    } failure:^(YTKBaseRequest *request) {
-        
-    }];
-}
-
 //  MARK:创建并加入聊天室
 - (void)createGroupWithTitle:(NSString *)title
 {
@@ -315,6 +303,18 @@
         if (code == 200) {
             [weakSelf joinGroupByGroupId:[title toMD5] andGroupName:title];
         }
+        
+    }];
+}
+
+//  MARK:记录用户点击过的标签
+- (void)recoderUserClickWord:(NSString *)word
+{
+    HTBaseRequest *request = [HTBaseRequest recoderUserSearchWord:word];
+    
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
+    } failure:^(YTKBaseRequest *request) {
         
     }];
 }

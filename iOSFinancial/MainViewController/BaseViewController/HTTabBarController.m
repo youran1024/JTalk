@@ -40,6 +40,33 @@
     self.tabBar.translucent = NO;
     self.tabBar.clipsToBounds = YES;
     
+    self.view.backgroundColor = HTGreenColor;
+    
+//    [self printSubViews:self.tabBar];
+}
+
+- (void)printSubViews:(UIView *)view
+{
+    if ([view.subviews count] == 0) {
+        return;
+    }
+    
+    for (UIView *subView in view.subviews) {
+        NSLog(@"%@ -> %@",NSStringFromClass([view class]), NSStringFromClass([subView class]));
+
+        //UITabBarButton        //UITabBarSwappableImageView
+        if ([subView isKindOfClass:NSClassFromString(@"UITabBarSwappableImageView")]) {
+            subView.backgroundColor = HTRedColor;
+            subView.top = view.height;
+//            [subView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.centerY.equalTo(@(view.centerY));
+//            }];
+            
+            continue;
+        }
+        
+        [self printSubViews:subView];
+    }
 }
 
 - (NSArray *)subViewControllers
@@ -67,7 +94,7 @@
     */
     
     SettingViewController *aboutVC = [[SettingViewController alloc] init];
-    aboutVC.tabBarItem = [self tabbarItemWithTitle:@"" andItemImage:@"me"];
+    aboutVC.tabBarItem = [self tabbarItemWithTitle:nil andItemImage:@"me"];
     HTNavigationController *nav3 = [[HTNavigationController alloc] initWithRootViewController:aboutVC];
     [viewControllers addObject:nav3];
     
@@ -77,7 +104,7 @@
 - (UITabBarItem *)tabbarItemWithTitle:(NSString *)title andItemImage:(NSString *)imageStr
 {
     UIImage *selectImage = HTImage(HTSTR(@"%@_selected", imageStr));
-    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:HTImage(imageStr) selectedImage:selectImage];
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:HTImage(imageStr) selectedImage:selectImage];
     
     return tabBarItem;
 }

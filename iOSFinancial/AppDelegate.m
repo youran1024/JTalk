@@ -12,12 +12,6 @@
 #import "HTVersionManager.h"
 #import "UIAlertView+RWBlock.h"
 
-//  友盟组件
-#import "umsocial.h"
-#import "UMSocialWechatHandler.h"
-#import "UMSocialQQHandler.h"
-#import "UMSocialSinaHandler.h"
-#import "MobClick.h"
 //  推送
 #import "UMessage.h"
 //  腾讯bug反馈
@@ -324,27 +318,6 @@
                                                          forBarMetrics:UIBarMetricsDefault];
 }
 
-//   友盟设置
-- (void)setUMengSetting
-{
-    //  友盟页面统计
-    [MobClick startWithAppkey:UMengAppKey reportPolicy:BATCH   channelId:nil];
-    
-    //  友盟分享
-    [UMSocialData setAppKey:UMengAppKey];
-    
-    [UMSocialConfig hiddenNotInstallPlatforms:nil];
-    
-    //  设置微信AppId、appSecret，分享url
-    [UMSocialWechatHandler setWXAppId:WeiXinAppKey appSecret:WeiXinAppSecreat url:kWebServiceURL];
-    
-    //  设置分享到QQ/Qzone的应用Id，和分享url 链接
-    [UMSocialQQHandler setQQWithAppId:QQAppId appKey:QQAppKey url:kWebServiceURL];
-    
-    //打开新浪微博的SSO开关，设置新浪微博回调地址，这里必须要和你在新浪微博后台设置的回调地址一致。
-    //若在新浪后台设置我们的回调地址，“http://sns.whalecloud.com/sina2/callback”，这里可以传nil
-    [UMSocialSinaHandler openSSOWithRedirectURL:nil];
-}
 
 //  设置bug报告
 - (void)setBuglyReport
@@ -404,39 +377,6 @@
     
     [self rongYunConnection];
 }
-
-- (void)shareSDKInit
-{
-    [ShareSDK registerApp:@"api20"];//字符串api20为您的ShareSDK的AppKey
-    
-    //添加新浪微博应用 注册网址 http://open.weibo.com
-    [ShareSDK connectSinaWeiboWithAppKey:@"1020741709"
-                               appSecret:@"b0be0a3e7020516a44540c4f8c92b622"
-                             redirectUri:@"http://baidu.com"];
-    
-    //当使用新浪微博客户端分享的时候需要按照下面的方法来初始化新浪的平台
-    [ShareSDK  connectSinaWeiboWithAppKey:@"1020741709"
-                                appSecret:@"b0be0a3e7020516a44540c4f8c92b622"
-                              redirectUri:@"http://baidu.com"
-                              weiboSDKCls:[WeiboSDK class]];
-    
-    //添加QQ空间应用  注册网址  http://connect.qq.com/intro/login/
-    [ShareSDK connectQZoneWithAppKey:QQAppId
-                           appSecret:QQAppKey
-                   qqApiInterfaceCls:[QQApiInterface class]
-                     tencentOAuthCls:[TencentOAuth class]];
-    
-    //添加QQ应用  注册网址   http://mobile.qq.com/api/
-    [ShareSDK connectQQWithQZoneAppKey:QQAppId
-                     qqApiInterfaceCls:[QQApiInterface class]
-                       tencentOAuthCls:[TencentOAuth class]];
-    
-    //微信登陆的时候需要初始化
-    [ShareSDK connectWeChatWithAppId:WeiXinAppKey
-                           appSecret:WeiXinAppSecreat
-                           wechatCls:[WXApi class]];
-}
-
 
 //  MARK:UMeng Key and setting
 - (void)setUMengpushSetting:(NSDictionary *)launchOptions
