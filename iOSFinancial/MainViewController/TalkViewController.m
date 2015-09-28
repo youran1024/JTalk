@@ -65,6 +65,10 @@
     self.conversationMessageCollectionView.height = self.view.height - 44.0f;
     self.conversationMessageCollectionView.top = 64.0f;
     
+    self.enableNewComingMessageIcon = YES;
+    self.enableUnreadMessageIcon = YES;
+    self.enableSaveNewPhotoToLocalSystem = YES;
+    
     if (self.conversationType == ConversationType_GROUP) {
         UIBarButtonItem *item1 = [UIBarButtonExtern buttonWithImage:@"talkPeopleList" target:self andSelector:@selector(showGroupJoinerListView)];
         UIBarButtonItem *item2 = [UIBarButtonExtern buttonWithImage:@"talkSetting" target:self andSelector:@selector(showTalkSettingViewController
@@ -88,6 +92,11 @@
     
     //  显示用户名
     [self setDisplayUserNameInCell:YES];
+    
+}
+
+- (void)notifyUpdateUnreadMessageCount
+{
     
 }
 

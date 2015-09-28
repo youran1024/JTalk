@@ -137,6 +137,8 @@
     
     [backView addSubview:self.textField];
     self.textField.left = lineView.right + 10;
+    self.textField.width = backView.width - 15 - lineView.right;
+
     self.textField.centerY = backView.centerY;
     
     if (_setPassType == SetPassTypeNew) {

@@ -128,7 +128,7 @@ static NSString *kSignListShowSign = @"kSignListShowSign";
     //  这次分页的起始位置
     NSInteger index = (_pageNum - 1) * 6 % _signArray.count;
     
-    for (NSInteger i = 0; i < 6; i++) {
+    for (NSInteger i = 0; i < 6 && i < _signArray.count; i++) {
         [array addObject:[_signArray objectAtIndex:index]];
         index++;
         if (index == _signArray.count) {

@@ -125,6 +125,8 @@
 //  MARK:用户登录成功
 - (void)userLoginSuccess
 {
+    self.tabBarController.selectedIndex = 0;
+    
     [self rongYunConnection];
     
     //  获取图片地址， 获取七牛Token

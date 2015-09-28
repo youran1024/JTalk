@@ -70,6 +70,11 @@
 
 + (HTBaseRequest *)otherUserInfo:(NSString *)otherUserId
 {
+    if (!otherUserId.length) {
+        NSLog(@"otherUserId is nil %@", otherUserId);
+        return nil;
+    }
+    
     HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/user/other"];
     [request addGetValue:otherUserId forKey:@"other_user_id"];
     [request addGetValue:__userInfoId forKey:@"user_id"];

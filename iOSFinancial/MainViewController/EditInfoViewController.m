@@ -103,11 +103,9 @@
     self.tableView.tableHeaderView = [self headerView];
     
     [self addKeyboardNotifaction];
-
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonExtern buttonWithTitle:@"完成" target:self andSelector:@selector(finishButtonClicked)];
 }
-
 
 // MARK: 注册请求
 - (void)doRegeitRequest
@@ -124,15 +122,15 @@
         
         NSInteger responseCode = [[dict stringForKey:@"code"] integerValue];
         if (responseCode == 200) {
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:__USER_LOGIN_SUCCESS object:nil];
-            
+
             [weakSelf showHudSuccessView:@"注册成功"];
             
             dict = [dict dictionaryForKey:@"result"];
             userInfo.userToken = [dict stringForKey:@"token"];
             userInfo.userID = [dict stringForKey:@"user_id"];
             [[User sharedUser] exchangeUserInfo];
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:__USER_LOGIN_SUCCESS object:nil];
             
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
         }
@@ -434,11 +432,14 @@
         HTEditCell *cell = (HTEditCell *)[tableView cellForRowAtIndexPath:indexPath];
         NSString *sex = cell.textField.text;
         
+        UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
+        
         if ([sex isEqualToString:@"男"]) {
             cell.textField.text = @"女";
-            
+            userInfo.userSex = @"女";
         }else {
             cell.textField.text = @"男";
+            userInfo.userSex = @"男";
         }
         
     }else if (indexPath.row == 2) {

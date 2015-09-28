@@ -82,8 +82,6 @@
     [self addBackImageView];
     self.tableView.tableHeaderView = self.personalInfoView;
     
-    [self configPersonalViewInfo];
-    
     self.showRefreshHeaderView = YES;
     [self.refreshHeaderView makeWhite];
     

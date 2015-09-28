@@ -129,8 +129,7 @@ static NSString *userPhone;
     [self.view endEditing:YES];
 }
 
-//  MARK:登陆按钮
-- (void)loginButtonClicked
+- (void)cacheUserInfo
 {
     NSString *tel = _telFiled.text;
     NSString *pass = _codeFiled.text;
@@ -138,6 +137,13 @@ static NSString *userPhone;
     
     userInfo.userPhone = tel;
     userInfo.userPass = [pass toMD5];
+}
+
+//  MARK:登陆按钮
+- (void)loginButtonClicked
+{
+    NSString *tel = _telFiled.text;
+    NSString *pass = _codeFiled.text;
     
     if (![tel isValidatePhone]) {
         [self showHudErrorView:@"请输入正确的手机号"];
@@ -149,6 +155,7 @@ static NSString *userPhone;
         return;
     }
     
+    [self cacheUserInfo];
     
     [self showHudWaitingView:PromptTypeWating];
     
@@ -284,6 +291,12 @@ static NSString *userPhone;
 //  MARK:完成手机号， 下一步
 - (void)regeitNextStep
 {
+    if(isEmpty(_codeFiled.text)) {
+        [_codeFiled becomeFirstResponder];
+        [self showHudErrorView:@"请输入验证码"];
+        return;
+    }
+    
     //  是重新设置密码 还是 注册过程中得设置密码
     if (_loginViewType == LoginViewTypeFindPass ||
         _loginViewType == LoginViewTypeRegedit) {
