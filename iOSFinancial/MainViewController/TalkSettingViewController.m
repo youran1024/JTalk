@@ -26,7 +26,16 @@
     [self showHudWaitingView:PromptTypeWating];
     
     [[RCIMClient sharedRCIMClient] getConversationNotificationStatus:ConversationType_GROUP targetId:_groupId success:^(RCConversationNotificationStatus nStatus) {
-        self.messageSwitch.on = nStatus == DO_NOT_DISTURB;
+        
+        BOOL isOpen = nStatus == DO_NOT_DISTURB;
+        
+        //  如果本地和服务端不匹配，则同步本地数据
+        BOOL isOnLocal = [[HTUserDefaults valueForKey:_groupId] boolValue];
+        if (isOpen != isOnLocal) {
+            [self messageNotificationChangedSwitch:nil andIsOpen:isOnLocal];
+        }
+        
+        self.messageSwitch.on = isOnLocal;
         
         [self removeHudInManaual];
         
@@ -34,6 +43,12 @@
         
         [self showHudErrorView:@"获取数据错误"];
     }];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -64,7 +79,7 @@
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, APPScreenWidth, 50.0f)];
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, APPScreenWidth - 30, 30)];
-    title.font = HTFont(14.0f);
+    title.font = HTFont(13.0f);
     title.textColor = [UIColor jt_lightBlackTextColor];
     title.text = [self tableView:tableView titleForFooterInSection:section];
     [view addSubview:title];
@@ -132,15 +147,17 @@
 
 - (void)switchValueChanged:(UISwitch *)_switch
 {
-    [self showHudWaitingView:PromptTypeWating];
+    [HTUserDefaults setValue:@(_switch.on) forKey:_groupId];
+    [HTUserDefaults synchronize];
     
+    [self messageNotificationChangedSwitch:_switch andIsOpen:_switch.on];
+}
+
+- (void)messageNotificationChangedSwitch:(UISwitch *)_switch andIsOpen:(BOOL)isOpen
+{
     __weakSelf;
-    [[RCIMClient sharedRCIMClient] setConversationNotificationStatus:ConversationType_GROUP targetId:_groupId isBlocked:_switch.on success:^(RCConversationNotificationStatus nStatus) {
+    [[RCIMClient sharedRCIMClient] setConversationNotificationStatus:ConversationType_GROUP targetId:_groupId isBlocked:isOpen success:^(RCConversationNotificationStatus nStatus) {
         NSLog(@"valueChanged:%ld", (long)nStatus);
-    
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self removeHudInManaual];
-        });
         
     } error:^(RCErrorCode status) {
         dispatch_sync(dispatch_get_main_queue(), ^{

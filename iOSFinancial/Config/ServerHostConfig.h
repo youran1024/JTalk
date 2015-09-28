@@ -20,7 +20,7 @@
 #if __APP_TEST__
 
 static NSString *jTalkServerURL     = @"http://182.92.78.106";
-static NSString *qiNiuCloudServerURL = @"http://7xlo3b.com2.z0.glb.qiniucdn.com";
+static NSString *qiNiuCloudServerURL = @"http://7xlrvb.com2.z0.glb.qiniucdn.com";//@"http://7xlo3b.com2.z0.glb.qiniucdn.com";
 
 #else
 

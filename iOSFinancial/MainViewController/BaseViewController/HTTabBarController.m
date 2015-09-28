@@ -40,8 +40,6 @@
     self.tabBar.translucent = NO;
     self.tabBar.clipsToBounds = YES;
     
-    self.view.backgroundColor = HTGreenColor;
-    
 //    [self printSubViews:self.tabBar];
 }
 

@@ -12,12 +12,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="ZdW-tM-NiU">
-                    <rect key="frame" x="210" y="10" width="25" height="25"/>
+                    <rect key="frame" x="15" y="10" width="25" height="25"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="搜索" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5c-40-6H5">
-                    <rect key="frame" x="238" y="14" width="28" height="17"/>
+                    <rect key="frame" x="43" y="14" width="28" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Ib-fh-RXE">
@@ -25,15 +25,28 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUs-0H-C6A">
+                    <rect key="frame" x="422" y="10" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="7Ya-LY-UVH"/>
+                        <constraint firstAttribute="width" constant="25" id="pcP-XR-AJf"/>
+                    </constraints>
+                    <state key="normal" image="clear"/>
+                    <connections>
+                        <action selector="clearButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="5hL-Cs-syT"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="ZdW-tM-NiU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="0OO-bi-eba"/>
                 <constraint firstAttribute="centerY" secondItem="ZdW-tM-NiU" secondAttribute="centerY" id="1oA-pd-QwV"/>
                 <constraint firstItem="4Ib-fh-RXE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="Iod-U2-dWD"/>
                 <constraint firstAttribute="centerY" secondItem="P5c-40-6H5" secondAttribute="centerY" id="JQM-1h-vdq"/>
                 <constraint firstItem="4Ib-fh-RXE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="OUU-AL-Hxr"/>
-                <constraint firstAttribute="centerX" secondItem="ZdW-tM-NiU" secondAttribute="centerX" constant="6" id="Pof-lR-XWI"/>
+                <constraint firstAttribute="trailing" secondItem="rUs-0H-C6A" secondAttribute="trailing" constant="10" id="fiY-94-VGD"/>
                 <constraint firstItem="P5c-40-6H5" firstAttribute="leading" secondItem="ZdW-tM-NiU" secondAttribute="trailing" constant="3" id="jz4-pf-fkJ"/>
+                <constraint firstItem="rUs-0H-C6A" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="o3Y-Dg-CiR"/>
                 <constraint firstAttribute="bottom" secondItem="4Ib-fh-RXE" secondAttribute="bottom" constant="5" id="uHP-e9-6JD"/>
                 <constraint firstAttribute="trailing" secondItem="4Ib-fh-RXE" secondAttribute="trailing" constant="15" id="vLr-iY-WdG"/>
             </constraints>
@@ -42,6 +55,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="clearButton" destination="rUs-0H-C6A" id="wgg-dM-WlC"/>
                 <outlet property="imageView" destination="ZdW-tM-NiU" id="EIG-LA-n3V"/>
                 <outlet property="searchField" destination="4Ib-fh-RXE" id="nd5-qQ-8Zs"/>
                 <outlet property="titleLabel" destination="P5c-40-6H5" id="E0B-wU-O90"/>
@@ -50,6 +64,7 @@
         </view>
     </objects>
     <resources>
+        <image name="clear" width="25" height="25"/>
         <image name="search" width="25" height="25"/>
     </resources>
 </document>

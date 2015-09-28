@@ -19,6 +19,7 @@
 #import "TalkViewController.h"
 #import "SystemConfig.h"
 #import "NSDate+BFExtension.h"
+#import <CoreText/CoreText.h>
 
 
 @interface StateListViewController () <UITextFieldDelegate>
@@ -64,6 +65,14 @@
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    self.searchBarView.searchField.text = @"";
+    [self.searchBarView makeEditing:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -86,10 +95,19 @@
     [self.view addSubview:backImageView];
     [self.view bringSubviewToFront:self.tableView];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backViewTapGesture)];
+    [self.tableView addGestureRecognizer:tap];
+    
+    
     [self addTableHeaderView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginSuccess) name:__USER_LOGIN_SUCCESS object:nil];
-    
+}
+
+//  MARK:收回键盘
+- (void)backViewTapGesture
+{
+    [self.view endEditing:YES];
 }
 
 - (void)userLoginSuccess
@@ -114,7 +132,7 @@
         [self parseHotSignListData:[request.responseJSONObject arrayForKey:@"result"]];
         
         self.refreshDate = [NSDate date];
-        self.refreshLabel.text = @"刚刚";
+        self.refreshLabel.text = @"刚刚刷新";
         
     } failure:^(YTKBaseRequest *request) {
         [self endRefresh];
@@ -381,9 +399,14 @@
 
 - (void)addTableHeaderView
 {
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:@"世界有交集"];
+    long number = 10.0f;
+    CFNumberRef num = CFNumberCreate(kCFAllocatorDefault,kCFNumberSInt8Type,&number);
+    [string addAttribute:(id)kCTKernAttributeName value:(__bridge id)num range:NSMakeRange(0,[string length])];
+    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 160)];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.width, 36)];
-    titleLabel.text = @"世界有交集";
+    titleLabel.attributedText = string;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.font = [UIFont boldSystemFontOfSize:32.0f];;

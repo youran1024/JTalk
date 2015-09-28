@@ -56,23 +56,11 @@
 
 //------------------ 更多
 
+//  消息通知的Key
+static NSString *const kJTalkMessageStoreKey = @"kJTalkMessageStoreKey";
+
 //  评价地址
 static NSString *const kApplicationEvaluateURL = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%954270";
-
-//  客服电话
-static NSString *const kServicePhone    =    @"4006565716";
-
-//  电话显示格式
-static NSString *const kServicePhone_f  =    @"400-6565-716";
-
-//  微信公众账号
-static NSString *const kWeiChatPublic   =    @"jiandanlicaiwang";
-
-//  网站
-static NSString *const kWebServiceURL   =    @"https://www.jiandanlicai.com";
-static NSString *const kWebServiceURL_f =    @"www.jiandanlicai.com";
-
-
 
 
 /*----------------第三方AppKey--------------------------*/

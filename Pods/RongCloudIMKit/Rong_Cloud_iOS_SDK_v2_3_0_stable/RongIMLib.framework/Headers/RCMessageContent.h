@@ -86,4 +86,6 @@
 @property(nonatomic, strong, setter=setRawJSONData:) NSData *rawJSONData;
 
 @end
+
+
 #endif

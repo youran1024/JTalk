@@ -30,8 +30,9 @@
 
 @property (nonatomic, strong)       UIImageView *headerImageView;
 @property (nonatomic, weak)         HTEditCell *selectionCell;
-@property (nonatomic, weak)         HTInfoCell *selectionInfoCell;
+@property (nonatomic, strong)         HTInfoCell *selectionInfoCell;
 @property (nonatomic, strong)       ZHPickView *pickerView;
+@property (nonatomic, strong)         HTEditCell *nameCell;
 
 @property (nonatomic, weak)     UIView *selectionView;
 
@@ -49,7 +50,13 @@
     [super viewWillAppear:animated];
     
     [_pickerView remove];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
+    _selectionInfoCell.placeHolderView.contentOffset = CGPointZero;
 }
 
 - (void)viewDidLoad
@@ -149,6 +156,10 @@
         if (code == 200) {
             [self showHudSuccessView:@"修改成功"];
             [[User sharedUser] exchangeUserInfo];
+            
+            //   修改缓存
+            [[RCIM sharedRCIM] refreshUserInfoCache:[[User sharedUser] rcUserinfo] withUserId:[User sharedUser].userInfo.userID];
+            
             [weakSelf performSelector:@selector(dismissViewController) withObject:nil afterDelay:1.0f];
         }
         
@@ -174,6 +185,7 @@
     
     UserInfoModel *userInfo = user.userInfoModelTmp;
     
+    userInfo.userName = _nameCell.textField.text;
     userInfo.userPrompt = _selectionInfoCell.placeHolderView.text;
     
     if (user.isLogin) {
@@ -206,21 +218,20 @@
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
     NSData *data = UIImageJPEGRepresentation(image, .9);
     NSString *token = [SystemConfig defaultConfig].qiniuCloudToken;
-    
+    NSString *qiniuServer = [SystemConfig defaultConfig].qiniuServiceServer;
     __weakSelf;
-    [upManager putData:data key:[[[NSDate date] description] toMD5] token:token
+    [upManager putData:data key:[HTSTR(@"iOS%@", [[NSDate date] description]) toMD5] token:token
               complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
                   NSLog(@"%@", info);
                   NSLog(@"%@", resp);
                   
                   // 保存用户头像地址
-                  user.userInfoModelTmp.userPhoto = HTSTR(@"%@/%@", qiNiuCloudServerURL, key);
+                  user.userInfoModelTmp.userPhoto = HTSTR(@"%@/%@", qiniuServer, key);
                   user.userInfoModelTmp.userPhotoImage = image;
                   
                   [weakSelf doRegeditOrModify:user];
                   
               } option:nil];
-    
 }
 
 - (void)doRegeditOrModify:(User *)user
@@ -233,7 +244,6 @@
     }else {
         [self doRegeitRequest];
     }
-    
 }
 
 //  头像视图
@@ -257,7 +267,6 @@
         
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headerImageViewTaped)];
         [_headerImageView addGestureRecognizer:tapGesture];
-        
     }
     
     return _headerImageView;
@@ -281,7 +290,10 @@
     CGFloat offset = (self.view.height - CGRectGetHeight(rect)) - CGRectGetMaxY(location);
     
     if (offset < 0) {
-        [self.tableView setContentOffset:CGPointMake(0, -offset) animated:YES];
+        CGPoint offset1 = self.tableView.contentOffset;
+        offset1.y = offset1.y - offset;
+        
+        [self.tableView setContentOffset:offset1 animated:YES];
     }
 }
 
@@ -290,8 +302,7 @@
     [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
-#pragma mark - 
-
+#pragma mark -
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [_selectionView endEditing:YES];
@@ -352,6 +363,7 @@
     UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
     
     if (indexPath.row == 0) {
+        _nameCell = editCell;
         editCell.textField.text = userInfo.userName;
         editCell.textField.enabled = YES;
         editCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -384,8 +396,15 @@
 
 - (UITableViewCell *)infoCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    HTInfoCell *infoCell = [HTInfoCell newCell];
-    _selectionInfoCell = infoCell;
+    HTInfoCell *infoCell;
+    
+    if (!_selectionInfoCell) {
+        infoCell = [HTInfoCell newCell];
+        _selectionInfoCell = infoCell;
+    }else {
+        infoCell = _selectionInfoCell;
+    }
+    
     infoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
@@ -442,17 +461,6 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    
-    return YES;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
-    NSString *willChange = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (textField.tag == 0) {
-        userInfo.userName = willChange;
-    }
     
     return YES;
 }

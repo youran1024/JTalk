@@ -9,12 +9,14 @@
 #import "CommitListViewController.h"
 #import "CommitListCell.h"
 #import "PersonalViewController.h"
+#import "NSString+BFExtension.h"
+#import "NSDate+BFExtension.h"
+
 
 @interface CommitListViewController ()
 
-@property (nonatomic, strong)   UIView *navBackView;
-@property (nonatomic, strong) NSMutableArray *users;
-@property (nonatomic, assign) NSInteger pageIndex;
+@property (nonatomic, strong)   NSMutableArray *users;
+@property (nonatomic, assign)   NSInteger pageIndex;
 
 @end
 
@@ -33,7 +35,6 @@
 {
     [super viewWillAppear:animated];
     
-    [self getBackView:self.navigationController.navigationBar withHidden:NO];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor jt_barTintColor];
 }
@@ -42,37 +43,13 @@
 {
     [super viewDidAppear:animated];
 
-    [self getBackView:self.navigationController.navigationBar withHidden:NO];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor jt_barTintColor];
-}
-
--(void)getBackView:(UIView*)superView withHidden:(BOOL)hidden
-{
-    if ([superView isKindOfClass:NSClassFromString(@"_UINavigationBarBackground")])
-    {
-        _navBackView = superView;
-        //在这里可设置背景色
-        _navBackView.backgroundColor = hidden ? [UIColor clearColor] : [UIColor jt_barTintColor];
-        
-    }else if ([superView isKindOfClass:NSClassFromString(@"_UIBackdropView")]) {
-        //_UIBackdropEffectView是_UIBackdropView的子视图，这是只需隐藏父视图即可
-        superView.hidden = hidden;
-    }
-    
-    for (UIView *view in superView.subviews)
-    {
-        [self getBackView:view withHidden:hidden];
-    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = self.groupTitle;
-    
-    self.navigationItem.titleView.backgroundColor = HTRedColor;
     
     self.showRefreshHeaderView = YES;
     self.showRefreshFooterView = YES;
@@ -146,7 +123,10 @@
     cell.nameLabel.text = [user stringForKey:@"name"];
     NSString *imageUrl = [user stringForKey:@"photo"];
     [cell.headImageView sd_setImageWithURL:HTURL(imageUrl) placeholderImage:HTImage(@"app_icon")];
-    cell.promptLabel.text = @"";
+    NSString *dateString = [user stringForKey:@"created"];
+    NSDate *date = [NSDate dateWithString:dateString format:nil];
+    
+    cell.promptLabel.text = [date labelString];
     
     return cell;
 }

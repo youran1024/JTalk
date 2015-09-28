@@ -13,9 +13,12 @@
 
 @implementation UIView (NoneDataView)
 
-- (void)showNoneDataView
+- (LoadingStateView *)showNoneDataView
 {
-    [self addSubview:[self loadingStateView]];
+    LoadingStateView * view = [self loadingStateView];
+    [self addSubview:view];
+    
+    return view;
 }
 
 - (void)removeNoneDataView
@@ -29,7 +32,7 @@
     LoadingStateView *view = [[LoadingStateView alloc] initWithFrame:self.bounds];
     view.tag = LoadingStateViewTag;
     view.image = HTImage(@"nonedataImage");
-    view.promptStr = @"";
+    view.promptStr = @"没有任何会话";
     view.backgroundColor = [UIColor clearColor]; //[UIColor colorWithHEX:0xcccccc];
     [view setLoadingState:LoadingStateNoneCustome];
     

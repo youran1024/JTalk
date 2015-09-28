@@ -100,7 +100,11 @@
 
 - (void)showGroupJoinerListView
 {
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    [self.navigationItem setBackBarButtonItem:backItem];
+    
     CommitListViewController *commit = [[CommitListViewController alloc] initWithTableViewStyle:UITableViewStyleGrouped];
+    commit.title = self.groupTitle;
     commit.groupTitle = self.groupTitle;
     [self.navigationController pushViewController:commit animated:YES];
 }

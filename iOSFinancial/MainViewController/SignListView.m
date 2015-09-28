@@ -90,7 +90,7 @@
         if (i % 2 == 0) {
             UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15.0f, button.bottom + 10, APPScreenWidth - 60.0f, .5)];
             
-            line.backgroundColor = [UIColor colorWithHEX:0xb0b0b0];
+            line.backgroundColor = [UIColor jt_lineColor];
             [self addSubview:line];
         }
         
@@ -129,7 +129,7 @@
     [self addSubview:self.changeButton];
     [self.changeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(@(-15.0f));
-        make.top.equalTo(@(15.0f));
+        make.top.equalTo(@(12.0f));
     }];
     
     [self createSignListView];

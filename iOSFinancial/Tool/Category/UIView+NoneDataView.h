@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoadingStateView.h"
+
 
 @interface UIView (NoneDataView)
 
-- (void)showNoneDataView;
+- (LoadingStateView *)showNoneDataView;
 - (void)removeNoneDataView;
 
 @end

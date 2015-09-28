@@ -15,11 +15,12 @@
 #import "UIView+BorderColor.h"
 #import "TalkViewController.h"
 #import "SystemConfig.h"
+#import "UIBarButtonExtern.h"
 
 
 #define __HeaderView_Height_Offset   100
 
-@interface PersonalViewController ()
+@interface PersonalViewController () <UIActionSheetDelegate>
 
 @property (nonatomic, strong)   UIImageView *backImageView;
 @property (nonatomic, strong)   PersonalInfoView *personalInfoView;
@@ -61,7 +62,6 @@
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.barTintColor = nil;
     [self getBackView:self.navigationController.navigationBar withHidden:YES];
-    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -88,6 +88,17 @@
     [self.refreshHeaderView makeWhite];
     
     [self.refreshHeaderView beginRefreshing];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    if (![_userId isEqualToString:__userInfoId]) {
+        self.navigationItem.rightBarButtonItem = [UIBarButtonExtern buttonWithImage:@"reportAction" target:self andSelector:@selector(reportButtonClicked)];
+    }
+}
+
+- (void)reportButtonClicked
+{
+    [self showPullBackList];
 }
 
 - (void)refreshViewBeginRefresh:(MJRefreshBaseView *)baseView
@@ -418,7 +429,6 @@
     [self.navigationController pushViewController:conversationVC animated:YES];
 }
 
-
 - (PersonalInfoView *)personalInfoView
 {
     if (!_personalInfoView) {
@@ -439,6 +449,112 @@
     return _signListModel;
 }
 
+
+#pragma mark - 屏蔽并举报
+
+#define pullBackListTag     10001
+#define pullBackResionTag   10002
+
+- (void)showPullBackList
+{
+    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"屏蔽并举报", @"屏蔽", nil];
+    choiceSheet.tag = pullBackListTag;
+    
+    [choiceSheet showInView:self.view];
+    
+}
+
+#pragma mark -
+#pragma mark Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == pullBackListTag) {
+        if (buttonIndex == 0) {
+            //  屏蔽并举报
+            UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                     delegate:self
+                                                            cancelButtonTitle:@"取消"
+                                                       destructiveButtonTitle:nil
+                                                            otherButtonTitles: @"淫秽色情", @"垃圾广告", @"骚扰", @"诈骗", nil];
+            choiceSheet.tag = pullBackResionTag;
+            
+            [choiceSheet showInView:self.view];
+            
+        }else if (buttonIndex == 1){
+            //
+            [self pullToBlackList];
+        }
+        
+    }else {
+        if (buttonIndex != 4) {
+            
+            [self pullToBlackList];
+            //  举报
+            [self reportUserReqeust:buttonIndex];
+        }
+    }
+}
+
+- (void)pullToBlackList
+{
+    //  屏蔽
+    [self sendPullBlackRequestWithPrompt:NO];
+    
+    //  拉黑
+    [[RCIMClient sharedRCIMClient] addToBlacklist:self.userId success:^{
+        
+    } error:^(RCErrorCode status) {
+        
+    }];
+    
+}
+
+- (void)reportUserReqeust:(NSInteger)type
+{
+    [self showHudWaitingView:PromptTypeWating];
+    
+    HTBaseRequest *request = [HTBaseRequest reportUserInGroup:self.userId andReportType:type];
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSDictionary *dic = request.responseJSONObject;
+        NSInteger code = [[dic stringIntForKey:@"code"] integerValue];
+        if (code == 200) {
+            [self showHudSuccessView:@"举报成功"];
+        }
+        
+    } failure:^(YTKBaseRequest *request) {
+        
+        [self showHudErrorView:@"举报失败"];
+        
+    }];
+}
+
+- (void)sendPullBlackRequestWithPrompt:(BOOL)prompt
+{
+    if (prompt) {
+        [self showHudWaitingView:PromptTypeWating];
+    }
+    
+    HTBaseRequest *request = [HTBaseRequest pullBlackUser:self.userId];
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSDictionary *dic = request.responseJSONObject;
+        NSInteger code = [[dic stringIntForKey:@"code"] integerValue];
+        if (code == 200 && prompt) {
+            [self showHudSuccessView:@"屏蔽成功"];
+        }
+        
+    } failure:^(YTKBaseRequest *request) {
+        
+        if (prompt) {
+            [self showHudErrorView:@"屏蔽失败"];
+        }
+        
+    }];
+}
 
 
 @end

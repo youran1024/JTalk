@@ -79,8 +79,10 @@
                 }
             }
             
-            RCGroup *group = [[RCGroup alloc] initWithGroupId:groupId groupName:groupName portraitUri:@"app_icon"];
+            RCGroup *group = [[RCGroup alloc] initWithGroupId:groupId groupName:groupName portraitUri:@"appIcon"];
+            
             completion(group);
+            
         }
         
     } failure:^(YTKBaseRequest *request) {

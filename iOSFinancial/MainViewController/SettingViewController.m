@@ -36,7 +36,7 @@
     if (!_switchButton) {
         _switchButton = [[UISwitch alloc] init];
         [_switchButton addTarget:self action:@selector(switchButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
+        _switchButton.on = [RCIM sharedRCIM].disableMessageNotificaiton;
     }
     
     return _switchButton;
@@ -45,8 +45,11 @@
 //  消息接收事件
 - (void)switchButtonClicked:(UISwitch*)switchbutton
 {
+    [HTUserDefaults setValue:@(switchbutton.on) forKey:kJTalkMessageStoreKey];
+    [HTUserDefaults synchronize];
     
-    
+    [RCIM sharedRCIM].disableMessageNotificaiton = switchbutton.on;
+    [RCIM sharedRCIM].disableMessageAlertSound = switchbutton.on;
 }
 
 #pragma mark - 
@@ -62,7 +65,7 @@
     if (section == 0) {
         return .01f;
     }
-    return 42.0f;
+    return 25.0f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -123,6 +126,7 @@
     
    if(indexPath.section == 1 && indexPath.row == 1) {
         cell.accessoryView = self.switchButton;
+       
     }
     
     if (indexPath.section == 0 ||

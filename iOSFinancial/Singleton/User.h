@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "UserInfoModel.h"
+#import <RCIM.h>
+
 
 typedef NS_ENUM(NSInteger, UserNameAuthState) {
     UserNameAuthStateUnAuth  = 0,   //  未认证
@@ -31,6 +33,8 @@ typedef NS_ENUM(NSInteger, UserNameAuthState) {
 @property (nonatomic, strong)   UserInfoModel *userInfoModelTmp;
 
 + (User *)sharedUser;
+
+- (RCUserInfo *)rcUserinfo;
 
 //  用户信息修改完成之后，用临时的替换新的
 - (void)exchangeUserInfo;

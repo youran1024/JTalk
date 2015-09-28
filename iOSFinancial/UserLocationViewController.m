@@ -79,7 +79,7 @@
             
             NSDictionary *loactionDic = [placemark addressDictionary];
             NSString *city = [loactionDic stringForKey:@"State"];
-            NSString *subLocality = [loactionDic stringForKey:@"subLocality"];
+            NSString *subLocality = [loactionDic stringForKey:@"SubLocality"];
             _locationCity = HTSTR(@"%@ %@", city, subLocality);
             
             /*

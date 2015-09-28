@@ -53,6 +53,8 @@
 
     
     [self initFinishLaunch:application andOption:launchOptions];
+    
+    
    
     if ([application
          respondsToSelector:@selector(registerUserNotificationSettings:)]) {
@@ -262,6 +264,10 @@
 
 - (void)initFinishLaunch:(UIApplication *)application  andOption:(NSDictionary *)launchOptions
 {
+    BOOL isMessageNotifacion = [[HTUserDefaults valueForKey:kJTalkMessageStoreKey] boolValue];
+    [RCIM sharedRCIM].disableMessageNotificaiton = isMessageNotifacion;
+    [RCIM sharedRCIM].disableMessageAlertSound = isMessageNotifacion;
+    
     //  MARK:系统样式
     [self setAppStyle];
     
@@ -314,7 +320,7 @@
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -160)
                                                          forBarMetrics:UIBarMetricsDefault];
 }
 
@@ -363,7 +369,6 @@
             [user doLoginOut];
         }];
     }
-
 }
 
 - (void)rongYunInit

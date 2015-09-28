@@ -19,6 +19,7 @@
 #import "RCDUserInfo.h"
 #import "PersonalViewController.h"
 #import "HTBaseRequest+Requests.h"
+#import "UIView+NoneDataView.h"
 
 
 @interface TalkedFriendsVIewController ()
@@ -33,18 +34,58 @@
 {
     [super viewWillAppear:animated];
     
-    [self setNavigationItemTitleView];
-    
     [self notifyUpdateUnreadMessageCount];
+
+    NSArray *dataSource = [[RCIMClient sharedRCIMClient] getConversationList:@[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_APPSERVICE), @(ConversationType_PUBLICSERVICE),@(ConversationType_GROUP),@(ConversationType_SYSTEM)]];
+    for (RCConversation *obj in dataSource) {
+        if (!obj.lastestMessage) {
+            obj.objectName = @"sdf";
+            obj.draft = @"fds";
+        }
+    }
+    
+    if (dataSource.count == 0) {
+        LoadingStateView *view = [self.view showNoneDataView];
+        view.promptStr = @"暂无任何会话";
+        
+    }else {
+        [self.view removeNoneDataView];
+    }
+
+}
+
+- (void)showEmptyConversationView
+{
+
     
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
+//    [self setNavigationItemTitleView];
     
     //showConnectingStatusOnNavigatorBar设置为YES时，需要重写setNavigationItemTitleView函数来显示已连接时的标题。
     self.showConnectingStatusOnNavigatorBar = YES;
+    
     [super updateConnectionStatusOnNavigatorBar];
+    
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+//    UIView *view = [self.view showNoneDataView];
+//    self.emptyConversationView = view;
+//    [view removeFromSuperview];
+//    
+//    [self resetConversationListBackgroundViewIfNeeded];
+    
+    [self setConversationAvatarStyle:RC_USER_AVATAR_CYCLE];
+    
+    self.conversationListTableView.tableFooterView = [[UIView alloc] init];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -65,13 +106,6 @@
     titleView.textAlignment = NSTextAlignmentCenter;
     titleView.text = @"会话";
     self.tabBarController.navigationItem.titleView = titleView;
-    
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
 }
 
 - (void)notifyUpdateUnreadMessageCount
@@ -94,6 +128,16 @@
     });
 }
 
+- (RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView
+                                  cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RCConversationBaseCell *cell = [super rcConversationListTableView:tableView cellForRowAtIndexPath:indexPath];
+    RCConversationModel *model = cell.model;
+
+    
+    return cell;
+}
+
 /**
  *  点击进入会话界面
  *
@@ -103,7 +147,6 @@
  */
 -(void)onSelectedTableRow:(RCConversationModelType)conversationModelType conversationModel:(RCConversationModel *)model atIndexPath:(NSIndexPath *)indexPath
 {
-    
     if (conversationModelType == RC_CONVERSATION_MODEL_TYPE_NORMAL) {
         TalkViewController *_conversationVC = [[TalkViewController alloc]init];
         _conversationVC.conversationType = model.conversationType;

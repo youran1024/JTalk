@@ -7,6 +7,7 @@
 //
 
 #import "LoadingStateView.h"
+#import "UIView+BorderColor.h"
 
 @interface LoadingStateView  ()
 
@@ -47,7 +48,7 @@
         [self addSubview:self.activyView];
         [_activyView startAnimating];
         
-        _promptLabel.text = @"加载中...";
+        self.promptLabel.text = @"加载中...";
         
     }else {
         
@@ -75,8 +76,6 @@
             default:
                 image = _image;
                 _promptLabel.text = _promptStr;
-                _promptLabel.textColor = [UIColor whiteColor];
-                [_promptLabel setFont:[UIFont systemFontOfSize:14.0f]];
                 
                 break;
         }
@@ -134,6 +133,7 @@
         _promptStr = promptStr;
         self.promptLabel.text = _promptStr;
         [self.promptLabel sizeToFit];
+        [self layoutIfNeeded];
     }
 }
 
@@ -143,7 +143,7 @@
 
     CGPoint point = CGPointMake(self.width / 2.0f, self.height / 2.0f);
     
-    CGSize size = [_promptLabel sizeThatFits:CGSizeMake(230, 36)];
+    CGSize size = [self.promptLabel sizeThatFits:CGSizeMake(230, 36)];
     _promptLabel.size = size;
     
     if (_loadingState == LoadingStateLoading) {
@@ -159,6 +159,7 @@
     self.imageView.center = point;
     
     point.y += _imageView.height / 2.0f;
+    
     point.y += size.height;
     self.promptLabel.center = point;
 }

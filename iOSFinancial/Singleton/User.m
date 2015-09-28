@@ -42,6 +42,13 @@ static NSString * const kIsBalanceIncomeOpen = @"kIsBalanceIncomeOpen";
     return self;
 }
 
+- (RCUserInfo *)rcUserinfo
+{
+    RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:_userInfo.userID name:_userInfo.userName portrait:_userInfo.userPhoto];
+
+    return userInfo;
+}
+
 - (BOOL)isLogin
 {
     _isLogin = !isEmpty(_userInfo.userToken);

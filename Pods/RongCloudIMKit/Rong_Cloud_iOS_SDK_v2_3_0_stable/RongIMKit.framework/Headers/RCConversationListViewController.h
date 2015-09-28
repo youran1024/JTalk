@@ -240,5 +240,7 @@
  *  重写方法，设置会话列表emptyConversationView的视图。
  */
 - (void)showEmptyConversationView;
+
+
 @end
 #endif

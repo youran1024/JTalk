@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *firstIndexBackImage;
 @property (nonatomic, copy) NSString *personalBackImage;
 @property (nonatomic, copy) NSString *qiniuCloudToken;
+@property (nonatomic, copy) NSString *qiniuServiceServer;
 
 
 + (SystemConfig *)defaultConfig;

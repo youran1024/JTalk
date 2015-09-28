@@ -11,7 +11,7 @@
 @interface SearchBarView : HTBaseView
 
 @property (nonatomic, weak) id<UITextFieldDelegate>searchDelegate;
-
+@property (nonatomic, weak) IBOutlet UITextField *searchField;
 
 - (void)makeEditing:(BOOL)editing;
 

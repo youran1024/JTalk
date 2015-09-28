@@ -123,6 +123,11 @@ static NSString *kQiNiuCloudToken = @"kQiNiuCloudToken";
             if (!isEmpty(qiNiuToken)) {
                 self.qiniuCloudToken = qiNiuToken;
             }
+            
+            NSString *qiniu_token_domain = [dic stringForKey:@"qiniu_token_domain"];
+            if (!isEmpty(qiniu_token_domain)) {
+                self.qiniuServiceServer = qiniu_token_domain;
+            }
         }  
         
     } failure:^(YTKBaseRequest *request) {
