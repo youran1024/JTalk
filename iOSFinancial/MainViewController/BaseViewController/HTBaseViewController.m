@@ -371,6 +371,49 @@ typedef void (^AlertViewBlock)(UIAlertView *alertView, NSInteger buttonIndex);
     }
 }
 
+#pragma mark - 半透明视图
+
+/**
+ *  MARK: 半透明的黑色背景遮盖图
+ */
+- (HTTransparentView *)transparentView
+{
+    if (!_transparentView) {
+        _transparentView = [[HTTransparentView alloc] initWithFrame:self.view.bounds];
+        
+        __weakSelf;
+        [_transparentView setTouchBlock:^{
+            //  取消编辑
+            if (weakSelf.transparentBlockClicked) {
+                weakSelf.transparentBlockClicked();
+            }
+        }];
+    }
+    
+    return _transparentView;
+}
+
+/**
+ *  MARK:显示半透明视图
+ */
+- (void)showTransparentView
+{
+    //  添加透明背景视图
+    if (!_transparentView) {
+        [self.view addSubview:self.transparentView];
+    }
+    
+    self.transparentView.hidden = NO;
+}
+
+/**
+ *  MARK:移除半透明视图
+ */
+- (void)hideTransparentView
+{
+    //  移除背景
+    [self.transparentView setHidden:YES];
+}
 
 #pragma mark - ActionSheet
 //  iOS 8

@@ -47,6 +47,13 @@
 		920C09991B74C0A700A8CC30 /* SMS_SDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 920C09951B74C0A700A8CC30 /* SMS_SDKLocalizable.strings */; };
 		920C099A1B74C0A700A8CC30 /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 920C09971B74C0A700A8CC30 /* SMS_SDK.framework */; };
 		9211AF751B7AF74D00B7FD9F /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211AF741B7AF74D00B7FD9F /* VPImageCropperViewController.m */; };
+		9217C91E1BC6659500938A9E /* JTSAnimatedGIFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9217C9131BC6659500938A9E /* JTSAnimatedGIFUtility.m */; settings = {ASSET_TAGS = (); }; };
+		9217C91F1BC6659500938A9E /* JTSImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9217C9151BC6659500938A9E /* JTSImageInfo.m */; settings = {ASSET_TAGS = (); }; };
+		9217C9201BC6659500938A9E /* JTSImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9217C9171BC6659500938A9E /* JTSImageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		9217C9211BC6659500938A9E /* JTSSimpleImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9217C9191BC6659500938A9E /* JTSSimpleImageDownloader.m */; settings = {ASSET_TAGS = (); }; };
+		9217C9221BC6659500938A9E /* UIApplication+JTSImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9217C91B1BC6659500938A9E /* UIApplication+JTSImageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		9217C9231BC6659500938A9E /* UIImage+JTSImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9217C91D1BC6659500938A9E /* UIImage+JTSImageEffects.m */; settings = {ASSET_TAGS = (); }; };
+		9217C9261BC66A3E00938A9E /* HTTransparentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9217C9251BC66A3E00938A9E /* HTTransparentView.m */; settings = {ASSET_TAGS = (); }; };
 		921DD28A1AEB65790004251F /* HTActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 921DD27C1AEB65790004251F /* HTActions.m */; };
 		921DD28B1AEB65790004251F /* HTBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 921DD27F1AEB65790004251F /* HTBaseCell.m */; };
 		921DD28C1AEB65790004251F /* HTBaseSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 921DD2811AEB65790004251F /* HTBaseSource.m */; };
@@ -244,6 +251,20 @@
 		920C09981B74C0A700A8CC30 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SMS_SDKLocalizable.strings"; sourceTree = "<group>"; };
 		9211AF731B7AF74D00B7FD9F /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
 		9211AF741B7AF74D00B7FD9F /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
+		9217C9121BC6659500938A9E /* JTSAnimatedGIFUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTSAnimatedGIFUtility.h; sourceTree = "<group>"; };
+		9217C9131BC6659500938A9E /* JTSAnimatedGIFUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTSAnimatedGIFUtility.m; sourceTree = "<group>"; };
+		9217C9141BC6659500938A9E /* JTSImageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTSImageInfo.h; sourceTree = "<group>"; };
+		9217C9151BC6659500938A9E /* JTSImageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTSImageInfo.m; sourceTree = "<group>"; };
+		9217C9161BC6659500938A9E /* JTSImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTSImageViewController.h; sourceTree = "<group>"; };
+		9217C9171BC6659500938A9E /* JTSImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTSImageViewController.m; sourceTree = "<group>"; };
+		9217C9181BC6659500938A9E /* JTSSimpleImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTSSimpleImageDownloader.h; sourceTree = "<group>"; };
+		9217C9191BC6659500938A9E /* JTSSimpleImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTSSimpleImageDownloader.m; sourceTree = "<group>"; };
+		9217C91A1BC6659500938A9E /* UIApplication+JTSImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+JTSImageViewController.h"; sourceTree = "<group>"; };
+		9217C91B1BC6659500938A9E /* UIApplication+JTSImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+JTSImageViewController.m"; sourceTree = "<group>"; };
+		9217C91C1BC6659500938A9E /* UIImage+JTSImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JTSImageEffects.h"; sourceTree = "<group>"; };
+		9217C91D1BC6659500938A9E /* UIImage+JTSImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JTSImageEffects.m"; sourceTree = "<group>"; };
+		9217C9241BC66A3E00938A9E /* HTTransparentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTransparentView.h; sourceTree = "<group>"; };
+		9217C9251BC66A3E00938A9E /* HTTransparentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTransparentView.m; sourceTree = "<group>"; };
 		921DD27B1AEB65790004251F /* HTActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTActions.h; sourceTree = "<group>"; };
 		921DD27C1AEB65790004251F /* HTActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTActions.m; sourceTree = "<group>"; };
 		921DD27E1AEB65790004251F /* HTBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTBaseCell.h; sourceTree = "<group>"; };
@@ -669,6 +690,25 @@
 			path = VPImageCropper;
 			sourceTree = "<group>";
 		};
+		9217C9111BC6659500938A9E /* JTSImageView */ = {
+			isa = PBXGroup;
+			children = (
+				9217C9121BC6659500938A9E /* JTSAnimatedGIFUtility.h */,
+				9217C9131BC6659500938A9E /* JTSAnimatedGIFUtility.m */,
+				9217C9141BC6659500938A9E /* JTSImageInfo.h */,
+				9217C9151BC6659500938A9E /* JTSImageInfo.m */,
+				9217C9161BC6659500938A9E /* JTSImageViewController.h */,
+				9217C9171BC6659500938A9E /* JTSImageViewController.m */,
+				9217C9181BC6659500938A9E /* JTSSimpleImageDownloader.h */,
+				9217C9191BC6659500938A9E /* JTSSimpleImageDownloader.m */,
+				9217C91A1BC6659500938A9E /* UIApplication+JTSImageViewController.h */,
+				9217C91B1BC6659500938A9E /* UIApplication+JTSImageViewController.m */,
+				9217C91C1BC6659500938A9E /* UIImage+JTSImageEffects.h */,
+				9217C91D1BC6659500938A9E /* UIImage+JTSImageEffects.m */,
+			);
+			path = JTSImageView;
+			sourceTree = "<group>";
+		};
 		921DD27A1AEB65790004251F /* HTListTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -994,6 +1034,9 @@
 		9253F74F1BAA64DA0007BD88 /* IndexLoginVIew */ = {
 			isa = PBXGroup;
 			children = (
+				927848631B7449A60021562A /* IndexLoginViewController.h */,
+				927848641B7449A60021562A /* IndexLoginViewController.m */,
+				9253F7521BAA6C750007BD88 /* IndexLoginViewController.xib */,
 			);
 			name = IndexLoginVIew;
 			sourceTree = "<group>";
@@ -1014,9 +1057,6 @@
 			isa = PBXGroup;
 			children = (
 				9253F74F1BAA64DA0007BD88 /* IndexLoginVIew */,
-				927848631B7449A60021562A /* IndexLoginViewController.h */,
-				927848641B7449A60021562A /* IndexLoginViewController.m */,
-				9253F7521BAA6C750007BD88 /* IndexLoginViewController.xib */,
 				927848661B7454D00021562A /* LoginViewController.h */,
 				927848671B7454D00021562A /* LoginViewController.m */,
 				927848681B7454D00021562A /* LoginViewController.xib */,
@@ -1065,6 +1105,8 @@
 		928C974A1B843A0800D4CDD5 /* UnionViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9217C9241BC66A3E00938A9E /* HTTransparentView.h */,
+				9217C9251BC66A3E00938A9E /* HTTransparentView.m */,
 				92B47FD21B6F08D800AF9A2D /* ChatRoomJoinerList--delete */,
 				92EFB7FE1B75FA2D00CC8B5C /* BaseTalkViewController */,
 				92442FF31B831F2E006E3290 /* PersonalViewController */,
@@ -1310,6 +1352,7 @@
 		92D2A2AC1AC3E31500C9A4AE /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				9217C9111BC6659500938A9E /* JTSImageView */,
 				92FCF5961B9405AB00644EEA /* FMDB */,
 				9211AF721B7AF74D00B7FD9F /* VPImageCropper */,
 				920C09941B74C0A700A8CC30 /* SMS_SDK */,
@@ -1538,7 +1581,7 @@
 				TargetAttributes = {
 					92D2A27C1AC3DF7B00C9A4AE = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 3T4BLT5L4D;
+						DevelopmentTeam = WJ39GR2PR6;
 					};
 				};
 			};
@@ -1650,9 +1693,11 @@
 				92442FE81B82E729006E3290 /* CommitListViewController.m in Sources */,
 				921DD2CB1AEB67310004251F /* RedPointLabel.m in Sources */,
 				92B47FF31B6F37CC00AF9A2D /* ChatRoomInfo.m in Sources */,
+				9217C9261BC66A3E00938A9E /* HTTransparentView.m in Sources */,
 				92B47FFE1B6F611C00AF9A2D /* UIBarButtonItem+Badge.m in Sources */,
 				92442FDA1B82E216006E3290 /* TalkListToolBar.m in Sources */,
 				921DD2EB1AEB67AF0004251F /* NSDictionary+JSONEXtern.m in Sources */,
+				9217C91F1BC6659500938A9E /* JTSImageInfo.m in Sources */,
 				92EB85481AC5132700A80E03 /* User.m in Sources */,
 				921DD2931AEB65C80004251F /* HTBaseView.m in Sources */,
 				921DD2EF1AEB67AF0004251F /* NSString+Size.m in Sources */,
@@ -1665,14 +1710,17 @@
 				92F01EA11AF46A7600957F7C /* HTCircleView.m in Sources */,
 				927848651B7449A60021562A /* IndexLoginViewController.m in Sources */,
 				92EB85881AC561E400A80E03 /* HTNavigationController.m in Sources */,
+				9217C9221BC6659500938A9E /* UIApplication+JTSImageViewController.m in Sources */,
 				921DD2F41AEB67AF0004251F /* UIView+Animation.m in Sources */,
 				92FCF5A71B9405AB00644EEA /* FMDatabasePool.m in Sources */,
 				92FCF5AC1B9409B900644EEA /* RCDGroupInfo.m in Sources */,
 				920C09931B74ABD600A8CC30 /* SetNewPassViewController.m in Sources */,
+				9217C9211BC6659500938A9E /* JTSSimpleImageDownloader.m in Sources */,
 				922CB5A81AC9789700C4A438 /* MJRefreshHeaderView.m in Sources */,
 				921DD2F61AEB67AF0004251F /* UIView+Prompting.m in Sources */,
 				92F559111AE9F3F10074A52A /* HTVersionManager.m in Sources */,
 				92D2A2861AC3DF7B00C9A4AE /* AppDelegate.m in Sources */,
+				9217C91E1BC6659500938A9E /* JTSAnimatedGIFUtility.m in Sources */,
 				921DD2C91AEB67310004251F /* PlaceHolderTextView.m in Sources */,
 				921DD2F01AEB67AF0004251F /* NSString+URLEncoding.m in Sources */,
 				92BD02B41AEF430E00758530 /* Buttons.m in Sources */,
@@ -1683,11 +1731,13 @@
 				921DD2ED1AEB67AF0004251F /* NSString+IsValidate.m in Sources */,
 				92FCF5A51B9405AB00644EEA /* FMDatabase.m in Sources */,
 				921DD2F51AEB67AF0004251F /* UIView+BFExtension.m in Sources */,
+				9217C9201BC6659500938A9E /* JTSImageViewController.m in Sources */,
 				92442FCA1B81DD06006E3290 /* SignListView.m in Sources */,
 				9296B2751B720CDD0053B157 /* HTEditCell.m in Sources */,
 				92442FD21B81DD4D006E3290 /* SignModel.m in Sources */,
 				92871C791AF75D6E002EC9F6 /* HTSectionView.m in Sources */,
 				926811C51ADE571E00FAB0A2 /* HTUserDefault.m in Sources */,
+				9217C9231BC6659500938A9E /* UIImage+JTSImageEffects.m in Sources */,
 				921DD2EE1AEB67AF0004251F /* NSString+LunchName.m in Sources */,
 				92442FC01B81B4DC006E3290 /* HTBaseRequest+Requests.m in Sources */,
 				926811D11ADE870000FAB0A2 /* HTSeparateView.m in Sources */,
@@ -1904,7 +1954,7 @@
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.JTalkCompany.JTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxxxtalk.JTalk;
 				PRODUCT_NAME = JTalk;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1947,7 +1997,7 @@
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/WeChatSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.JTalkCompany.JTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxxxtalk.JTalk;
 				PRODUCT_NAME = JTalk;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

@@ -60,6 +60,10 @@
     
     if (_refreshDate) {
         _refreshLabel.text = HTSTR(@"%@", [_refreshDate labelString]);
+        if ([_refreshLabel.text isEqualToString:@"刚刚"]) {
+            _refreshLabel.text = @"刚刚刷新";
+        }
+        
     }else {
         _refreshLabel.text = @"";
     }

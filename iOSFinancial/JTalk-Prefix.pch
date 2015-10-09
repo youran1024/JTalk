@@ -60,7 +60,7 @@
 static NSString *const kJTalkMessageStoreKey = @"kJTalkMessageStoreKey";
 
 //  评价地址
-static NSString *const kApplicationEvaluateURL = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%954270";
+static NSString *const kApplicationEvaluateURL = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%1041310652";
 
 
 /*----------------第三方AppKey--------------------------*/
@@ -72,7 +72,7 @@ static NSString *const kApplicationEvaluateURL = @"itms-apps://ax.itunes.apple.c
 #define WeiXinAppKey       @"wx4483dbf9915bd984"
 #define WeiXinAppSecreat   @"0e1995460b92265e1ee13a09e096a060"
 //  Bug管理 (腾讯bugly)
-#define __BUGLY_APP_ID      @"900003742"
+#define __BUGLY_APP_ID      @"900006129"
 
 #define __RongYunKey_      @"vnroth0krcr4o"// @"vnroth0krcr4o"
 

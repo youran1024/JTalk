@@ -14,11 +14,16 @@
 #import "TalkSettingViewController.h"
 #import "LongTapUserView.h"
 #import "UIView+Prompting.h"
+#import "HTTransparentView.h"
+
 
 
 @interface TalkViewController () <UIActionSheetDelegate>
 
 @property (nonatomic, strong)   LongTapUserView *tapUserView;
+//  半透明的黑色背景遮盖图
+@property (nonatomic, strong)   HTTransparentView *transparentView;
+
 
 @end
 
@@ -80,12 +85,11 @@
         
     }else {
         //  有语音
-        [self.chatSessionInputBarControl setInputBarType:RCChatSessionInputBarControlDefaultType style:RC_CHAT_INPUT_BAR_STYLE_SWITCH_CONTAINER];
+        [self.chatSessionInputBarControl setInputBarType:RCChatSessionInputBarControlDefaultType style:RC_CHAT_INPUT_BAR_STYLE_SWITCH_CONTAINER_EXTENTION];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardDidHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardWillHideNotification object:nil];
-    
     
     //  圆角头像
     [self setMessageAvatarStyle:RC_USER_AVATAR_CYCLE];
@@ -141,10 +145,32 @@
             dic = [dic dictionaryForKey:@"result"];
             
             [self refreshUserTapView:dic];
+            [self showTransParentView];
             [self showTapUserView];
         }
     }];
     
+}
+
+- (void)showTransParentView
+{
+    [[UIApplication sharedApplication].keyWindow addSubview:self.transparentView];
+}
+
+- (HTTransparentView *)transparentView
+{
+    if (!_transparentView) {
+        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+        _transparentView = [[HTTransparentView alloc] initWithFrame:keyWindow.bounds];
+        
+        __weakSelf;
+        [_transparentView setTouchBlock:^{
+            //  取消编辑
+            [weakSelf dismissTapView];
+        }];
+    }
+    
+    return _transparentView;
 }
 
 - (void)refreshUserTapView:(NSDictionary *)dic
@@ -162,7 +188,7 @@
 
 - (void)showTapUserView
 {
-    [self.view addSubview:self.tapUserView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.tapUserView];
     self.tapUserView.top = self.view.bottom;
     [UIView animateWithDuration:.75f delay:0 usingSpringWithDamping:.7 initialSpringVelocity:.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.tapUserView.bottom = self.view.bottom;
@@ -221,12 +247,14 @@
 
 - (void)dismissTapView
 {
+    [self.transparentView removeFromSuperview];
+    
     __weakSelf;
     [UIView animateWithDuration:.75f delay:0 usingSpringWithDamping:.7 initialSpringVelocity:.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         weakSelf.tapUserView.top = weakSelf.view.bottom;
         
     } completion:^(BOOL finished) {
-        
+        [weakSelf.tapUserView removeFromSuperview];
     }];
 
 }

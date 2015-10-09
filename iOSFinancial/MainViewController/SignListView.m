@@ -113,7 +113,9 @@
     NSArray *signs = _signListModel.showSignList;
     
     if (signs.count == 0) {
-        [self showNoneDataView];
+        LoadingStateView *view = [self showNoneDataView];
+        view.promptStr = @"";
+        
         return;
     }
     

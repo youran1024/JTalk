@@ -21,12 +21,14 @@
 
 #define ORIGINAL_MAX_WIDTH 640.0f
 
+
 @interface EditInfoViewController () <UIImagePickerControllerDelegate,
                                     UINavigationControllerDelegate,
                                     UITextFieldDelegate,
                                     UITextViewDelegate,
                                     ZHPickViewDelegate,
                                     VPImageCropperDelegate, UIActionSheetDelegate>
+
 
 @property (nonatomic, strong)       UIImageView *headerImageView;
 @property (nonatomic, weak)         HTEditCell *selectionCell;
@@ -184,6 +186,7 @@
     UserInfoModel *userInfo = user.userInfoModelTmp;
     
     userInfo.userName = _nameCell.textField.text;
+    userInfo.userName = [userInfo.userName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     userInfo.userPrompt = _selectionInfoCell.placeHolderView.text;
     
     if (user.isLogin) {
@@ -198,9 +201,12 @@
         }
     }
     
-    if (!userInfo.userName) {
+    if (isEmpty(userInfo.userName)) {
         [self showHudErrorView:@"请设置用户名"];
         return;
+        
+    }else if (isEmpty(userInfo.userPrompt)) {
+        userInfo.userPrompt = @"我很懒，但是我很温柔~";
     }
     
     if (userInfo.userPhotoImage) {
@@ -450,7 +456,6 @@
             UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
             weakSelf.selectionCell.textField.text = cityName;
             userInfo.userLocation = cityName;
-            
         }];
         
         loaction.hidesBottomBarWhenPushed = YES;
@@ -519,7 +524,7 @@
         case 0: return @"请输入您的昵称";
         case 1: return @"请选择您的性别";
         case 2: return @"请选择您的地区";
-        case 3: return @"请输入您的简介";
+        case 3: return @"我很懒，但是我很温柔~";
     }
     return nil;
 }

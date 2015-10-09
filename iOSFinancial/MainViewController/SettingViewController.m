@@ -45,11 +45,12 @@
 //  消息接收事件
 - (void)switchButtonClicked:(UISwitch*)switchbutton
 {
-    [HTUserDefaults setValue:@(switchbutton.on) forKey:kJTalkMessageStoreKey];
+    BOOL isOpen = switchbutton.on;
+    [HTUserDefaults setValue:@(isOpen) forKey:kJTalkMessageStoreKey];
     [HTUserDefaults synchronize];
     
-    [RCIM sharedRCIM].disableMessageNotificaiton = switchbutton.on;
-    [RCIM sharedRCIM].disableMessageAlertSound = switchbutton.on;
+    [RCIM sharedRCIM].disableMessageNotificaiton = isOpen;
+    [RCIM sharedRCIM].disableMessageAlertSound = isOpen;
 }
 
 #pragma mark - 
@@ -138,7 +139,6 @@
     if (indexPath.section != 0) {
         cell.textLabel.text = [self titleAtIndexPath:indexPath];
     }
-    
     
     return cell;
 }
