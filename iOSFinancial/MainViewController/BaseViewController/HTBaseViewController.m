@@ -15,7 +15,6 @@
 #import "UIColor+Colors.h"
 #import "AppDelegate.h"
 #import "UIAlertView+RWBlock.h"
-#import "MobClick.h"
 
 
 typedef void (^AlertViewBlock)(UIAlertView *alertView, NSInteger buttonIndex);
@@ -714,10 +713,6 @@ typedef void (^AlertViewBlock)(UIAlertView *alertView, NSInteger buttonIndex);
 {
     [super viewWillAppear:animated];
     
-    //NSLog(@"%@ view will appear", NSStringFromClass([self class]));
-    
-    // 页面开启时间统计
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -731,19 +726,7 @@ typedef void (^AlertViewBlock)(UIAlertView *alertView, NSInteger buttonIndex);
 {
     [super viewWillDisappear:animated];
     
-    //NSLog(@"%@ view will disappear", NSStringFromClass([self class]));
-    
-    // 页面关闭时间统计
-    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
-
-//- (NSString *)getPageName
-//{
-//    NSString *pageKey = NSStringFromClass([self class]);
-//    NSString *pageNameStr = [self.ctrNameDict stringForKey:pageKey];
-//    
-//    return HTSTR(@"%@(%@)", pageKey, pageNameStr);
-//}
 
 - (void)viewDidDisappear:(BOOL)animated
 {

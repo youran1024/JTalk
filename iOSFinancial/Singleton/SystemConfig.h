@@ -18,8 +18,6 @@
 
 + (SystemConfig *)defaultConfig;
 
-- (void)synchronize;
-
 @end
 
 

@@ -105,37 +105,5 @@ static NSString *kQiNiuCloudToken = @"kQiNiuCloudToken";
     [HTUserDefaults synchronize];
 }
 
-- (void)synchronize
-{
-    HTBaseRequest *request = [HTBaseRequest requestSystemSetting];
-    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
-        NSDictionary *dic = request.responseJSONObject;
-        NSInteger state = [[dic stringIntForKey:@"code"] integerValue];
-        if (state == 200) {
-            dic = [dic dictionaryForKey:@"result"];
-            //  succes
-            NSString *mainImageStr = [dic stringForKey:@"main_back_img"];
-            if (!isEmpty(mainImageStr)) {
-                self.firstIndexBackImage = mainImageStr;
-            }
-            
-            NSString *qiNiuToken = [dic stringForKey:@"qiniu_token"];
-            if (!isEmpty(qiNiuToken)) {
-                self.qiniuCloudToken = qiNiuToken;
-            }
-            
-            NSString *qiniu_token_domain = [dic stringForKey:@"qiniu_token_domain"];
-            if (!isEmpty(qiniu_token_domain)) {
-                self.qiniuServiceServer = qiniu_token_domain;
-            }
-        }  
-        
-    } failure:^(YTKBaseRequest *request) {
-        
-        
-    }];
-}
-
-
 
 @end
