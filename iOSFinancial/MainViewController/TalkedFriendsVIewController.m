@@ -102,7 +102,7 @@
     titleView.font = [UIFont boldSystemFontOfSize:19];
     titleView.textColor = [UIColor whiteColor];
     titleView.textAlignment = NSTextAlignmentCenter;
-    titleView.text = @"会话";
+    titleView.text = @"消息";
     self.tabBarController.navigationItem.titleView = titleView;
 }
 
@@ -318,7 +318,7 @@
 
 - (NSString *)title
 {
-    return @"聊天";
+    return @"消息";
 }
 
 @end

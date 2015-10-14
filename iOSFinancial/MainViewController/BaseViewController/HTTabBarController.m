@@ -8,10 +8,11 @@
 
 #import "HTTabBarController.h"
 #import "HTNavigationController.h"
-#import "TalkedFriendsVIewController.h"
-#import "ChatRoomJoinerList.h"
-#import "StateListViewController.h"
-#import "SettingViewController.h"
+#import "StoreViewController.h"
+#import "CartViewController.h"
+#import "FindViewController.h"
+#import "MyStoreViewController.h"
+#import "MineViewController.h"
 
 
 @interface HTTabBarController ()
@@ -29,7 +30,7 @@
     self.viewControllers = [self subViewControllers];
     
     //  去掉顶部的阴影线
-    //self.tabBar.clipsToBounds = YES;
+    self.tabBar.clipsToBounds = YES;
     
     [self changeShowdImageColor];
 }
@@ -48,70 +49,37 @@
     [self.tabBar setShadowImage:img];
     [self.tabBar setBackgroundImage:[[UIImage alloc]init]];
 }
-
-/*
-- (void)printSubViews:(UIView *)view
-{
-    if ([view.subviews count] == 0) {
-        return;
-    }
-    
-    for (UIView *subView in view.subviews) {
-        NSLog(@"%@ -> %@",NSStringFromClass([view class]), NSStringFromClass([subView class]));
-
-        //UITabBarButton        //UITabBarSwappableImageView
-        if ([subView isKindOfClass:NSClassFromString(@"UITabBarSwappableImageView")]) {
-            subView.backgroundColor = HTRedColor;
-            subView.top = view.height;
-            [subView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.centerY.equalTo(@(view.centerY));
-            }];
-        
-            continue;
-        }
-        
-        [self printSubViews:subView];
-    }
-}
-*/
- 
  
 - (NSArray *)subViewControllers
 {
-    NSMutableArray *viewControllers = [@[] mutableCopy];
+    StoreViewController *store = [[StoreViewController alloc]init];
+    store.tabBarItem = [self tabbarItemWithTitle:@"商城" andItemImage:@"shangjia_icon"];
+    HTNavigationController *nav1 = [[HTNavigationController alloc] initWithRootViewController:store];
     
-    StateListViewController *stateVC = [[StateListViewController alloc] initWithTableViewStyle:UITableViewStyleGrouped];
-    stateVC.tabBarItem = [self tabbarItemWithTitle:@"发现" andItemImage:@"sign"];
-    HTNavigationController *nav2 = [[HTNavigationController alloc] initWithRootViewController:stateVC];
-    [viewControllers addObject:nav2];
+    CartViewController *cart = [[CartViewController alloc]init];
+    cart.tabBarItem = [self tabbarItemWithTitle:@"购物车" andItemImage:@"gouwuche_icon"];
+    HTNavigationController *nav2 = [[HTNavigationController alloc] initWithRootViewController:cart];
     
-    NSArray *conversations = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_APPSERVICE), @(ConversationType_PUBLICSERVICE),@(ConversationType_GROUP),@(ConversationType_SYSTEM)];
-//    NSArray *collectionConversations = @[@(ConversationType_GROUP)];
-    TalkedFriendsVIewController *talkVC = [[TalkedFriendsVIewController alloc] initWithDisplayConversationTypes:conversations collectionConversationType:nil];
-    talkVC.tabBarItem = [self tabbarItemWithTitle:@"消息" andItemImage:@"commit"];
-    HTNavigationController *nav = [[HTNavigationController alloc] initWithRootViewController:talkVC];
-    [viewControllers addObject:nav];
+    FindViewController *find = [[FindViewController alloc]init];
+    find.tabBarItem = [self tabbarItemWithTitle:@"寻鲜" andItemImage:@"xunxian_icon"];
+    HTNavigationController *nav3 = [[HTNavigationController alloc] initWithRootViewController:find];
     
-    /*
-    ChatRoomJoinerList *chatVC = [[ChatRoomJoinerList alloc] init];
-    chatVC.tabBarItem = [self tabbarItemWithTitle:@"聊天室" andItemImage:@"address"];
-    chatVC.title = @"聊天室";
-    HTNavigationController *nav1 = [[HTNavigationController alloc] initWithRootViewController:chatVC];
-    [viewControllers addObject:nav1];
-    */
+    MyStoreViewController *myStore = [[MyStoreViewController alloc]init];
+    myStore.tabBarItem = [self tabbarItemWithTitle:@"我的店" andItemImage:@"wode_icon"];
+    HTNavigationController *nav4 = [[HTNavigationController alloc] initWithRootViewController:myStore];
     
-    SettingViewController *aboutVC = [[SettingViewController alloc] init];
-    aboutVC.tabBarItem = [self tabbarItemWithTitle:@"我" andItemImage:@"me"];
-    HTNavigationController *nav3 = [[HTNavigationController alloc] initWithRootViewController:aboutVC];
-    [viewControllers addObject:nav3];
+    MineViewController *mine = [[MineViewController alloc]init];
+    mine.tabBarItem = [self tabbarItemWithTitle:@"我的" andItemImage:@"maishoudian_icon"];
+    HTNavigationController *nav5 = [[HTNavigationController alloc] initWithRootViewController:mine];
     
-    return viewControllers;
+    return @[nav1, nav2, nav3, nav4, nav5];
 }
 
 - (UITabBarItem *)tabbarItemWithTitle:(NSString *)title andItemImage:(NSString *)imageStr
 {
-    UIImage *selectImage = HTImage(HTSTR(@"%@_selected", imageStr));
-    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:HTImage(imageStr) selectedImage:selectImage];
+    UIImage *selectImage = HTImage(HTSTR(@"%@_2", imageStr));
+    UIImage *normalImage = HTImage(HTSTR(@"%@_1", imageStr));
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:normalImage selectedImage:selectImage];
     
     return tabBarItem;
 }

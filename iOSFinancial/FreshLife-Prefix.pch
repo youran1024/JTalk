@@ -1,0 +1,154 @@
+//
+//  iOSFinancial-Prefix.pch
+//  iOSFinancial
+//
+//  Created by Mr.Yang on 15/3/27.
+//  Copyright (c) 2015年 Mr.Yang. All rights reserved.
+//
+
+#ifndef iOSFinancial_iOSFinancial_Prefix_pch
+#define iOSFinancial_iOSFinancial_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "UIColor+HTExtension.h"
+#import "UIView+BFExtension.h"
+#import "NSString+BaseURL.h"
+#import "User.h"
+#import "HTBaseRequest.h"
+#import "NSDictionary+JSONExtern.h"
+#import "UIColor+Colors.h"
+#import "NSString+BFExtension.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
+
+/*--------------------------- 全局变量 ---------------------------*/
+
+#if DEBUG
+
+#define __APP_CHANNEL  @"Test"
+
+#else
+
+#define __APP_CHANNEL  @"AppStore"
+
+#endif
+
+//  距离屏幕上方的高度
+#define TransparentTopHeight        0 //64
+
+//--------------网络请求 (错误号)
+
+//  用户被提下线
+#define __UserAccoutIsLoginByOther  -5
+
+//  用户token过期
+#define __UserAccessTokenOutDate    -2
+
+#define __Globle_line_width  .3f
+
+
+//------------------ 更多
+
+//  消息通知的Key
+static NSString *const kJTalkMessageStoreKey = @"kJTalkMessageStoreKey";
+
+//  评价地址
+static NSString *const kApplicationEvaluateURL = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%1041310652";
+
+
+/*----------------第三方AppKey--------------------------*/
+
+#define UMengAppKey        @"55d1546167e58e1d7800528b"
+
+#define QQAppId            @"1103996144"
+#define QQAppKey           @"oAU4rGCv0WoFubsd"
+#define WeiXinAppKey       @"wx4483dbf9915bd984"
+#define WeiXinAppSecreat   @"0e1995460b92265e1ee13a09e096a060"
+//  Bug管理 (腾讯bugly)
+#define __BUGLY_APP_ID      @"900006129"
+
+#define __RongYunKey_      @"vnroth0krcr4o"// @"vnroth0krcr4o"
+
+
+/*-----------------NOTIFACTION DEFINE----------------------*/
+
+//  登录成功
+#define __USER_LOGIN_SUCCESS          @"__userLoginSucess"
+
+//  退出登录成功
+#define __USER_LOGINOUT_SUCCESS       @"__userLoginOutSuccess"
+
+//  刷新个人账户
+#define __USER_ACCOUNT_REFRESH_NOTIFACTION      @"__user_account_refresh_notifiction"
+
+
+/*--------------COMMON FUNCTION-----------------*/
+
+static inline BOOL isEmpty(id thing) {
+    return thing == nil || [thing isEqual:[NSNull null]]
+    || ([thing respondsToSelector:@selector(length)]
+        && [(NSData *)thing length] == 0)
+    || ([thing respondsToSelector:@selector(count)]
+        && [(NSArray *)thing count] == 0);
+}
+
+#define __userInfoTmp   [User sharedUser].userInfoModelTmp
+#define __userInfo      [User sharedUser].userInfo
+#define __userInfoId    __userInfo.userID
+#define __isUserLogin   [User sharedUser].isLogin
+
+
+#define APPScreenFrame      [[UIScreen mainScreen] applicationFrame]
+#define APPScreenWidth      APPScreenFrame.size.width
+#define APPScreenHeight     APPScreenFrame.size.height
+#define RealScreenHeight    [UIScreen mainScreen].bounds.size.height
+
+#define APPKeyWindow        [UIApplication sharedApplication].keyWindow
+
+#define is35Inch   ((NSInteger)RealScreenHeight == 480 ? YES : NO)
+#define is4Inch   ((NSInteger)RealScreenHeight == 568 ? YES : NO)
+#define is47Inch  ((NSInteger)RealScreenHeight == 667 ? YES : NO)
+#define is55Inch  ((NSInteger)RealScreenHeight == 736 ? YES : NO)
+
+#define APPSystemVersion        [[[UIDevice currentDevice] systemVersion] intValue]
+#define HTImage(__name)         [UIImage imageNamed:__name]
+#define HTSTR(...)              [NSString stringWithFormat:__VA_ARGS__]
+#define HTURL(__str)            [NSURL URLWithString:__str]
+
+#define HTUserDefaults          [NSUserDefaults standardUserDefaults]
+#define HTFont(__fontSize)      [UIFont systemFontOfSize:__fontSize]
+
+#define __weakSelf              __weak typeof(self) weakSelf = self
+
+
+/**
+ *  if undefined DEBUG or DEBUG is 0 then disabled log
+ *
+ *  if DEBUG == 1 LogWarning is enabled
+ *
+ *  if DEBUG > 1 LogError ie enabled
+ */
+
+
+#if !defined(DEBUG) || DEBUG == 0
+#define NSLog(...) do {} while (0)
+#define DLog(fmt, ...)
+
+#elif DEBUG == 1
+
+#define NSLog(...) NSLog(__VA_ARGS__)
+#define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+#endif
+
+
+#endif
+
+
+#endif

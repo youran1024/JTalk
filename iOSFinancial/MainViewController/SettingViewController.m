@@ -229,7 +229,7 @@
 
 - (NSString *)title
 {
-    return @"设置";
+    return @"我";
 }
 
 

@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UserInfoModel.h"
-#import <RCIM.h>
 
 
 typedef NS_ENUM(NSInteger, UserNameAuthState) {
@@ -27,24 +25,8 @@ typedef NS_ENUM(NSInteger, UserNameAuthState) {
 }
 
 @property (nonatomic, readonly) BOOL isLogin;
-@property (nonatomic, strong)   UserInfoModel *userInfo;
 
-//   注册用的临时用户信息
-@property (nonatomic, strong)   UserInfoModel *userInfoModelTmp;
 
 + (User *)sharedUser;
-
-- (RCUserInfo *)rcUserinfo;
-
-//  用户信息修改完成之后，用临时的替换新的
-- (void)exchangeUserInfo;
-
-//  刷新userModelTmp数据
-- (void)refreshUserInfoTmp;
-
-//  清除用户数据
-- (void)clearUserData;
-
-- (void)doLoginOut;
 
 @end
