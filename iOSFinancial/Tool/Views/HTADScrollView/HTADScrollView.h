@@ -1,0 +1,22 @@
+//
+//  HTADScrollIView.h
+//  JRJNews
+//
+//  Created by Mr.Yang on 14-4-10.
+//  Copyright (c) 2014年 Mr.Yang. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface HTADScrollView : UIView
+
+@property (nonatomic, strong)   NSArray *images;
+@property (nonatomic, strong)   NSArray *titles;
+@property (nonatomic, copy) void(^touchBlock)(NSInteger index);
+
+- (id)initWithFrame:(CGRect)frame images:(NSArray *)images andTitles:(NSArray *)titles;
+
+- (void)refreshView:(NSArray *)images titles:(NSArray *)titles;
+
+@end
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

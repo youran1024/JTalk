@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>136E52AD-1D1D-4765-A94C-AE01BFDAD55E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>JTalk</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>75C93EB92B3553A0D3F6D1724EF7C79357BAC9F6</key>
+		<string>github.com:youran1024/JTalk.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>JTalk.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>75C93EB92B3553A0D3F6D1724EF7C79357BAC9F6</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:youran1024/JTalk.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>75C93EB92B3553A0D3F6D1724EF7C79357BAC9F6</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>75C93EB92B3553A0D3F6D1724EF7C79357BAC9F6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>JTalk</string>
+		</dict>
+	</array>
+</dict>
+</plist>

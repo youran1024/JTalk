@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="66" id="YCe-qm-MsF" customClass="UserInfoCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YCe-qm-MsF" id="ke9-4z-7z7">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1sd-of-00f">
+                        <rect key="frame" x="15" y="7" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="Bws-Xz-Plz"/>
+                            <constraint firstAttribute="width" constant="50" id="WTB-Fp-8DU"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NU5-8M-awO">
+                        <rect key="frame" x="80" y="23" width="40" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="NU5-8M-awO" firstAttribute="leading" secondItem="1sd-of-00f" secondAttribute="trailing" constant="15" id="0OM-BS-cti"/>
+                    <constraint firstItem="NU5-8M-awO" firstAttribute="centerY" secondItem="ke9-4z-7z7" secondAttribute="centerY" id="ggj-7r-lb7"/>
+                    <constraint firstItem="1sd-of-00f" firstAttribute="centerY" secondItem="ke9-4z-7z7" secondAttribute="centerY" id="hs8-Jv-NzK"/>
+                    <constraint firstItem="1sd-of-00f" firstAttribute="leading" secondItem="ke9-4z-7z7" secondAttribute="leading" constant="15" id="oN7-Pb-gMx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="headerImageView" destination="1sd-of-00f" id="MHk-OG-5vz"/>
+                <outlet property="nameLabel" destination="NU5-8M-awO" id="DeT-gb-9hb"/>
+            </connections>
+            <point key="canvasLocation" x="186" y="308"/>
+        </tableViewCell>
+    </objects>
+</document>
