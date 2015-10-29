@@ -46,14 +46,43 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxe-dZ-Ixh">
                     <rect key="frame" x="0.0" y="520" width="320" height="80"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kki-84-Uyi">
-                            <rect key="frame" x="48" y="25" width="46" height="30"/>
-                            <state key="normal" title="Button"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kki-84-Uyi">
+                            <rect key="frame" x="40" y="15" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="YHK-rF-PPc"/>
+                                <constraint firstAttribute="height" constant="50" id="xKW-Cw-Zpq"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="qq"/>
+                            <state key="highlighted" image="qq_select"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yrt-u9-UMj">
+                            <rect key="frame" x="230" y="15" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="Kes-es-kUf"/>
+                                <constraint firstAttribute="height" constant="50" id="anP-Vj-xWd"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="weixin"/>
+                            <state key="highlighted" image="weixin_select"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flM-iu-bSQ">
+                            <rect key="frame" x="135" y="15" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="0Ex-dl-krO"/>
+                                <constraint firstAttribute="width" constant="50" id="jm6-Dm-y1X"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="weibo"/>
+                            <state key="highlighted" image="weibo_select"/>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="flM-iu-bSQ" firstAttribute="leading" secondItem="Kki-84-Uyi" secondAttribute="trailing" constant="45" id="E7h-06-ZhN"/>
                         <constraint firstAttribute="height" constant="80" id="F6W-xx-jyr"/>
+                        <constraint firstItem="Yrt-u9-UMj" firstAttribute="leading" secondItem="flM-iu-bSQ" secondAttribute="trailing" constant="45" id="FGZ-in-8a1"/>
+                        <constraint firstItem="flM-iu-bSQ" firstAttribute="centerY" secondItem="hxe-dZ-Ixh" secondAttribute="centerY" id="GTN-9I-mMJ"/>
+                        <constraint firstItem="Yrt-u9-UMj" firstAttribute="top" secondItem="Kki-84-Uyi" secondAttribute="top" id="Rw9-ya-dkt"/>
+                        <constraint firstItem="flM-iu-bSQ" firstAttribute="top" secondItem="Kki-84-Uyi" secondAttribute="top" id="XWZ-7z-iGy"/>
+                        <constraint firstItem="flM-iu-bSQ" firstAttribute="centerX" secondItem="hxe-dZ-Ixh" secondAttribute="centerX" id="siA-Hc-dxd"/>
                     </constraints>
                 </view>
             </subviews>
@@ -86,4 +115,12 @@
             <point key="canvasLocation" x="282" y="331"/>
         </view>
     </objects>
+    <resources>
+        <image name="qq" width="50" height="50"/>
+        <image name="qq_select" width="50" height="50"/>
+        <image name="weibo" width="50" height="50"/>
+        <image name="weibo_select" width="50" height="50"/>
+        <image name="weixin" width="50" height="50"/>
+        <image name="weixin_select" width="50" height="50"/>
+    </resources>
 </document>
