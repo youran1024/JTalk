@@ -22,6 +22,7 @@
 + (instancetype)requestWithURL:(NSString *)detailURL
 {
     HTBaseRequest *request = [[HTBaseRequest alloc] initWithURL:detailURL];
+    request.requestMethod = YTKRequestMethodPost;
     
     return request;
 }

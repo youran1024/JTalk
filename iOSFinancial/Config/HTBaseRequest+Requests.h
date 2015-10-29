@@ -10,19 +10,16 @@
 
 @interface HTBaseRequest (Requests)
 
-+ (HTBaseRequest *)regeditNewAccount;
++ (HTBaseRequest *)userRegister;
 
-+ (HTBaseRequest *)editUserInfo;
++ (HTBaseRequest *)userInfoEdit;
 
-+ (HTBaseRequest *)loginWithUserInfo;
++ (HTBaseRequest *)userLogin;
 
 + (HTBaseRequest *)resetUserPass;
 
-//  获取自己的用户信息
-+ (HTBaseRequest *)getUserInfo;
-
-//  获取某人的信息
-+ (HTBaseRequest *)otherUserInfo:(NSString *)otherUserId;
+//  获取个人信息
++ (HTBaseRequest *)getUserInfo:(NSString *)getUserId;
 
 //  首页热门词汇
 + (HTBaseRequest *)hotWordList;
@@ -32,13 +29,13 @@
  */
 
 //  拉黑用户
-+ (HTBaseRequest *)pullBlackUser:(NSString *)userID;
++ (HTBaseRequest *)pullUserToBlackList:(NSString *)userId;
 
 //  查获黑名单列表 //get
-+ (HTBaseRequest *)fetchBlackUserList;
++ (HTBaseRequest *)fetchBlackList;
 
 //  移除拉黑用户
-+ (HTBaseRequest *)removeUserFromPullBlackList:(NSString *)userId;
++ (HTBaseRequest *)removeUserFromBlackList:(NSString *)userId;
 
 /**
  *    搜索

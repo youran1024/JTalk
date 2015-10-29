@@ -112,7 +112,7 @@
 // MARK: 注册请求
 - (void)doRegeitRequest
 {
-    HTBaseRequest *request = [HTBaseRequest regeditNewAccount];
+    HTBaseRequest *request = [HTBaseRequest userRegister];
     
     User *user = [User sharedUser];
     UserInfoModel *userInfo = user.userInfo;
@@ -146,7 +146,7 @@
 // MARK: 编辑请求
 - (void)doEditUserInfoRequest
 {
-    HTBaseRequest *request = [HTBaseRequest editUserInfo];
+    HTBaseRequest *request = [HTBaseRequest userInfoEdit];
     
     __weakSelf;
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {

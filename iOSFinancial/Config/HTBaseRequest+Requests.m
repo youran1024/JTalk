@@ -10,6 +10,8 @@
 #import "ServerHostConfig.h"
 #import "NSString+URLEncoding.h"
 
+#define HTRequestWithUserInfoByURL(__url_)  [[HTBaseRequest requestWithURL:__url_] addUserId]
+
 
 @implementation HTBaseRequest (Requests)
 
@@ -18,45 +20,32 @@
  */
 //------------------------------------
 
-+ (HTBaseRequest *)userRequest:(YTKRequestMethod)requestMethod
++ (HTBaseRequest *)userRegister
 {
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/user"];
-    request.requestMethod = requestMethod;
-    [request addUserId];
-    
-    return request;
-}
-
-+ (HTBaseRequest *)regeditNewAccount
-{
-    HTBaseRequest *request = [self userRequest:YTKRequestMethodPost];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/register");
     [request addUserInfoEdit:NO];
     
     return request;
 }
 
-+ (HTBaseRequest *)editUserInfo
++ (HTBaseRequest *)userInfoEdit
 {
-    HTBaseRequest *request = [self userRequest:YTKRequestMethodPut];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/edit");
     [request addUserInfoEdit:YES];
     
     return request;
 }
 
-+ (HTBaseRequest *)getUserInfo
-{
-    return [HTBaseRequest userRequest:YTKRequestMethodGet];
-}
 
 /**
  *  用户登录
  */
 //------------------------------------
 
-+ (HTBaseRequest *)loginWithUserInfo
++ (HTBaseRequest *)userLogin
 {
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/user/login"];
-    request.requestMethod = YTKRequestMethodPost;
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/login");
+
     [request addRegeditUserInfo];
     
     return request;
@@ -64,20 +53,19 @@
 
 
 /**
- *  其他用户信息
+ *  获取用户信息
  */
 //------------------------------------
 
-+ (HTBaseRequest *)otherUserInfo:(NSString *)otherUserId
++ (HTBaseRequest *)getUserInfo:(NSString *)getUserId
 {
-    if (!otherUserId.length) {
-        NSLog(@"otherUserId is nil %@", otherUserId);
-        return nil;
+    if (!getUserId.length) {
+        getUserId = __userInfoId;
     }
     
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/user/other"];
-    [request addGetValue:otherUserId forKey:@"other_user_id"];
-    [request addGetValue:__userInfoId forKey:@"user_id"];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/get");
+    [request addPostValue:getUserId forKey:@"get_user_id"];
+    [request addPostValue:__userInfoId forKey:@"user_id"];
     
     return request;
 }
@@ -91,7 +79,7 @@
 {
     UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
     
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/user/pwd"];
+    HTBaseRequest *request = HTRequestWithURL(@"/user/pwd");
     
     [request addPostValue:userInfo.userPhone forKey:@"phone"];
     [request addPostValue:userInfo.userPass forKey:@"pwd"];
@@ -106,9 +94,9 @@
 
 + (HTBaseRequest *)hotWordList
 {
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/words"];
-    [request addGetValue:__userInfoId forKey:@"user_id"];
-    [request addGetValue:@(0) forKey:@"type"];
+    HTBaseRequest *request = HTRequestWithURL(@"/words");
+    [request addPostValue:__userInfoId forKey:@"user_id"];
+    [request addPostValue:@(0) forKey:@"type"];
     
     return request;
 }
@@ -118,36 +106,27 @@
  */
 //------------------------------------
 
-+ (HTBaseRequest *)pullBlackUserRequest:(YTKRequestMethod)requestMethod
-{
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/black"];
-    request.requestMethod = requestMethod;
-    [request addUserId];
-    
-    return request;
-}
-
-//  查获黑名单列表 //get
-+ (HTBaseRequest *)fetchBlackUserList
-{
-    HTBaseRequest *request = [self pullBlackUserRequest:YTKRequestMethodGet];
-    
-    return request;
-}
-
 //  拉黑用户
-+ (HTBaseRequest *)pullBlackUser:(NSString *)userId
++ (HTBaseRequest *)pullUserToBlackList:(NSString *)userId
 {
-    HTBaseRequest *request = [self pullBlackUserRequest:YTKRequestMethodPut];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/black/add");
     [request addValue:userId forKey:@"black_user_id"];
     
     return request;
 }
 
-//  从用户拉黑列表移除
-+ (HTBaseRequest *)removeUserFromPullBlackList:(NSString *)userId
+//  查获黑名单列表 //get
++ (HTBaseRequest *)fetchBlackList
 {
-    HTBaseRequest *request = [self pullBlackUserRequest:YTKRequestMethodDelete];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/black/list");
+    
+    return request;
+}
+
+//  从用户拉黑列表移除
++ (HTBaseRequest *)removeUserFromBlackList:(NSString *)userId
+{
+    HTBaseRequest *request = HTRequestWithURL(@"/black/delete");
     [request addValue:userId forKey:@"black_user_id"];
 
     return request;
@@ -158,20 +137,12 @@
  */
 //------------------------------------
 
-+ (HTBaseRequest *)userSearchRequest:(YTKRequestMethod)requestMethod
-{
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/user/search"];
-    request.requestMethod = requestMethod;
-    [request addUserId];
-    
-    return request;
-}
-
 //  记录用户检索词汇
 + (HTBaseRequest *)recoderUserSearchWord:(NSString *)word
 {
-    HTBaseRequest *request = [self userSearchRequest:YTKRequestMethodPost];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/search/submit");
     [request addValue:word forKey:@"word"];
+    
     request.shouldShowErrorMsg = NO;
     
     return request;
@@ -180,7 +151,7 @@
 //  查询个人检索词历史
 + (HTBaseRequest *)fetchUserSearchList
 {
-    HTBaseRequest *request = [self userSearchRequest:YTKRequestMethodGet];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/searching");
     
     return request;
 }
@@ -188,7 +159,8 @@
 //  删除个人查询的词汇
 + (HTBaseRequest *)deleteUserSearchWord:(NSString *)word
 {
-    HTBaseRequest *request = [self userSearchRequest:YTKRequestMethodDelete];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"words/delete");
+    
     [request addValue:word forKey:@"word"];
     
     return request;
@@ -201,8 +173,7 @@
 //  创建群组
 + (HTBaseRequest *)createGroupWithGroupName:(NSString *)groupName
 {
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/group/create"];
-    [request addUserId];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/group/create");
     [request addGetValue:groupName forKey:@"word"];
     
     return request;
@@ -210,9 +181,7 @@
 
 + (HTBaseRequest *)requestGroupInfo
 {
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/user/group"];
-    [request addUserId];
-    request.requestMethod = YTKRequestMethodGet;
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/group");
     
     return request;
 }
@@ -220,8 +189,7 @@
 // 群成员列表
 + (HTBaseRequest *)groupUserList:(NSString *)groupId andPageIndex:(NSInteger)index
 {
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/group/user/list"];
-    [request addUserId];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/group/user/list");
     [request addGetValue:groupId forKey:@"group_id"];
     [request addGetValue:@(index) forKey:@"page_index"];
     
@@ -232,8 +200,7 @@
 + (HTBaseRequest *)reportUserInGroup:(NSString *)reportUserId andReportType:(NSInteger)type
 {
     //  1.色情， 2.广告 3.骚扰 4.诈骗
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/group/user/report"];
-    [request addUserId];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/group/user/report");
     [request addPostValue:reportUserId forKey:@"report_user_id"];
     [request addPostValue:@(type) forKey:@"type"];
     
@@ -242,8 +209,7 @@
 
 + (HTBaseRequest *)reportUser:(NSString *)reportUserId anReportType:(NSInteger)type
 {
-    HTBaseRequest *request = [HTBaseRequest requestWithURL:@"/user/report"];
-    [request addUserId];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/report");
     [request addPostValue:reportUserId forKey:@"report_user_id"];
     [request addPostValue:@(type) forKey:@"type"];
     
@@ -257,10 +223,8 @@
 
 + (HTBaseRequest *)requestSystemSetting
 {
-    HTBaseRequest   *request = [HTBaseRequest requestWithURL:@"/sys/setting"];
+    HTBaseRequest   *request = HTRequestWithUserInfoByURL(@"/sys/setting");
     request.shouldShowErrorMsg = NO;
-    [request addUserId];
-    request.requestMethod = YTKRequestMethodGet;
     
     return request;
 }
@@ -302,9 +266,11 @@
     [self addValue:@(userInfo.userLoginType) forKey:@"type"];
 }
 
-- (void)addUserId
+- (HTBaseRequest *)addUserId
 {
     [self addValue:__userInfoId forKey:@"user_id"];
+    
+    return self;
 }
 
 

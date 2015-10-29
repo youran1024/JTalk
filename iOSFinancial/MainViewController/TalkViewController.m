@@ -137,7 +137,7 @@
         return;
     }
     
-    HTBaseRequest *request = [HTBaseRequest otherUserInfo:userId];
+    HTBaseRequest *request = [HTBaseRequest getUserInfo:userId];
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dic = request.responseJSONObject;
         NSInteger code = [[dic stringIntForKey:@"code"] integerValue];
@@ -334,7 +334,7 @@
         [self.view showHudWaitingView:PromptTypeWating];
     }
     
-    HTBaseRequest *request = [HTBaseRequest pullBlackUser:userId];
+    HTBaseRequest *request = [HTBaseRequest pullUserToBlackList:userId];
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dic = request.responseJSONObject;
         NSInteger code = [[dic stringIntForKey:@"code"] integerValue];

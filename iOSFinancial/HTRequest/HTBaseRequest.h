@@ -9,6 +9,8 @@
 #import "YTKBaseRequest.h"
 #import "ServerHostConfig.h"
 
+#define HTRequestWithURL(__url_)    [HTBaseRequest requestWithURL:__url_]
+
 @interface HTBaseRequest : YTKBaseRequest
 
 @property (nonatomic, assign)   YTKRequestMethod requestMethod;

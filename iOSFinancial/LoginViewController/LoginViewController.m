@@ -159,7 +159,7 @@ static NSString *userPhone;
     
     [self showHudWaitingView:PromptTypeWating];
     
-    HTBaseRequest *request = [HTBaseRequest loginWithUserInfo];
+    HTBaseRequest *request = [HTBaseRequest userLogin];
     
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         

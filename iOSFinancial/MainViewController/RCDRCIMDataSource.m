@@ -95,7 +95,7 @@
 #pragma mark - RCIMUserInfoDataSource
 - (void)getUserInfoWithUserId:(NSString*)userId completion:(void (^)(RCUserInfo*))completion
 {
-    HTBaseRequest *request = [HTBaseRequest otherUserInfo:userId];
+    HTBaseRequest *request = [HTBaseRequest getUserInfo:userId];
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         
         NSDictionary *dic = [request.responseJSONObject dictionaryForKey:@"result"];
