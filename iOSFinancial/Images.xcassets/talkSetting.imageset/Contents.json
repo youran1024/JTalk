@@ -6,12 +6,11 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "设置.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "talkSetting@2x.png"
     },
     {
       "idiom" : "universal",
-      "filename" : "设置-1.png",
       "scale" : "3x"
     }
   ],

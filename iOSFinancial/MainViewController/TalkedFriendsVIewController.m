@@ -35,10 +35,28 @@
     [super viewWillAppear:animated];
     
     [self notifyUpdateUnreadMessageCount];
+
+    NSArray *dataSource = [[RCIMClient sharedRCIMClient] getConversationList:@[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_APPSERVICE), @(ConversationType_PUBLICSERVICE),@(ConversationType_GROUP),@(ConversationType_SYSTEM)]];
+    for (RCConversation *obj in dataSource) {
+        if (!obj.lastestMessage) {
+            obj.objectName = @"sdf";
+            obj.draft = @"fds";
+        }
+    }
+    
+    if (dataSource.count == 0) {
+        LoadingStateView *view = [self.view showNoneDataView];
+        view.promptStr = @"暂无任何会话";
+        
+    }else {
+        [self.view removeNoneDataView];
+    }
+
 }
 
 - (void)showEmptyConversationView
 {
+
     
 }
 
@@ -68,22 +86,6 @@
     
     self.conversationListTableView.tableFooterView = [[UIView alloc] init];
     
-    
-    NSArray *dataSource = [[RCIMClient sharedRCIMClient] getConversationList:@[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_APPSERVICE), @(ConversationType_PUBLICSERVICE),@(ConversationType_GROUP),@(ConversationType_SYSTEM)]];
-    for (RCConversation *obj in dataSource) {
-        if (!obj.lastestMessage) {
-            obj.objectName = @"sdf";
-            obj.draft = @"fds";
-        }
-    }
-    
-    if (dataSource.count == 0) {
-        LoadingStateView *view = [self.view showNoneDataView];
-        view.promptStr = @"暂无任何会话";
-        
-    }else {
-        [self.view removeNoneDataView];
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -108,8 +110,6 @@
 
 - (void)notifyUpdateUnreadMessageCount
 {
-    [self.view removeNoneDataView];
-    
     [self updateBadgeValueForTabBarItem];
 }
 
@@ -132,8 +132,9 @@
                                   cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RCConversationBaseCell *cell = [super rcConversationListTableView:tableView cellForRowAtIndexPath:indexPath];
-    //RCConversationModel *model = cell.model;
+    RCConversationModel *model = cell.model;
 
+    
     return cell;
 }
 
@@ -170,7 +171,9 @@
         [temp setCollectionConversationType:nil];
         temp.isEnteredToCollectionViewController = YES;
         [self.navigationController pushViewController:temp animated:YES];
+        
     }
+    
 }
 
 //*********************插入自定义Cell*********************//
@@ -312,6 +315,7 @@
             [blockSelf_ resetConversationListBackgroundViewIfNeeded];
             //            [self notifyUpdateUnreadMessageCount]; super会调用notifyUpdateUnreadMessageCount
         });
+        
     }
 }
 */

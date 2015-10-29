@@ -6,12 +6,11 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "通讯录.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "talkPeopleList@2x.png"
     },
     {
       "idiom" : "universal",
-      "filename" : "通讯录-1.png",
       "scale" : "3x"
     }
   ],

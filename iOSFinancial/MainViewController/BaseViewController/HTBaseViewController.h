@@ -11,8 +11,6 @@
 #import "UIColor+Colors.h"
 #import "LoadingStateView.h"
 #import <Masonry.h>
-#import "HTTransparentView.h"
-
 
 @interface HTBaseViewController : UIViewController <ViewControllerPromptingDelegate,
                                                     ViewControllerKeyboardNotificationDelegate,
@@ -26,21 +24,11 @@
 //  等待视图
 @property (nonatomic, strong)   LoadingStateView *loadingStateView;
 
-//  半透明的黑色背景遮盖图
-@property (nonatomic, strong)   HTTransparentView *transparentView;
-
-//  半透明视图Block
-@property (nonatomic, copy) void(^transparentBlockClicked)(void);
-
-
 //  显示网络连接状态的视图
 - (void)showLoadingViewWithState:(LoadingState)loadingState;
 - (void)removeLoadingView;
 //  （子类实现）
 - (void)willChangePromptView;
-
-- (void)showTransparentView;
-- (void)hideTransparentView;
 
 
 /**

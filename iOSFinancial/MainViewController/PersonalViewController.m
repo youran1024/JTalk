@@ -16,8 +16,6 @@
 #import "TalkViewController.h"
 #import "SystemConfig.h"
 #import "UIBarButtonExtern.h"
-#import "JTSImageInfo.h"
-#import "JTSImageViewController.h"
 
 
 #define __HeaderView_Height_Offset   100
@@ -60,6 +58,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.barTintColor = nil;
     [self getBackView:self.navigationController.navigationBar withHidden:YES];
@@ -69,21 +68,15 @@
 {
     [super viewDidDisappear:animated];
     
-    if (![self.navigationController.viewControllers containsObject:self]) {
-        [self getBackView:self.navigationController.navigationBar withHidden:NO];
-        self.navigationController.navigationBar.translucent = NO;
-        self.navigationController.navigationBar.barTintColor = [UIColor jt_barTintColor];
-    }
+    [self getBackView:self.navigationController.navigationBar withHidden:NO];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor jt_barTintColor];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    if ([[UIDevice currentDevice].systemVersion integerValue] >= 8) {
-        //self.navigationController.hidesBarsOnSwipe = YES;
-    }
-    
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self addBackImageView];
@@ -99,37 +92,6 @@
     if (![_userId isEqualToString:__userInfoId]) {
         self.navigationItem.rightBarButtonItem = [UIBarButtonExtern buttonWithImage:@"reportAction" target:self andSelector:@selector(reportButtonClicked)];
     }
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
-    [tapRecognizer addTarget:self action:@selector(bigButtonTapped:)];
-    
-    UIImageView *userHeaderImageView = self.personalInfoView.imageView;
-    [userHeaderImageView addGestureRecognizer:tapRecognizer];
-    [userHeaderImageView setAccessibilityLabel:@"Photo of a cat wearing a Bane costume."];
-    userHeaderImageView.userInteractionEnabled = YES;
-}
-
-- (void)bigButtonTapped:(id)sender {
-    
-    // Create image info
-    
-    UIImageView *userHeaderImageView = self.personalInfoView.imageView;
-    
-    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
-    imageInfo.image = self.personalInfoView.imageView.image;
-    imageInfo.referenceRect = userHeaderImageView.frame;
-    imageInfo.referenceView = self.view;
-    imageInfo.referenceContentMode = userHeaderImageView.contentMode;
-    imageInfo.referenceCornerRadius = userHeaderImageView.layer.cornerRadius;
-    
-    // Setup view controller
-    JTSImageViewController *imageViewer = [[JTSImageViewController alloc]
-                                           initWithImageInfo:imageInfo
-                                           mode:JTSImageViewControllerMode_Image
-                                           backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
-    
-    // Present the view controller.
-    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
 }
 
 - (void)reportButtonClicked
@@ -222,8 +184,8 @@
 {
     [self.personalInfoView.imageView sd_setImageWithURL:HTURL(_userInfoModel.userPhoto) placeholderImage:HTImage(@"app_icon")];
     self.personalInfoView.nameLabel.text = _userInfoModel.userName;
-    self.personalInfoView.locationLabel.text = HTSTR(@"%@, %@", _userInfoModel.userSex, _userInfoModel.userLocation);
-    self.personalInfoView.promptLabel.text = _userInfoModel.userPrompt;
+    self.personalInfoView.promptLabel.text = HTSTR(@"%@, %@", _userInfoModel.userSex, _userInfoModel.userLocation);
+    self.personalInfoView.locationLabel.text = _userInfoModel.userPrompt;
     
     [self.tableView reloadData];
 }

@@ -138,7 +138,7 @@
     frame.origin.x = x;
     self.view.frame = frame;
     
-    //float scale = (x / (APPScreenWidth / 0.05)) + 0.95;
+    float scale = (x / (APPScreenWidth / 0.05)) + 0.95;
     float alpha = 0.4 - (x / 800);
     
     lastScreenShotView.transform = CGAffineTransformMakeTranslation(x * .5, 0);
@@ -197,9 +197,9 @@
                 self.backgroundView.hidden = NO;
                 
             }];
-            
-        } else {
-            
+        }
+        else
+        {
             [UIView animateWithDuration:0.3 animations:^{
                 [self moveViewWithX:0];
             } completion:^(BOOL finished) {
