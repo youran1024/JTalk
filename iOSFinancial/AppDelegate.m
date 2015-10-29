@@ -168,13 +168,15 @@
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    
-    return YES;
+    return  [UMSocialSnsService handleOpenURL:url];
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
 {
-    return YES;
+    return  [UMSocialSnsService handleOpenURL:url];
 }
 
 //  MARK:程序状态的存储和恢复

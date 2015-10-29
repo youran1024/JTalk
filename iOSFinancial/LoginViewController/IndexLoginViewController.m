@@ -9,6 +9,7 @@
 #import "IndexLoginViewController.h"
 #import "LoginViewController.h"
 #import "SystemConfig.h"
+#import "UMSocial.h"
 
 
 @interface IndexLoginViewController ()
@@ -129,6 +130,56 @@
                                                                     andViewType:LoginViewTypeRegedit];
     
     [self.navigationController pushViewController:loginVc animated:YES];
+}
+
+- (IBAction)qqLoginClicked:(id)sender
+{
+    [self loginWithType:UMShareToQQ andBlock:^(UMSocialResponseEntity *response) {
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
+            
+            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+            
+        }
+    }];
+}
+
+- (IBAction)weChatClicked:(id)sender
+{
+    [self loginWithType:UMShareToWechatSession andBlock:^(UMSocialResponseEntity *response) {
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
+            
+            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+            
+        }
+    }];
+}
+
+- (IBAction)weBoClicked:(id)sender
+{
+    [self loginWithType:UMShareToSina andBlock:^(UMSocialResponseEntity *response) {
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
+            
+            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+        
+        }
+    }];
+}
+
+
+- (void)loginWithType:(NSString *)snsName andBlock:(UMSocialDataServiceCompletion)block
+{
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:snsName];
+    
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES, block);
 }
 
 - (UIButton *)customButton

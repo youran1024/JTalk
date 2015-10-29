@@ -54,6 +54,9 @@
                             </constraints>
                             <state key="normal" title="Button" image="qq"/>
                             <state key="highlighted" image="qq_select"/>
+                            <connections>
+                                <action selector="qqLoginClicked:" destination="-1" eventType="touchUpInside" id="ppn-lL-h1J"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yrt-u9-UMj">
                             <rect key="frame" x="230" y="15" width="50" height="50"/>
@@ -63,6 +66,9 @@
                             </constraints>
                             <state key="normal" title="Button" image="weixin"/>
                             <state key="highlighted" image="weixin_select"/>
+                            <connections>
+                                <action selector="weChatClicked:" destination="-1" eventType="touchUpInside" id="QSH-Vd-W8t"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flM-iu-bSQ">
                             <rect key="frame" x="135" y="15" width="50" height="50"/>
@@ -72,6 +78,9 @@
                             </constraints>
                             <state key="normal" title="Button" image="weibo"/>
                             <state key="highlighted" image="weibo_select"/>
+                            <connections>
+                                <action selector="weBoClicked:" destination="-1" eventType="touchUpInside" id="YBu-nK-ORG"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
