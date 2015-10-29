@@ -26,34 +26,40 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>weixin</string>
+			<string>Sina Wei Bo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wx4483dbf9915bd984</string>
+				<string>sina.55d1546167e58e1d7800528b</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>WeChat</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wb1020741709</string>
+				<string>wx70dd3b62ba048f85</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Tecent</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tencent1103996144</string>
+				<string>tencent1104804840</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>QQ</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>QQ41CDA4F0</string>
+				<string>QQ41D9FBE8</string>
 			</array>
 		</dict>
 	</array>

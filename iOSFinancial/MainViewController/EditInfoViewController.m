@@ -9,7 +9,6 @@
 #import "EditInfoViewController.h"
 #import "HTEditCell.h"
 #import "HTInfoCell.h"
-#import "ZHPickView.h"
 #import "UserLocationViewController.h"
 #import "VPImageCropperViewController.h"
 #import "UIBarButtonExtern.h"
@@ -26,15 +25,13 @@
                                     UINavigationControllerDelegate,
                                     UITextFieldDelegate,
                                     UITextViewDelegate,
-                                    ZHPickViewDelegate,
                                     VPImageCropperDelegate, UIActionSheetDelegate>
 
 
 @property (nonatomic, strong)       UIImageView *headerImageView;
 @property (nonatomic, weak)         HTEditCell *selectionCell;
-@property (nonatomic, strong)         HTInfoCell *selectionInfoCell;
-@property (nonatomic, strong)       ZHPickView *pickerView;
-@property (nonatomic, strong)         HTEditCell *nameCell;
+@property (nonatomic, strong)       HTInfoCell *selectionInfoCell;
+@property (nonatomic, strong)       HTEditCell *nameCell;
 
 @property (nonatomic, weak)     UIView *selectionView;
 
@@ -46,13 +43,6 @@
 @end
 
 @implementation EditInfoViewController
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [_pickerView remove];
-}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -287,9 +277,6 @@
 
 - (void)keyboardDidAppear:(NSNotification *)noti withKeyboardRect:(CGRect)rect
 {
-    //  如果有移除掉
-    [_pickerView remove];
-    
     CGRect location = [self.tableView convertRect:_selectionView.frame toView:self.view];
     CGFloat offset = (self.view.height - CGRectGetHeight(rect)) - CGRectGetMaxY(location);
     
@@ -539,27 +526,6 @@
     }
     
     return nil;
-}
-
-- (void)showSexPickerView
-{
-    NSArray *array=@[@[@"男", @"女"]];
-    
-    if (!_pickerView) {
-        _pickerView =[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
-        [_pickerView setPickViewColer:[UIColor jt_lightGrayColor]];
-        _pickerView.delegate = self;
-    }
-
-    [_pickerView show];
-}
-
-#pragma mark - ZHPickerViewDelegate
-- (void)toobarDonBtnHaveClick:(ZHPickView *)pickView resultString:(NSString *)resultString
-{
-    _selectionCell.textField.text = resultString;
-    UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
-    userInfo.userSex = resultString;
 }
 
 #pragma mark - 

@@ -102,7 +102,7 @@
 /// 请求的BaseURL
 - (NSString *)baseUrl
 {
-    return jTalkServerURL;
+    return jTalkServer;
 }
 
 /// 在HTTP报头添加的自定义参数

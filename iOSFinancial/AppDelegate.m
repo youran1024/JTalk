@@ -12,16 +12,11 @@
 #import "HTVersionManager.h"
 #import "UIAlertView+RWBlock.h"
 
-//  推送
 #import "UMessage.h"
-//  腾讯bug反馈
 #import <Bugly/CrashReporter.h>
-//  分享
-#import <ShareSDK/ShareSDK.h>
-#import "WeiboSDK.h"
-#import "WXApi.h"
 #import <SMS_SDK/SMS_SDK.h>
-//  融云
+#import "UMSocial.h"
+/* 融云 */
 #import <RongIMKit/RongIMKit.h>
 #import "NSString+BFExtension.h"
 #import "RCDataBaseManager.h"
@@ -54,7 +49,9 @@
     
     [self initFinishLaunch:application andOption:launchOptions];
     
-    
+    BOOL isMessageNotifacion = [[HTUserDefaults valueForKey:kJTalkMessageStoreKey] boolValue];
+    [RCIM sharedRCIM].disableMessageNotificaiton = isMessageNotifacion;
+    [RCIM sharedRCIM].disableMessageAlertSound = isMessageNotifacion;
    
     if ([application
          respondsToSelector:@selector(registerUserNotificationSettings:)]) {
@@ -146,7 +143,7 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-//    [UMessage registerDeviceToken:deviceToken];
+    
     NSString *token =
     [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<"
                                                            withString:@""]
@@ -160,8 +157,6 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-   // [UMessage didReceiveRemoteNotification:userInfo];
-    
     if ([application applicationState] == UIApplicationStateInactive) {
         
         
@@ -169,18 +164,17 @@
         //  MARK:应用内前台运行时收到推送 暂不处理
         
     }
-    
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    return [ShareSDK handleOpenURL:url
-                        wxDelegate:self];
+    
+    return YES;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
+    return YES;
 }
 
 //  MARK:程序状态的存储和恢复
@@ -261,91 +255,6 @@
     }
 }
 
-#pragma mark - Appdelegate
-#pragma mark -
-
-- (void)initFinishLaunch:(UIApplication *)application  andOption:(NSDictionary *)launchOptions
-{
-    BOOL isMessageNotifacion = [[HTUserDefaults valueForKey:kJTalkMessageStoreKey] boolValue];
-    [RCIM sharedRCIM].disableMessageNotificaiton = isMessageNotifacion;
-    [RCIM sharedRCIM].disableMessageAlertSound = isMessageNotifacion;
-    
-    //  MARK:系统样式
-    [self setAppStyle];
-    
-    //  MARK:融云
-    [self rongYunInit];
-    
-    //  MARK:崩溃监测
-    [self setBuglyReport];
-    
-    //  MARK:短信
-    [self smsSDKInit];
-    
-    //  MARK:UMeng用户反馈
-    [UMFeedback setAppkey:UMengAppKey];
-    
-    /*
-    //  MARK:推送设置
-        [self setUMengpushSetting:launchOptions];
-    
-     // MARK:友盟设置
-        [self setUMengSetting];
-        [self shareSDKInit];
-     
-     */
-}
-
-//  MARK: Setting
-- (void)setAppStyle
-{
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],NSFontAttributeName : [UIFont systemFontOfSize:18]}];
-    
-    
-    //  去掉tabbar底下的黑线 (顶部的阴影线 是 shoadowImage 造成的)
-    [[UITabBar appearance] setTintColor:[UIColor jt_barTintColor]];
-    //[[UITabBar appearance] setShadowImage:HTImage(@"")];
-    
-    //  修改navigation Bar底下的黑色线
-    [[UINavigationBar appearance] setBarTintColor:[UIColor jt_barTintColor]];
-    [[UINavigationBar appearance] setShadowImage:HTImage(@"")];//[[UIImage alloc] init]
-    
-    //修改返回按钮图片
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    
-    //returnBackIcon dismissIndicatior
-    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"returnBackIcon"]];
-    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"returnBackIcon"]];
-    
-    [[UITableView appearance] setSeparatorColor:[UIColor jt_lineColor]];
-    
-    [[UISwitch appearance] setOnTintColor:[UIColor jt_barTintColor]];
-    
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -160)
-                                                         forBarMetrics:UIBarMetricsDefault];
-}
-
-
-//  设置bug报告
-- (void)setBuglyReport
-{
-    //  版本渠道信息
-    [[CrashReporter sharedInstance] setChannel:__APP_CHANNEL];
-    //  合并上传
-    [[CrashReporter sharedInstance] setExpMergeUpload:YES];
-    //  设置appId
-    [[CrashReporter sharedInstance] installWithAppId:__BUGLY_APP_ID];
-    //  打开Log
-    [[CrashReporter sharedInstance] enableLog:YES];
-}
-
-- (void)smsSDKInit
-{
-    [SMS_SDK registerApp:@"9714408bd484" withSecret:@"a1f086c784801056efcc857e974119d4"];
-}
-
 - (void)rongYunConnection
 {
     User *user = [User sharedUser];
@@ -374,7 +283,92 @@
     }
 }
 
-- (void)rongYunInit
+#pragma mark - APP Init
+
+- (void)initFinishLaunch:(UIApplication *)application  andOption:(NSDictionary *)launchOptions
+{
+    //  MARK:系统样式
+    [self initAppStyle];
+    
+    //  MARK:融云
+    [self initRongYun];
+    
+    //  MARK:崩溃监测
+    [self initBuglyReport];
+    
+    //  MARK:短信
+    [self initSMS_SDK];
+    
+    //  MARK:友盟分享
+    [self initUmengShare];
+    
+    //  MARK:友盟用户反馈
+    [self initUmengUserFeedBack];
+    
+}
+
+- (void)initUmengShare
+{
+    [UMSocialData setAppKey:UMengAppKey];
+    
+}
+
+- (void)initUmengUserFeedBack
+{
+    [UMFeedback setAppkey:UMengAppKey];
+}
+
+//  MARK: Setting
+- (void)initAppStyle
+{
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                           NSFontAttributeName: [UIFont systemFontOfSize:18]}];
+    
+    //  去掉tabbar底下的黑线 (顶部的阴影线 是 shoadowImage 造成的)
+    [[UITabBar appearance] setTintColor:[UIColor jt_barTintColor]];
+    
+    //  修改navigation Bar底下的黑色线
+    [[UINavigationBar appearance] setBarTintColor:[UIColor jt_barTintColor]];
+    [[UINavigationBar appearance] setShadowImage:HTImage(@"")];
+    
+    //修改返回按钮图片
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    //returnBackIcon dismissIndicatior
+    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"returnBackIcon"]];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"returnBackIcon"]];
+    
+    [[UITableView appearance] setSeparatorColor:[UIColor jt_lineColor]];
+    
+    [[UISwitch appearance] setOnTintColor:[UIColor jt_barTintColor]];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -160)
+                                                         forBarMetrics:UIBarMetricsDefault];
+}
+
+
+//  设置bug报告
+- (void)initBuglyReport
+{
+    //  版本渠道信息
+    [[CrashReporter sharedInstance] setChannel:__APP_CHANNEL];
+    //  合并上传
+    [[CrashReporter sharedInstance] setExpMergeUpload:YES];
+    //  设置appId
+    [[CrashReporter sharedInstance] installWithAppId:__BUGLY_APP_ID];
+    //  打开Log
+    [[CrashReporter sharedInstance] enableLog:YES];
+}
+
+- (void)initSMS_SDK
+{
+    [SMS_SDK registerApp:SMSAppKey withSecret:SMSAppSecret];
+    [SMS_SDK enableAppContactFriends:NO];
+}
+
+- (void)initRongYun
 {
     //初始化融云SDK，
     [[RCIM sharedRCIM] initWithAppKey:__RongYunKey_];
@@ -387,7 +381,7 @@
 }
 
 //  MARK:UMeng Key and setting
-- (void)setUMengpushSetting:(NSDictionary *)launchOptions
+- (void)initUmengPush:(NSDictionary *)launchOptions
 {
     //set AppKey and AppSecret
     [UMessage startWithAppkey:@"54f52161fd98c52c280001a0" launchOptions:launchOptions];
