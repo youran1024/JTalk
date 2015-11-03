@@ -15,7 +15,9 @@
 #import "LongTapUserView.h"
 #import "UIView+Prompting.h"
 #import "HTTransparentView.h"
-
+#import "HTWebViewController.h"
+#import "FunctionButton.h"
+#import "NSString+URLEncoding.h"
 
 
 @interface TalkViewController () <UIActionSheetDelegate>
@@ -24,6 +26,12 @@
 //  半透明的黑色背景遮盖图
 @property (nonatomic, strong)   HTTransparentView *transparentView;
 
+//  功能列表
+@property (nonatomic, strong)   UIView *functionView;
+//  消息提醒开关
+@property (nonatomic, strong)   FunctionButton *mindButton;
+//  消息提醒状态
+@property (nonatomic, assign)   BOOL isMindOpen;
 
 @end
 
@@ -76,8 +84,8 @@
     
     if (self.conversationType == ConversationType_GROUP) {
         UIBarButtonItem *item1 = [UIBarButtonExtern buttonWithImage:@"talkPeopleList" target:self andSelector:@selector(showGroupJoinerListView)];
-        UIBarButtonItem *item2 = [UIBarButtonExtern buttonWithImage:@"talkSetting" target:self andSelector:@selector(showTalkSettingViewController
-                                                                                                                     )];
+        UIBarButtonItem *item2 = [UIBarButtonExtern buttonWithImage:@"talkSetting" target:self andSelector:@selector(funtionBarButtonClicked)];//showTalkSettingViewController
+                                  
         self.navigationItem.rightBarButtonItems = @[item2, item1];
         
         //  没有语音
@@ -85,6 +93,9 @@
         
     }else {
         //  有语音
+        UIBarButtonItem *item2 = [UIBarButtonExtern buttonWithImage:@"info_personal" target:self andSelector:@selector(showPersonalInfoViewController)];
+        self.navigationItem.rightBarButtonItem = item2;
+        
         [self.chatSessionInputBarControl setInputBarType:RCChatSessionInputBarControlDefaultType style:RC_CHAT_INPUT_BAR_STYLE_SWITCH_CONTAINER_EXTENTION];
     }
     
@@ -97,11 +108,121 @@
     //  显示用户名
     [self setDisplayUserNameInCell:YES];
     
+    [self readMessageMindOpenState];
 }
 
 - (void)notifyUpdateUnreadMessageCount
 {
     
+}
+
+- (void)showPersonalInfoViewController
+{
+    PersonalViewController *personal = [[PersonalViewController alloc] initWithTableViewStyle:UITableViewStyleGrouped];
+    personal.userId = self.targetId;
+    
+    [self.navigationController pushViewController:personal animated:YES];
+}
+
+#pragma mark - ReadMessageSwitch
+
+- (void)readMessageMindOpenState
+{
+    NSString *groupId = [_groupTitle toMD5];
+    [[RCIMClient sharedRCIMClient] getConversationNotificationStatus:ConversationType_GROUP targetId:groupId success:^(RCConversationNotificationStatus nStatus) {
+        
+        //  免打扰
+        _isMindOpen = nStatus == NOTIFY;
+        
+        //  如果本地和服务端不匹配，则同步本地数据
+        id localValue = [HTUserDefaults valueForKey:groupId];
+        
+        if (localValue) {
+            BOOL isOnLocal = [localValue boolValue];
+            if (_isMindOpen != isOnLocal) {
+                self.isMindOpen = isOnLocal;
+                [self messageMindStateChanged:groupId andIsOpen:isOnLocal];
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self refreshMindButtonState];
+        });
+     
+    } error:^(RCErrorCode status) {
+        
+    }];
+}
+
+- (void)messageMindStateChanged:(NSString *)groupId andIsOpen:(BOOL)isOpen
+{
+    __weakSelf;
+    [[RCIMClient sharedRCIMClient] setConversationNotificationStatus:ConversationType_GROUP targetId:groupId isBlocked:isOpen success:^(RCConversationNotificationStatus nStatus) {
+        NSLog(@"valueChanged:%ld", (long)nStatus);
+        [HTUserDefaults setValue:@(isOpen) forKey:groupId];
+        [HTUserDefaults synchronize];
+        
+    } error:^(RCErrorCode status) {
+        weakSelf.isMindOpen = !weakSelf.isMindOpen;
+        [weakSelf refreshMindButtonState];
+    }];
+}
+
+- (void)refreshMindButtonState
+{
+    NSString *imageName = self.isMindOpen ? @"talk_mind_open" : @"talk_mind_close";
+    
+    NSString *title = self.isMindOpen ? @"提醒开启" : @"提醒关闭";
+    
+    self.mindButton.imageView.image = HTImage(imageName);
+    self.mindButton.titleLabel.text = title;
+}
+
+#pragma mark -
+
+- (void)funtionBarButtonClicked
+{
+    if (!self.functionView.userInteractionEnabled) {
+        return;
+    }
+    
+    UIView *superView = self.functionView.superview;
+    if (superView) {
+        [self removeFunctionView];
+        
+    }else {
+        [self showFunctionView];
+    }
+}
+
+- (void)showFunctionView
+{
+    self.functionView.bottom = self.view.top + 64;
+    [self.view addSubview:self.functionView];
+    
+    [UIView animateWithDuration:.65 delay:.0 usingSpringWithDamping:.7 initialSpringVelocity:.3 options:UIViewAnimationOptionCurveLinear animations:^{
+        
+        self.functionView.userInteractionEnabled = NO;
+        self.functionView.top = self.view.top + 64;
+        
+    } completion:^(BOOL finished) {
+        self.functionView.userInteractionEnabled = YES;
+    }];
+}
+
+- (void)removeFunctionView
+{
+    [UIView animateWithDuration:.65 delay:.0 usingSpringWithDamping:.7 initialSpringVelocity:.3 options:UIViewAnimationOptionCurveLinear animations:^{
+        
+        self.functionView.userInteractionEnabled = NO;
+        self.functionView.bottom = self.view.top + 64;
+        
+    } completion:^(BOOL finished) {
+        
+        self.functionView.userInteractionEnabled = YES;
+        [self.functionView removeFromSuperview];
+        
+    }];
 }
 
 - (void)showTalkSettingViewController
@@ -127,7 +248,6 @@
     PersonalViewController *personal = [[PersonalViewController alloc] initWithTableViewStyle:UITableViewStyleGrouped];
     personal.userId = userId;
     
-    personal.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:personal animated:YES];
 }
 
@@ -311,7 +431,8 @@
     
     [self.view showHudWaitingView:PromptTypeWating];
     
-    HTBaseRequest *request = [HTBaseRequest reportUserInGroup:userId andReportType:type];
+    //  举报群组里边的用户
+    HTBaseRequest *request = [HTBaseRequest reportUserInGroup:[self.groupTitle toMD5] andReporterId:userId andReportType:type];
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dic = request.responseJSONObject;
         NSInteger code = [[dic stringIntForKey:@"code"] integerValue];
@@ -350,5 +471,91 @@
         
     }];
 }
+
+#pragma mark - Views
+
+- (UIView *)functionView
+{
+    if (!_functionView) {
+        _functionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, APPScreenWidth, 84)];
+        _functionView.backgroundColor = HTHexColor(0x4bb174);
+        
+        FunctionButton *searchButton = [self functionButton:@"搜索" andImage:@"talk_search"];
+        searchButton.left = 0;
+        
+        [_functionView addSubview:searchButton];
+        
+        FunctionButton *mindButton = self.mindButton;
+        [self refreshMindButtonState];
+        mindButton.left = searchButton.right;
+        
+        [_functionView addSubview:mindButton];
+        
+        FunctionButton *quiteButton = [self functionButton:@"退出" andImage:@"talk_quite"];
+        quiteButton.left = mindButton.right;
+        
+        [_functionView addSubview:quiteButton];
+        
+        __weakSelf;
+        //  单击了搜索
+        [searchButton setTouchBlock:^(FunctionButton *button) {
+            HTWebViewController *controller = [[HTWebViewController alloc] init];
+            controller.titleStr = _groupTitle;
+            controller.url = HTURL(HTSTR(@"http://www.baidu.com/s?wd=%@", [_groupTitle URLEncodedString]));
+            
+            [weakSelf.navigationController pushViewController:controller animated:YES];
+        }];
+        
+        [mindButton setTouchBlock:^(FunctionButton *button) {
+            weakSelf.isMindOpen = !weakSelf.isMindOpen;
+            
+            [weakSelf messageMindStateChanged:[_groupTitle toMD5] andIsOpen:weakSelf.isMindOpen];
+            [weakSelf refreshMindButtonState];
+        }];
+        
+        [quiteButton setTouchBlock:^(FunctionButton *button) {
+            [weakSelf quiteGroup];
+        }];
+    }
+    
+    return _functionView;
+}
+
+- (FunctionButton *)mindButton
+{
+    if (!_mindButton) {
+        _mindButton = [self functionButton:@"提醒关闭" andImage:@"talk_mind_close"];
+    }
+    
+    return _mindButton;
+}
+
+- (FunctionButton *)functionButton:(NSString *)title andImage:(NSString *)imageName
+{
+    FunctionButton *button = [FunctionButton xibView];
+    button.imageView.image = HTImage(imageName);
+    button.titleLabel.text = title;
+    
+    return button;
+}
+
+- (void)quiteGroup
+{
+    [self.view showHudWaitingView:PromptTypeWating];
+    
+    [[RCIMClient sharedRCIMClient] quitGroup:[_groupTitle toMD5] success:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.view showHudSuccessView:@"退出成功"];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        });
+        
+    } error:^(RCErrorCode status) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.view showHudErrorView:@"退出失败"];
+        });
+    }];
+}
+
+
 
 @end

@@ -10,25 +10,17 @@
 #import "LoginViewController.h"
 #import "SystemConfig.h"
 #import "UMSocial.h"
+#import "EditInfoViewController.h"
 
 
 @interface IndexLoginViewController ()
-
-/*
-@property (nonatomic, strong) IBOutlet  UIButton *loginButton;
-@property (nonatomic, strong) IBOutlet  UIButton *regeditButton;
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
-@property (nonatomic, strong) IBOutlet UILabel *promptLabel;
-
-@property (nonatomic, strong) IBOutlet UIView *topLine;
-@property (nonatomic, strong) IBOutlet UIView *bottomLine;
-*/
 
 @property (nonatomic, strong) IBOutlet UIImageView *backIamgeView;
 @property (nonatomic, strong) IBOutlet UIButton *loginButton;
 @property (nonatomic, strong) IBOutlet UIButton *regeditButton;
 
+@property (nonatomic, strong) IBOutlet UIView *lineView1;
+@property (nonatomic, strong) IBOutlet UIView *lineView2;
 
 @end
 
@@ -76,36 +68,11 @@
     [self.regeditButton setBackgroundColor:HTHexColor(0xe3e3e3)];
     [self.loginButton setBackgroundColor:HTHexColor(0xe3e3e3)]; //HTHexColor(0x68d093)];
     
-}
-
-/*
-- (void)initView
-{
-    self.titleLabel.textColor = HTHexColor(0x555555);
-    
-    self.promptLabel.textColor = HTHexColor(0x2e2d2d);
-    
-    self.topLine.backgroundColor = HTHexColor(0x818282);
-    self.bottomLine.backgroundColor = HTHexColor(0x818282);
-    
-    [self.loginButton setTitleColor:[UIColor jt_globleTextColor] forState:UIControlStateNormal];
-    [self.regeditButton setTitleColor:[UIColor jt_globleTextColor] forState:UIControlStateNormal];
+    UIColor *color = [UIColor colorWithHEX:0xd5d5d5];
+    self.lineView1.backgroundColor = color;
+    self.lineView2.backgroundColor = color;
     
 }
- 
- - (void)viewWillLayoutSubviews
- {
- [super viewWillLayoutSubviews];
- 
- self.regeditButton.bottom = self.view.height;
- self.regeditButton.left = 0;
- 
- self.loginButton.bottom = self.view.height;
- self.loginButton.right = self.view.width;
- }
- 
- */
-
 
 //  重写左上角的关闭按钮
 - (void)addCloseBarbutton
@@ -121,7 +88,6 @@
     LoginViewController *loginVc = [[LoginViewController alloc] initWithNibName:@"LoginViewController"andViewType:LoginViewTypeLogin];
     
     [self.navigationController pushViewController:loginVc animated:YES];
-
 }
 
 - (IBAction)regeditButtonClicked:(UIButton *)button
@@ -132,54 +98,119 @@
     [self.navigationController pushViewController:loginVc animated:YES];
 }
 
+#pragma mark - QuickLoad
+
 - (IBAction)qqLoginClicked:(id)sender
 {
-    [self loginWithType:UMShareToQQ andBlock:^(UMSocialResponseEntity *response) {
-        
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
-            
-            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-            
-        }
-    }];
+    [self loginWithType:UMShareToQQ];
 }
 
 - (IBAction)weChatClicked:(id)sender
 {
-    [self loginWithType:UMShareToWechatSession andBlock:^(UMSocialResponseEntity *response) {
-        
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
-            
-            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-            
-        }
-    }];
+    [self loginWithType:UMShareToWechatSession];
 }
 
 - (IBAction)weBoClicked:(id)sender
 {
-    [self loginWithType:UMShareToSina andBlock:^(UMSocialResponseEntity *response) {
-        
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
-            
-            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-        
-        }
-    }];
+    [self loginWithType:UMShareToSina];
 }
 
-
-- (void)loginWithType:(NSString *)snsName andBlock:(UMSocialDataServiceCompletion)block
+- (void)loginWithType:(NSString *)snsName
 {
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:snsName];
     
-    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES, block);
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES, ^(UMSocialResponseEntity *response) {
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsName];
+            
+            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+            
+            UserLoginType loginType = -1;
+            
+            UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
+            userInfo.userID = snsAccount.accessToken;
+            userInfo.userToken = snsAccount.accessToken;
+            userInfo.userPhoto = snsAccount.iconURL;
+            
+            if ([snsName isEqualToString:UMShareToQQ]) {
+                loginType = UserLoginTypeQQ;
+            }else if ([snsName isEqualToString:UMShareToWechatSession]) {
+                loginType = UserLoginTypeWeChat;
+            }else {
+                loginType = UserLoginTypeWeibo;
+            }
+            
+            userInfo.userLoginType = loginType;
+            
+            /*不需要检测，直接登录，如果没有这个用户则需要注册*/
+            [self doLogin];
+            
+            //[self isUserExists:snsAccount.accessToken andLoginType:loginType];
+            
+        }
+    });
+}
+
+- (void)isUserExists:(NSString *)userToken andLoginType:(UserLoginType)loginType
+{
+    HTBaseRequest *request = [HTBaseRequest userRegisteCheck:loginType userId:userToken];
+    request.shouldShowErrorMsg = NO;
+    
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSInteger code = [[request.responseJSONObject stringIntForKey:@"code"] integerValue];
+        
+        UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
+        userInfo.userToken = userToken;
+        userInfo.userLoginType = loginType;
+        
+        if (code == Error_UserExists) {
+            //  用户已经存在, 直接登陆
+            [self doLogin];
+            
+        }else {
+            
+            userInfo.userID = userToken;
+            //  用户没有注册
+            [self doRegister];
+        }
+        
+    } failure:^(YTKBaseRequest *request) {
+        [self showHudErrorView:@"网络链接错误"];
+    }];
+}
+
+- (void)doRegister
+{
+    //  MARK:完善用户资料
+    EditInfoViewController *editor = [[EditInfoViewController alloc] init];
+    [self.navigationController pushViewController:editor animated:YES];
+}
+
+- (void)doLogin
+{
+    [self showHudWaitingView:PromptTypeWating];
+    
+    HTBaseRequest *request = [HTBaseRequest userLogin];
+    
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
+        NSInteger responseCode = [[request.responseJSONObject stringForKey:@"code"] integerValue];
+        NSDictionary *dict = [request.responseJSONObject dictionaryForKey:@"result"];
+        
+        if (responseCode == 200) {
+            //  登陆成功
+            [self showHudSuccessView:@"登录成功"];
+            
+            [[User sharedUser].userInfo parseWithDictionary:dict];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:__USER_LOGIN_SUCCESS object:nil];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        
+    }];
 }
 
 - (UIButton *)customButton

@@ -8,7 +8,6 @@
 
 #import "LoginViewController.h"
 #import "UIBarButtonExtern.h"
-#import <ShareSDK/ShareSDK.h>
 #import "SetNewPassViewController.h"
 #import <SMS_SDK/SMS_SDK.h>
 #import "NSString+IsValidate.h"
@@ -137,6 +136,7 @@ static NSString *userPhone;
     
     userInfo.userPhone = tel;
     userInfo.userPass = [pass toMD5];
+    userInfo.userLoginType = UserLoginTypePhone;
 }
 
 //  MARK:登陆按钮
@@ -241,11 +241,41 @@ static NSString *userPhone;
         return;
     }
     
-    //  保存用户注册手机号
-    self.userInfo.userPhone = tel;
-    
+    //  检查用户手机号有没有注册
+
     [self showHudWaitingView:@"请稍候..."];
-    [SMS_SDK getVerificationCodeBySMSWithPhone:tel zone:@"86" result:^(SMS_SDKError *error) {
+    [self isUserRegister:tel];
+
+   }
+
+- (void)isUserRegister:(NSString *)userId
+{
+    HTBaseRequest *request = [HTBaseRequest userRegisteCheck:UserLoginTypePhone userId:userId];
+    request.shouldShowErrorMsg = NO;
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
+        NSInteger code = [[request.responseJSONObject stringIntForKey:@"code"] integerValue];
+        if (code == 40006) {
+            [self removeHudInManaual];
+            [self showAlert:@"用户已经存在"];
+            
+        }else {
+            [self sendUserRegisterCode:userId];
+        }
+        
+    } failure:^(YTKBaseRequest *request) {
+        
+        [self showHudErrorView:@"网络连接失败"];
+    }];
+}
+
+//  发送短信验证码
+- (void)sendUserRegisterCode:(NSString *)telphone
+{
+    //  保存用户注册手机号
+    self.userInfo.userPhone = telphone;
+    
+    [SMS_SDK getVerificationCodeBySMSWithPhone:telphone zone:@"86" result:^(SMS_SDKError *error) {
         if (error) {
             [self showHudErrorView:HTSTR(@"获取失败,%@", error)];
         }else {
@@ -342,22 +372,5 @@ static NSString *userPhone;
         return @"找回密码";
     }
 }
-
-#pragma mark -
-#pragma mark 暂时不用的
-
-
-- (IBAction)weiBoButtonClicked:(id)sender
-{
-    
-    
-}
-
-- (IBAction)weChatButtonClicked:(id)sender
-{
-    
-    
-}
-
 
 @end

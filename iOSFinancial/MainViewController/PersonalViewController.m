@@ -554,7 +554,7 @@
 {
     [self showHudWaitingView:PromptTypeWating];
     
-    HTBaseRequest *request = [HTBaseRequest reportUserInGroup:self.userId andReportType:type];
+    HTBaseRequest *request = [HTBaseRequest reportUser:self.userId andReportType:type];
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dic = request.responseJSONObject;
         NSInteger code = [[dic stringIntForKey:@"code"] integerValue];

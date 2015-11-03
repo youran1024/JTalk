@@ -7,8 +7,12 @@
 //
 
 #import "HTBaseRequest.h"
+#import "UserInfoModel.h"
 
 @interface HTBaseRequest (Requests)
+
+//  用户注册检测
++ (HTBaseRequest *)userRegisteCheck:(UserLoginType)loginType userId:(NSString *)userId;
 
 + (HTBaseRequest *)userRegister;
 
@@ -58,16 +62,16 @@
 + (HTBaseRequest *)createGroupWithGroupName:(NSString *)groupName;
 
 //  获取群组信息
-+ (HTBaseRequest *)requestGroupInfo;
++ (HTBaseRequest *)requestGroupInfoById:(NSString *)groupId;
 
 //  获取群组内的成员列表
 + (HTBaseRequest *)groupUserList:(NSString *)groupId andPageIndex:(NSInteger)index;
 
 //  举报用户
-+ (HTBaseRequest *)reportUserInGroup:(NSString *)reportUserId andReportType:(NSInteger)type;
++ (HTBaseRequest *)reportUserInGroup:(NSString *)groupId andReporterId:(NSString *)reportUserId andReportType:(NSInteger)type;
 
 //  群外举报用户
-+ (HTBaseRequest *)reportUser:(NSString *)reportUserId anReportType:(NSInteger)type;
++ (HTBaseRequest *)reportUser:(NSString *)reportUserId andReportType:(NSInteger)type;
 
 
 /**

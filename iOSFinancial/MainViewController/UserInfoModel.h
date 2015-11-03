@@ -8,11 +8,14 @@
 
 #import "HTBaseModel.h"
 
+
 typedef NS_ENUM(NSInteger, UserLoginType) {
     UserLoginTypeWeChat = 0,
     UserLoginTypeWeibo = 1,
-    UserLoginTypePhone = 2
+    UserLoginTypePhone = 2,
+    UserLoginTypeQQ
 };
+
 
 @interface UserInfoModel : HTBaseModel <NSCopying>
 

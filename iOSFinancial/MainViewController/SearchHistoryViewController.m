@@ -38,6 +38,12 @@
     self.showRefreshHeaderView = YES;
     
     [self.refreshHeaderView beginRefreshing];
+    
+    __weakSelf;
+    [self.loadingStateView setTouchBlock:^(LoadingStateView *view, LoadingState state) {
+        [weakSelf requestUserSearchList];
+    }];
+    
 }
 
 - (void)willChangePromptView
@@ -64,6 +70,8 @@
             [self removeHudInManaual];
             
             if (result.count > 0) {
+                [self removeLoadingView];
+                
                 [self parseUserSearchList:result];
                 [self.tableView reloadData];
             }else {
@@ -74,6 +82,7 @@
     } failure:^(YTKBaseRequest *request) {
         [self endRefresh];
         [self showLoadingViewWithState:LoadingStateNetworkError];
+        [self showHudErrorView:PromptTypeError];
     }];
 }
 

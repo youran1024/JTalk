@@ -16,6 +16,10 @@
 #import <Bugly/CrashReporter.h>
 #import <SMS_SDK/SMS_SDK.h>
 #import "UMSocial.h"
+#import "UMSocialSinaHandler.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
+
 /* 融云 */
 #import <RongIMKit/RongIMKit.h>
 #import "NSString+BFExtension.h"
@@ -63,6 +67,7 @@
         [application registerUserNotificationSettings:settings];
         
     } else {
+        
         UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
         UIRemoteNotificationTypeAlert |
         UIRemoteNotificationTypeSound;
@@ -312,6 +317,11 @@
 - (void)initUmengShare
 {
     [UMSocialData setAppKey:UMengAppKey];
+    [UMSocialSinaHandler openSSOWithRedirectURL:_SinaShareSDKCallBackURL_];
+    
+    [UMSocialWechatHandler setWXAppId:WeChatAppKey appSecret:WeChatAppSecret url:_WeChatCallBackURL_];
+    
+    [UMSocialQQHandler setQQWithAppId:QQAppId appKey:QQAppKey url:_WeChatCallBackURL_];
     
 }
 

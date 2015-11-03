@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSFinancial/MainViewController/TalkListViewController.m"
-            timestampString = "462429897.295522"
+            timestampString = "468148232.894488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "-addContentViewController"
             landmarkType = "5">
          </BreakpointContent>
@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSFinancial/MainViewController/TalkListViewController.m"
-            timestampString = "462357887.323821"
+            timestampString = "468148232.894488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "-viewWillLayoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
@@ -195,22 +195,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iOSFinancial/Config/HTBaseRequest+Requests.m"
-            timestampString = "467796835.375861"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
-            landmarkName = "-addUserInfoEdit:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "iOSFinancial/Tool/Views/PublicView/LoadingStateView.m"
             timestampString = "464944499.018226"
             startingColumnNumber = "9223372036854775807"
@@ -240,17 +224,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iOSFinancial/MainViewController/RCDRCIMDataSource.m"
-            timestampString = "465966555.4901"
+            filePath = "iOSFinancial/AppDelegate.m"
+            timestampString = "468130030.565894"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "-getGroupInfoWithGroupId:completion:"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
+            landmarkName = "-onRCIMConnectionStatusChanged:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[AppDelegate onRCIMConnectionStatusChanged:]"
+                  moduleName = "JTalk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MrYang/Developer/JTalk/iOSFinancial/AppDelegate.m"
+                  timestampString = "468227024.825795"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "251"
+                  endingLineNumber = "251"
+                  offsetFromSymbolStart = "276">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__45-[AppDelegate onRCIMConnectionStatusChanged:]_block_invoke"
+                  moduleName = "JTalk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MrYang/Developer/JTalk/iOSFinancial/AppDelegate.m"
+                  timestampString = "468227024.826065"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "251"
+                  endingLineNumber = "251"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -259,29 +275,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iOSFinancial/Tool/Category/UIView+NoneDataView.m"
-            timestampString = "467015340.263121"
+            filePath = "iOSFinancial/AppDelegate.m"
+            timestampString = "468130039.459664"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "-loadingStateView"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iOSFinancial/LoginViewController/IndexLoginViewController.m"
-            timestampString = "467108196.315126"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "-loginButtonClicked:"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "-onRCIMConnectionStatusChanged:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

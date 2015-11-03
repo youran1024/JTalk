@@ -26,11 +26,12 @@
 #import "UIColor+Colors.h"
 #import "NSString+BFExtension.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "ServerHostConfig.h"
 
 
 /*--------------------------- 全局变量 ---------------------------*/
 
-#if DEBUG
+#ifdef __APP_TEST__
 
 #define __APP_CHANNEL  @"Test"
 
@@ -65,26 +66,48 @@ static NSString *const kApplicationEvaluateURL = @"itms-apps://ax.itunes.apple.c
 
 /*----------------第三方AppKey--------------------------*/
 
-#define SMSAppKey          @"9714408bd484"
-#define SMSAppSecret       @"a1f086c784801056efcc857e974119d4"
+#define SMSAppKey           @"9714408bd484"
+#define SMSAppSecret        @"a1f086c784801056efcc857e974119d4"
 
-#define UMengAppKey        @"55d1546167e58e1d7800528b"
+#define UMengAppKey         @"55d1546167e58e1d7800528b"
 
-#define QQAppId            @"1104804840"
-#define QQAppKey           @"o3l593XNcWzwST1H"
+#define QQAppId             @"1104804840"
+#define QQAppKey            @"o3l593XNcWzwST1H"
 
-#define WeChatAppKey       @"wx70dd3b62ba048f85"
-#define WeChatAppSecret    @"bc54cb2bcb26c1c997f77ebeba8d380f"
+#define WeChatAppKey        @"wx70dd3b62ba048f85"
+#define WeChatAppSecret     @"bc54cb2bcb26c1c997f77ebeba8d380f"
 
-#define SinaAppKey         @"4099131399"
-#define SinaAppSecret      @"0efe4a1ed5ef1bc14612fa8b7d9bf2a0"
+#define SinaAppKey          @"4099131399"
+#define SinaAppSecret       @"0efe4a1ed5ef1bc14612fa8b7d9bf2a0"
 
 #define __BUGLY_APP_ID      @"900006129"
 
-#define __RongYunKey_      @"vnroth0krcr4o"
+/*-------融云开发环境----------*/
+
+#ifdef __APP_TEST__
+
+#define __RongYunKey_       @"vnroth0krcr4o"
+
+#else
+
+#define __RongYunKey_       @"m7ua80gbufuwm"
+
+#endif
 
 
-/*-----------------NOTIFACTION DEFINE----------------------*/
+#define _SinaShareSDKCallBackURL_   @"http://sns.whalecloud.com/sina2/callback"
+#define _WeChatCallBackURL_         @"http://www.umeng.com/social"
+
+/*-----------------  错误码  ------------------------*/
+
+//  用户已经存在
+#define Error_UserExists    40006
+
+//  用户不存在
+#define Error_UserNotExists 40004
+
+
+/*----------------- NOTIFACTION DEFINE ----------------------*/
 
 //  登录成功
 #define __USER_LOGIN_SUCCESS          @"__userLoginSucess"

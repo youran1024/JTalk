@@ -12,7 +12,6 @@
 #import "XMBadgeView.h"
 #import "UIBarButtonExtern.h"
 #import "IndexLoginViewController.h"
-#import <ShareSDK/ShareSDK.h>
 #import "BaseTalkViewController.h"
 #import "TalkViewController.h"
 #import "RCDChatListCell.h"

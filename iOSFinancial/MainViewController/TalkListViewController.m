@@ -23,6 +23,8 @@
 
 @property (nonatomic, strong)   TalkViewController *talkViewController;
 
+
+
 @end
 
 @implementation TalkListViewController
@@ -218,6 +220,7 @@
 {
     [self.pageScrollView setContentOffset:CGPointMake(APPScreenWidth * index, 0) animated:YES];
 }
+
 
 - (NSString *)title
 {

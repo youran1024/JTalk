@@ -44,6 +44,12 @@
 
 @implementation EditInfoViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -89,7 +95,14 @@
         self.headerImageView.image = userInfo.userPhotoImage;
         
     }else {
-        self.headerImageView.image = HTImage(@"app_icon");
+        
+        if (userInfo.userPhoto.length) {
+            //  快速登录获得的头像
+            [self.headerImageView sd_setImageWithURL:HTURL(userInfo.userPhoto) placeholderImage:HTImage(@"app_icon")];
+            
+        }else {
+            self.headerImageView.image = HTImage(@"app_icon");
+        }
     }
     
     self.tableView.tableHeaderView = [self headerView];
@@ -128,7 +141,12 @@
         }
         
     } failure:^(YTKBaseRequest *request) {
-        [weakSelf showHudErrorView:PromptTypeError];
+        NSInteger code = request.responseStatusCode;
+        if (code == 404) {
+            [weakSelf showHudErrorView:@"404,资源未找到"];
+        }else {
+            [weakSelf showHudErrorView:PromptTypeError];
+        }
         
     }];
 }
@@ -185,10 +203,18 @@
             return;
         }
     }else {
-        if (!userInfo.userPhotoImage) {
-            [self showHudErrorView:@"请设置头像"];
-            return;
+        if (userInfo.userLoginType == UserLoginTypePhone) {
+            if (!userInfo.userPhotoImage) {
+                [self showHudErrorView:@"请设置头像"];
+                return;
+            }
+        }else {
+            if (!userInfo.userPhoto.length && !userInfo.userPhotoImage) {
+                [self showHudErrorView:@"请设置头像"];
+                return;
+            }
         }
+
     }
     
     if (isEmpty(userInfo.userName)) {

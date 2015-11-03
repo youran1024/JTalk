@@ -63,23 +63,19 @@
         return;
     
     //开发者调自己的服务器接口根据userID异步请求数据
-    HTBaseRequest *request = [HTBaseRequest requestGroupInfo];
+    HTBaseRequest *request = [HTBaseRequest requestGroupInfoById:groupId];
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         
         NSDictionary *dic = request.responseJSONObject;
         NSInteger code = [[dic stringForKey:@"code"] integerValue];
+        
         if (code == 200) {
-            NSArray * array = [dic arrayForKey:@"result"];
-            NSString *groupName;
-            for (NSDictionary *dic in array) {
-                NSString *group_id = [dic stringForKey:@"group_id"];
-                if ([group_id isEqualToString:groupId]) {
-                    groupName = [dic stringForKey:@"group_name"];
-                    break;
-                }
-            }
+            dic = [dic dictionaryForKey:@"result"];
+            NSString *groupName = [dic stringForKey:@"group_name"];
+            NSString *group_id = [dic stringForKey:@"group_id"];
+            NSString *photoURI = [dic stringForKey:@"group_image"];
             
-            RCGroup *group = [[RCGroup alloc] initWithGroupId:groupId groupName:groupName portraitUri:@"appIcon"];
+            RCGroup *group = [[RCGroup alloc] initWithGroupId:group_id groupName:groupName portraitUri:photoURI];
             
             completion(group);
             
@@ -89,7 +85,6 @@
         
         
     }];
-    
 }
  
 #pragma mark - RCIMUserInfoDataSource
@@ -109,6 +104,7 @@
     }];
     
 }
+
 - (void)cacheAllUserInfo:(void (^)())completion
 {
 

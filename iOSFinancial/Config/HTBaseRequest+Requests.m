@@ -15,6 +15,15 @@
 
 @implementation HTBaseRequest (Requests)
 
++ (HTBaseRequest *)userRegisteCheck:(UserLoginType)loginType userId:(NSString *)userId
+{
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/exists");
+    [request addPostValue:userId forKey:@"id"];
+    [request addPostValue:@(loginType) forKey:@"type"];
+    
+    return request;
+}
+
 /**
  *  用户信息
  */
@@ -35,7 +44,6 @@
     
     return request;
 }
-
 
 /**
  *  用户登录
@@ -65,7 +73,6 @@
     
     HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/get");
     [request addPostValue:getUserId forKey:@"get_user_id"];
-    [request addPostValue:__userInfoId forKey:@"user_id"];
     
     return request;
 }
@@ -94,7 +101,7 @@
 
 + (HTBaseRequest *)hotWordList
 {
-    HTBaseRequest *request = HTRequestWithURL(@"/words");
+    HTBaseRequest *request = HTRequestWithURL(@"/main/words");
     [request addPostValue:__userInfoId forKey:@"user_id"];
     [request addPostValue:@(0) forKey:@"type"];
     
@@ -109,7 +116,7 @@
 //  拉黑用户
 + (HTBaseRequest *)pullUserToBlackList:(NSString *)userId
 {
-    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/black/add");
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/black/add");
     [request addValue:userId forKey:@"black_user_id"];
     
     return request;
@@ -118,7 +125,7 @@
 //  查获黑名单列表 //get
 + (HTBaseRequest *)fetchBlackList
 {
-    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/black/list");
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/black/list");
     
     return request;
 }
@@ -126,7 +133,7 @@
 //  从用户拉黑列表移除
 + (HTBaseRequest *)removeUserFromBlackList:(NSString *)userId
 {
-    HTBaseRequest *request = HTRequestWithURL(@"/black/delete");
+    HTBaseRequest *request = HTRequestWithURL(@"/user/black/delete");
     [request addValue:userId forKey:@"black_user_id"];
 
     return request;
@@ -174,14 +181,15 @@
 + (HTBaseRequest *)createGroupWithGroupName:(NSString *)groupName
 {
     HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/group/create");
-    [request addGetValue:groupName forKey:@"word"];
+    [request addPostValue:groupName forKey:@"word"];
     
     return request;
 }
 
-+ (HTBaseRequest *)requestGroupInfo
++ (HTBaseRequest *)requestGroupInfoById:(NSString *)groupId
 {
-    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/group");
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/group/get");
+    [request addPostValue:groupId forKey:@"group_id"];
     
     return request;
 }
@@ -190,14 +198,14 @@
 + (HTBaseRequest *)groupUserList:(NSString *)groupId andPageIndex:(NSInteger)index
 {
     HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/group/user/list");
-    [request addGetValue:groupId forKey:@"group_id"];
-    [request addGetValue:@(index) forKey:@"page_index"];
+    [request addPostValue:groupId forKey:@"group_id"];
+    [request addPostValue:@(index) forKey:@"page_index"];
     
     return request;
 }
 
 //  群里举报用户
-+ (HTBaseRequest *)reportUserInGroup:(NSString *)reportUserId andReportType:(NSInteger)type
++ (HTBaseRequest *)reportUserInGroup:groupId andReporterId:(NSString *)reportUserId andReportType:(NSInteger)type
 {
     //  1.色情， 2.广告 3.骚扰 4.诈骗
     HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/group/user/report");
@@ -207,7 +215,7 @@
     return request;
 }
 
-+ (HTBaseRequest *)reportUser:(NSString *)reportUserId anReportType:(NSInteger)type
++ (HTBaseRequest *)reportUser:(NSString *)reportUserId andReportType:(NSInteger)type
 {
     HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/report");
     [request addPostValue:reportUserId forKey:@"report_user_id"];
@@ -261,14 +269,20 @@
     UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
     
     //  注册用户
-    [self addValue:userInfo.userPhone forKey:@"id"];
-    [self addValue:userInfo.userPass forKey:@"pwd"];
+    if (userInfo.userLoginType == UserLoginTypePhone) {
+        [self addValue:userInfo.userPhone forKey:@"id"];
+        [self addValue:userInfo.userPass forKey:@"pwd"];
+        
+    }else {
+        [self addValue:userInfo.userToken forKey:@"id"];
+    }
+    
     [self addValue:@(userInfo.userLoginType) forKey:@"type"];
 }
 
 - (HTBaseRequest *)addUserId
 {
-    [self addValue:__userInfoId forKey:@"user_id"];
+    [self addPostValue:__userInfoId forKey:@"user_id"];
     
     return self;
 }

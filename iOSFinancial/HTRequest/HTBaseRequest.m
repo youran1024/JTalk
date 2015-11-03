@@ -10,7 +10,7 @@
 #import "HTVersionManager.h"
 #import "AppDelegate.h"
 #import "HTBaseViewController.h"
-#import <AGCommon/NSString+Common.h>
+#import "NSString+Encrypto.h"
 
 
 @interface HTBaseRequest () <YTKRequestDelegate>
@@ -133,7 +133,7 @@
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]];
     
     [mutDic setValue:timeSp forKey:@"Timestamp"];
-    NSString *rsa1 = [HTSTR(@"%@%@%@", __RongYunKey_, randm, timeSp) sha1String];
+    NSString *rsa1 = [HTSTR(@"%@%@%@", __RongYunKey_, randm, timeSp) toSha1];
     
     [mutDic setValue:rsa1 forKey:@"Signature"];
     

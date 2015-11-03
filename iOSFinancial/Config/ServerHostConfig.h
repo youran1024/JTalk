@@ -19,13 +19,13 @@
 
 #if __APP_TEST__
 
-static NSString *jTalkServer         = @"api.xxxxtalk.com"; //@"http://182.92.78.106";
+static NSString *jTalkServer         = @"http://api.dev.xxxxtalk.com";
 static NSString *qiNiuCloudServerURL = @"http://7xlrvb.com2.z0.glb.qiniucdn.com";
 
 #else
 
 static NSString *jTalkServer         = @"http://api.xxxxtalk.com";
-static NSString *qiNiuCloudServerURL = @"http://7xlrvb.com2.z0.glb.qiniucdn.com";;
+static NSString *qiNiuCloudServerURL = @"http://7xlrvb.com2.z0.glb.qiniucdn.com";
 
 #endif
 
