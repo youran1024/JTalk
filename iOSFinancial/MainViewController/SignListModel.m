@@ -106,9 +106,10 @@ static NSString *kSignListShowSign = @"kSignListShowSign";
     self.signType = SignTagTypeNormal;
     
     NSMutableArray *mutArray = [NSMutableArray array];
-    for (NSString *title in array) {
+    for (NSDictionary *dic in array) {
         SignModel *model = [[SignModel alloc] init];
-        model.title = title;
+        model.title = [dic stringForKey:@"group_name"];
+        model.signId = [dic stringForKey:@"group_id"];
         [mutArray addObject:model];
     }
     

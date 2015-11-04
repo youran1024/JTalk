@@ -71,8 +71,8 @@ static NSString *const kApplicationEvaluateURL = @"itms-apps://ax.itunes.apple.c
 
 #define UMengAppKey         @"55d1546167e58e1d7800528b"
 
-#define QQAppId             @"1104804840"
-#define QQAppKey            @"o3l593XNcWzwST1H"
+#define QQAppId             @"1104732065"
+#define QQAppKey            @"TRR0zgqPXRtsVAZb"
 
 #define WeChatAppKey        @"wx70dd3b62ba048f85"
 #define WeChatAppSecret     @"bc54cb2bcb26c1c997f77ebeba8d380f"
@@ -82,11 +82,12 @@ static NSString *const kApplicationEvaluateURL = @"itms-apps://ax.itunes.apple.c
 
 #define __BUGLY_APP_ID      @"900006129"
 
+
 /*-------融云开发环境----------*/
 
 #ifdef __APP_TEST__
 
-#define __RongYunKey_       @"vnroth0krcr4o"
+#define __RongYunKey_      @"m7ua80gbufuwm" //测试环境的Key @"vnroth0krcr4o"
 
 #else
 

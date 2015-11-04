@@ -50,6 +50,7 @@ static NSString *kSignModelTagType = @"signModelTagType";
 {
     self.title = [dic stringForKey:@"word"];
     self.signTag = [dic stringForKey:@"type"];
+    self.signId = [dic stringForKey:@"word_id"];
     
     if ([self.signTag isEqualToString:@"热"]) {
         self.signTagType = SignTagTypeHot;

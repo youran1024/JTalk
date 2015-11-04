@@ -174,9 +174,8 @@
     }
     
     _signListModel = [[SignListModel alloc] init];
-    [_signListModel parseWithPersonalArray:[dict arrayForKey:@"user_words"]];
+    [_signListModel parseWithPersonalArray:[dict arrayForKey:@"groups"]];
     [_signListView refreWithModel:_signListModel];
-    
     
     self.userInfoModel.userID = _userId;
     [self.userInfoModel parseWithDictionaryWithOutSync:dict];

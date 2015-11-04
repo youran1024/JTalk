@@ -246,22 +246,22 @@
     UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
     if (isEdit) {
         //  修改用户资料
-        [self addValue:userInfo.userID forKey:@"user_id"];
+        [self addPostValue:userInfo.userID forKey:@"user_id"];
         
     }else {
         //  注册用户
         [self addRegeditUserInfo];
     }
 
-    [self addValue:userInfo.userName forKey:@"name"];
-    [self addValue:userInfo.userPrompt forKey:@"signature"];
+    [self addPostValue:userInfo.userName forKey:@"name"];
+    [self addPostValue:userInfo.userPrompt forKey:@"signature"];
     
     NSInteger sex = [userInfo.userSex isEqualToString:@"男"] ? 1 : 2;
-    [self addValue:@(sex) forKey:@"sex"];
-    [self addValue:userInfo.userLocation forKey:@"region"];
-    [self addValue:userInfo.userPhone forKey:@"phone"];
+    [self addPostValue:@(sex) forKey:@"sex"];
+    [self addPostValue:userInfo.userLocation forKey:@"region"];
+    [self addPostValue:userInfo.userPhone forKey:@"phone"];
     
-    [self addValue:[userInfo.userPhoto URLEncodedString] forKey:@"photo"];
+    [self addPostValue:[userInfo.userPhoto URLEncodedString] forKey:@"photo"];
 }
 
 - (void)addRegeditUserInfo
@@ -270,14 +270,16 @@
     
     //  注册用户
     if (userInfo.userLoginType == UserLoginTypePhone) {
-        [self addValue:userInfo.userPhone forKey:@"id"];
-        [self addValue:userInfo.userPass forKey:@"pwd"];
+        [self addPostValue:userInfo.userPhone forKey:@"id"];
+        [self addPostValue:userInfo.userPass forKey:@"pwd"];
         
     }else {
-        [self addValue:userInfo.userToken forKey:@"id"];
+        [self addPostValue:userInfo.userToken forKey:@"id"];
+        [self addPostValue:userInfo.userName forKey:@"name"];
+        [self addPostValue:userInfo.userPhoto forKey:@"photo"];
     }
     
-    [self addValue:@(userInfo.userLoginType) forKey:@"type"];
+    [self addPostValue:@(userInfo.userLoginType) forKey:@"type"];
 }
 
 - (HTBaseRequest *)addUserId

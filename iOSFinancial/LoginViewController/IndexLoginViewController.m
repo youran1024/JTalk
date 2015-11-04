@@ -133,6 +133,7 @@
             userInfo.userID = snsAccount.accessToken;
             userInfo.userToken = snsAccount.accessToken;
             userInfo.userPhoto = snsAccount.iconURL;
+            userInfo.userName = snsAccount.userName;
             
             if ([snsName isEqualToString:UMShareToQQ]) {
                 loginType = UserLoginTypeQQ;

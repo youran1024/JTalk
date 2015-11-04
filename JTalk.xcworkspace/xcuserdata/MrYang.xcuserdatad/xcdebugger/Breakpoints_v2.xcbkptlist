@@ -244,7 +244,7 @@
                   moduleName = "JTalk"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/MrYang/Developer/JTalk/iOSFinancial/AppDelegate.m"
-                  timestampString = "468227024.825795"
+                  timestampString = "468301558.366165"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "251"
@@ -259,7 +259,7 @@
                   moduleName = "JTalk"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/MrYang/Developer/JTalk/iOSFinancial/AppDelegate.m"
-                  timestampString = "468227024.826065"
+                  timestampString = "468301558.366373"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "251"
@@ -282,6 +282,22 @@
             startingLineNumber = "239"
             endingLineNumber = "239"
             landmarkName = "-onRCIMConnectionStatusChanged:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOSFinancial/MainViewController/SignListModel.m"
+            timestampString = "468300875.568651"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-parseWithDictionary:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

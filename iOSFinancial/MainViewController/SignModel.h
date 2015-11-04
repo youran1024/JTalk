@@ -16,7 +16,9 @@ typedef NS_ENUM(NSInteger, SignTagType) {
 
 @interface SignModel : HTBaseModel <NSCoding>
 
-@property (nonatomic, assign)   SignTagType signTagType;
+
+@property (nonatomic, assign) SignTagType signTagType;
+@property (nonatomic, copy) NSString *signId;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *signTag;
 

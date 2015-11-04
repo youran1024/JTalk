@@ -49,7 +49,7 @@
 			<string>Tecent</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tencent1104804840</string>
+				<string>tencent1104732065</string>
 			</array>
 		</dict>
 		<dict>
@@ -59,7 +59,17 @@
 			<string>QQ</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>QQ41D9FBE8</string>
+				<string>QQ41D8DFA1</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>JTalk</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>JTalk://xxxxTalk.com</string>
 			</array>
 		</dict>
 	</array>
