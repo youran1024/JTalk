@@ -120,13 +120,7 @@
     
     NSDictionary *user = [self.users objectAtIndex:indexPath.row];
     
-    cell.nameLabel.text = [user stringForKey:@"name"];
-    NSString *imageUrl = [user stringForKey:@"photo"];
-    [cell.headImageView sd_setImageWithURL:HTURL(imageUrl) placeholderImage:HTImage(@"app_icon")];
-    NSString *dateString = [user stringForKey:@"created"];
-    NSDate *date = [NSDate dateWithString:dateString format:nil];
-    
-    cell.promptLabel.text = [date labelString];
+    [cell parseWithDic:user];
     
     return cell;
 }

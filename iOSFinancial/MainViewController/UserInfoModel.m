@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 Mr.Yang. All rights reserved.
 //
 
+static NSString *userInfoAccesstoken = @"userInfoAccessToken";
 static NSString *userInfoId = @"userInfoId";
 static NSString *userInfoToken = @"userInfoToken";
 static NSString *userInfoName = @"userInfoName";
@@ -32,6 +33,7 @@ static NSString *userInfoPrompt = @"userInfoPrompt";
     model.userPhotoImage = self.userPhotoImage;
     model.userPhone = self.userPhone;
     model.userPrompt = self.userPrompt;
+    model.userAccessToken = self.userAccessToken;
     
     return model;
 }
@@ -80,6 +82,7 @@ static NSString *userInfoPrompt = @"userInfoPrompt";
 
 - (void)readSynchronizeData
 {
+    self.userAccessToken = [HTUserDefaults valueForKey:userInfoAccesstoken];
     self.userID = [HTUserDefaults valueForKey:userInfoId];
     self.userToken = [HTUserDefaults valueForKey:userInfoToken];
     self.userName = [HTUserDefaults valueForKey:userInfoName];
@@ -92,6 +95,7 @@ static NSString *userInfoPrompt = @"userInfoPrompt";
 
 - (void)synchronize
 {
+    [HTUserDefaults setValue:self.userAccessToken forKey:userInfoAccesstoken];
     [HTUserDefaults setValue:self.userID forKey:userInfoId];
     [HTUserDefaults setValue:self.userToken forKey:userInfoToken];
     [HTUserDefaults setValue:self.userName forKey:userInfoName];
@@ -120,6 +124,7 @@ static NSString *userInfoPrompt = @"userInfoPrompt";
 {
     self.userID = @"";
     self.userToken = @"";
+    self.userAccessToken = @"";
     self.userName = @"";
     self.userPhoto = @"";
     self.userPhone = @"";

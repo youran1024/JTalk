@@ -13,9 +13,11 @@
 #import "SearchHistoryViewController.h"
 #import "UserInfoCell.h"
 #import <RongIMKit/RongIMKit.h>
+#import "UserPullBackListViewController.h"
+#import "UMSocial.h"
 
 
-@interface SettingViewController ()
+@interface SettingViewController () <UMSocialUIDelegate>
 
 @property (nonatomic, strong)   UISwitch *switchButton;
 @property (nonatomic, strong)   UserInfoCell *infoCell;
@@ -83,7 +85,7 @@
         return 1;
     }
     
-    return 4;
+    return 6;
 }
 
 - (UserInfoCell *)infoCell
@@ -172,13 +174,23 @@
             //  评分
             [[UIApplication sharedApplication] openURL:HTURL(kApplicationEvaluateURL)];
 
-        }else {
+        }else if (indexPath.row == 3){
             //UMeng feedBack
             //[self presentViewController:[UMFeedback feedbackModalViewController] animated:YES completion:nil];
             
             ReedBackViewController *back = [[ReedBackViewController alloc] init];
             back.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:back animated:YES];
+            
+        }else if (indexPath.row == 4) {
+            //  邀请好友
+            [self inviteFriends];
+            
+        } else {
+            //  拉黑名单
+            UserPullBackListViewController *pullBlack = [[UserPullBackListViewController alloc] init];
+            pullBlack.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:pullBlack animated:YES];
         }
         
     }else {
@@ -196,6 +208,30 @@
             [self userLoginOut];
         }
     }];
+}
+
+#pragma mark - 
+#pragma mark 分享
+
+- (void)inviteFriends
+{
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:UMengAppKey
+                                      shareText:@"Hello,I am JTalk, http://xxxxTalk.com  -- test ^^"
+                                     shareImage:[UIImage imageNamed:@"personal1"]
+                                shareToSnsNames:@[UMShareToQQ, UMShareToWechatSession, UMShareToWechatTimeline,UMShareToSina]
+                                       delegate:self];
+}
+
+//实现回调方法（可选）：
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的微博平台名
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
 }
 
 //  MARK:用户退出按钮
@@ -216,6 +252,8 @@
             case 1: return @"新消息提醒";
             case 2: return @"去评分";
             case 3: return @"意见反馈";
+            case 4: return @"邀请好友";
+            case 5: return @"拉黑名单";
             default:
                 break;
         }

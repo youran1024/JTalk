@@ -81,21 +81,33 @@ static NSString *kSignListShowSign = @"kSignListShowSign";
 {
     self.title = [dic stringForKey:@"type_name"];
     self.signType = [[dic stringIntForKey:@"type"] integerValue];
-
-    NSArray *array = [dic arrayForKey:@"words"];
     
-    if (array.count == 0) {
-        return;
+    //  卧谈会
+    if (self.signType == 99) {
+        
+        self.signViewType = SignViewTypeImage;
+        self.signArray = [dic arrayForKey:@"words"];
+        
+        self.pageNum = -1;
+        
+    }else {
+        
+        self.signViewType = SignViewTypeLabel;
+        NSArray *array = [dic arrayForKey:@"words"];
+        
+        if (array.count == 0) {
+            return;
+        }
+        
+        NSMutableArray *mutArray = [NSMutableArray array];
+        for (id obj in array) {
+            SignModel *model = [[SignModel alloc] init];
+            [model parseWithDictionary:obj];
+            [mutArray addObject:model];
+        }
+        
+        self.signArray = [NSArray arrayWithArray:mutArray];
     }
-    
-    NSMutableArray *mutArray = [NSMutableArray array];
-    for (id obj in array) {
-        SignModel *model = [[SignModel alloc] init];
-        [model parseWithDictionary:obj];
-        [mutArray addObject:model];
-    }
-    
-    self.signArray = [NSArray arrayWithArray:mutArray];
     
     [self changeNextPage];
 }
@@ -119,13 +131,25 @@ static NSString *kSignListShowSign = @"kSignListShowSign";
 
 }
 
-- (NSInteger)changeNextPage
+- (NSInteger)changeImageNextPage
 {
+    _pageNum++;
     
-//    NSAssert(_signArray.count > self.pageSize, @"数组最小不能小过分页大小");
+    if (_pageNum == _signArray.count) {
+        _pageNum = 0;
+    }
+    
+    _showSignDic = [_signArray objectAtIndex:_pageNum];
+    
+    return _pageNum;
+}
+
+- (NSInteger)changeLabelNextPage
+{
+    //    NSAssert(_signArray.count > self.pageSize, @"数组最小不能小过分页大小");
     
     NSMutableArray *array = [NSMutableArray array];
-
+    
     //  这次分页的起始位置
     NSInteger index = (_pageNum - 1) * 6 % _signArray.count;
     
@@ -142,6 +166,15 @@ static NSString *kSignListShowSign = @"kSignListShowSign";
     _pageNum++;
     
     return _showSignList.count;
+}
+
+- (NSInteger)changeNextPage
+{
+    if (self.signViewType == SignViewTypeLabel) {
+        return [self changeLabelNextPage];
+    }
+    
+    return [self changeImageNextPage];
 }
 
 @end

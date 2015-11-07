@@ -133,8 +133,8 @@
 //  从用户拉黑列表移除
 + (HTBaseRequest *)removeUserFromBlackList:(NSString *)userId
 {
-    HTBaseRequest *request = HTRequestWithURL(@"/user/black/delete");
-    [request addValue:userId forKey:@"black_user_id"];
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/black/delete");
+    [request addPostValue:userId forKey:@"black_user_id"];
 
     return request;
 }
@@ -158,7 +158,7 @@
 //  查询个人检索词历史
 + (HTBaseRequest *)fetchUserSearchList
 {
-    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/searching");
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/group/list");
     
     return request;
 }
@@ -274,7 +274,7 @@
         [self addPostValue:userInfo.userPass forKey:@"pwd"];
         
     }else {
-        [self addPostValue:userInfo.userToken forKey:@"id"];
+        [self addPostValue:userInfo.userID forKey:@"id"];
         [self addPostValue:userInfo.userName forKey:@"name"];
         [self addPostValue:userInfo.userPhoto forKey:@"photo"];
     }

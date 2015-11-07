@@ -20,8 +20,14 @@ typedef NS_ENUM(NSInteger, UserLoginType) {
 @interface UserInfoModel : HTBaseModel <NSCopying>
 
 @property (nonatomic, copy)     NSString *userID;
+
+//  融云的Token
 @property (nonatomic, copy)     NSString *userToken;
+
+//  三方登陆的Token
+@property (nonatomic, copy)     NSString *userAccessToken;
 @property (nonatomic, copy)     NSString *userName;
+
 //  不做保存
 @property (nonatomic, copy)     NSString *userPass;
 @property (nonatomic, strong)   UIImage *userPhotoImage;

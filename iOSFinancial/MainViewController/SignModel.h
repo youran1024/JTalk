@@ -8,6 +8,10 @@
 
 #import "HTBaseModel.h"
 
+/*
+    单个标签的属性类
+ */
+
 typedef NS_ENUM(NSInteger, SignTagType) {
     SignTagTypeNormal,
     SignTagTypeNew,
@@ -15,7 +19,6 @@ typedef NS_ENUM(NSInteger, SignTagType) {
 };
 
 @interface SignModel : HTBaseModel <NSCoding>
-
 
 @property (nonatomic, assign) SignTagType signTagType;
 @property (nonatomic, copy) NSString *signId;

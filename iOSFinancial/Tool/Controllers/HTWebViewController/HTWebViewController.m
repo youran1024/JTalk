@@ -184,17 +184,8 @@
     
     _progressView.progressValue = .06f;
     
-    if (!_webView) {
-        _webView = [[HTWebView alloc] initWithFrame:self.view.bounds];
-        _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        _webView.delegate = self;
-        _webView.scalesPageToFit = YES;
-        _webView.backgroundColor = [UIColor jt_backgroudColor];
-        _webView.progressDelegate = self;
-        [self.view addSubview:_webView];
-    }
-    
-    [_webView addSubview:_progressView];
+    [self.view addSubview:self.webView];
+    [self.webView addSubview:_progressView];
     
     [self showLoadingViewWithState:LoadingStateLoading];
     
@@ -208,6 +199,20 @@
         urlRequest.allHTTPHeaderFields = [self addRequestHeader:urlRequest.allHTTPHeaderFields];
         [_webView loadRequest:urlRequest];
     }
+}
+
+- (HTWebView *)webView
+{
+    if (!_webView) {
+        _webView = [[HTWebView alloc] initWithFrame:self.view.bounds];
+        _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        _webView.delegate = self;
+        _webView.scalesPageToFit = YES;
+        _webView.backgroundColor = [UIColor jt_backgroudColor];
+        _webView.progressDelegate = self;
+    }
+
+    return _webView;
 }
 
 - (void)setHeaderObject:(id)anObject forKey:(id)aKey

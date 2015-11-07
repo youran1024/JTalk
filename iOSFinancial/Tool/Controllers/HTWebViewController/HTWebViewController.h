@@ -22,7 +22,7 @@
 @interface HTWebViewController : HTBaseViewController
 
 @property (nonatomic, strong)   NSURL *url;
-@property (nonatomic, strong, readonly) HTWebView *webView;
+@property (nonatomic, strong) HTWebView *webView;
 @property (nonatomic, strong)   HTWebProgressView *progressView;
 @property (nonatomic, copy) NSString *titleStr;
 

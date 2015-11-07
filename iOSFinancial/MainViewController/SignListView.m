@@ -19,10 +19,15 @@
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIButton *changeButton;
-
 @property (nonatomic, strong) NSArray *labels;
 @property (nonatomic, assign) NSInteger pageNum;
+
+//  卧谈会的图片
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UILabel *imageTitleLabel;
+
 @end
+
 
 @implementation SignListView
 
@@ -54,10 +59,102 @@
     [self createView];
 }
 
+- (void)createView
+{
+    NSArray *signs = _signListModel.showSignList;
+    
+    if ((signs.count == 0 && _signListModel.signViewType == SignViewTypeLabel) ||(
+        !_signListModel.showSignDic && _signListModel.signViewType == SignViewTypeImage)) {
+        LoadingStateView *view = [self showNoneDataView];
+        view.promptStr = @"";
+        
+        return;
+    }
+    
+    [self addSubview:self.titleLabel];
+    
+    _titleLabel.text = _signListModel.title;
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@(15.0f));
+        make.top.equalTo(@(15));
+        
+    }];
+    
+    [self addSubview:self.changeButton];
+    [self.changeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(@(-15.0f));
+        make.top.equalTo(@(12.0f));
+    }];
+    
+    if (self.signListModel.signViewType == SignViewTypeLabel) {
+        [self createSignListView];
+        
+    }else {
+        [self createSignImageView];
+    }
+}
+
+- (void)createSignImageView
+{
+    CGFloat signTop = 15 + 20 + 10.0f;
+    
+    [self addSubview:self.imageView];
+    self.imageView.frame = CGRectMake(15, signTop, APPScreenWidth - 60.0f, 138);
+    
+    [self.imageView addSubview:self.imageTitleLabel];
+    
+    UIView *maskView = [[UIView alloc] initWithFrame:CGRectMake(0, self.imageView.height - 26, self.imageView.width, 26)];
+    maskView.backgroundColor = [UIColor blackColor];
+    maskView.alpha = .7f;
+    [self.imageView addSubview:maskView];
+    
+    self.imageTitleLabel.frame = maskView.bounds;
+    self.imageTitleLabel.left = 10.0f;
+//    self.imageTitleLabel.centerY = maskView.centerY;
+    [maskView addSubview:self.imageTitleLabel];
+    
+    [self refreImageView];
+}
+
+- (void)refreImageView
+{
+    NSDictionary *dict = self.signListModel.showSignDic;
+    
+    NSString *imageUrl = [dict stringForKey:@"image_url"];
+    NSString *title = [dict stringForKey:@"title"];
+    [self.imageView sd_setImageWithURL:HTURL(imageUrl) placeholderImage:HTImage(@"nonedataImage")];
+    
+    self.imageTitleLabel.text = title;
+}
+
+- (UIImageView *)imageView
+{
+    if (!_imageView) {
+        _imageView = [[UIImageView alloc] init];
+        _imageView.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTaped)];
+        [_imageView addGestureRecognizer:tap];
+    }
+
+    return _imageView;
+}
+
+- (UILabel *)imageTitleLabel
+{
+    if (!_imageTitleLabel) {
+        _imageTitleLabel = [[UILabel alloc] init];
+        _imageTitleLabel.font = HTFont(15.0f);
+        _imageTitleLabel.textColor = [UIColor whiteColor];
+    }
+
+    return _imageTitleLabel;
+}
+
 - (void)createSignListView
 {
     NSArray *signs = _signListModel.showSignList;
-
+    
     int i = 0;
     CGFloat largeWith = (APPScreenWidth - 60.0f) / 2.0f;
     CGFloat signTop = 15 + 20 + 10.0f;
@@ -108,35 +205,6 @@
     }
 }
 
-- (void)createView
-{
-    NSArray *signs = _signListModel.showSignList;
-    
-    if (signs.count == 0) {
-        LoadingStateView *view = [self showNoneDataView];
-        view.promptStr = @"";
-        
-        return;
-    }
-    
-    [self addSubview:self.titleLabel];
-    
-    _titleLabel.text = _signListModel.title;
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(15.0f));
-        make.top.equalTo(@(15));
-        
-    }];
-    
-    [self addSubview:self.changeButton];
-    [self.changeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@(-15.0f));
-        make.top.equalTo(@(12.0f));
-    }];
-    
-    [self createSignListView];
-}
-
 - (void)signButtonClicked:(UIButton *)button
 {
     if (_signClickBlock) {
@@ -174,12 +242,42 @@
 - (void)changeButtonClicked:(UIButton *)button
 {
     [_signListModel changeNextPage];
-    [self refreshView];
+    
+    if (_signListModel.signViewType == SignViewTypeImage) {
+        [self refreImageView];
+        
+    }else {
+        [self refreshView];
+    }
     
     if (_changeAnotherBlock) {
         _changeAnotherBlock(button);
     }
 
+}
+
+- (void)imageViewTaped
+{
+    if (_signListViewTouchBlcok) {
+        _signListViewTouchBlcok(self.signListModel, self);
+    }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self];
+    
+    if (CGRectContainsPoint(self.bounds, point)) {
+        if (_signListViewTouchBlcok) {
+            _signListViewTouchBlcok(self.signListModel, self);
+        }
+    }
 }
 
 @end

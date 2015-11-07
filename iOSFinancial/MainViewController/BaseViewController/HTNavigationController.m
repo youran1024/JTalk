@@ -131,8 +131,6 @@
 {
     x = x > APPScreenWidth ? APPScreenWidth :x;
     x = x < 0 ? 0 : x ;
- 
-    NSLog(@"movingX:%.2f", x);
     
     CGRect frame = self.view.frame;
     frame.origin.x = x;

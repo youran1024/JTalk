@@ -37,7 +37,7 @@
 //  改变阴影线颜色
 - (void)changeShowdImageColor
 {
-    CGRect rect = CGRectMake(0, 0, APPScreenWidth, 1);
+    CGRect rect = CGRectMake(0, 0, APPScreenWidth, .5);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context,HTHexColor(0xefeeee).CGColor);

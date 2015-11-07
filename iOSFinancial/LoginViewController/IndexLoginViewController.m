@@ -130,8 +130,8 @@
             UserLoginType loginType = -1;
             
             UserInfoModel *userInfo = [User sharedUser].userInfoModelTmp;
-            userInfo.userID = snsAccount.accessToken;
-            userInfo.userToken = snsAccount.accessToken;
+            userInfo.userID = snsAccount.usid;
+            userInfo.userAccessToken = snsAccount.accessToken;
             userInfo.userPhoto = snsAccount.iconURL;
             userInfo.userName = snsAccount.userName;
             

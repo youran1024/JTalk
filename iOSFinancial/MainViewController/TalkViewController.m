@@ -18,9 +18,10 @@
 #import "HTWebViewController.h"
 #import "FunctionButton.h"
 #import "NSString+URLEncoding.h"
+#import "UMSocial.h"
 
 
-@interface TalkViewController () <UIActionSheetDelegate>
+@interface TalkViewController () <UIActionSheetDelegate, UMSocialUIDelegate>
 
 @property (nonatomic, strong)   LongTapUserView *tapUserView;
 //  半透明的黑色背景遮盖图
@@ -93,7 +94,7 @@
         
     }else {
         //  有语音
-        UIBarButtonItem *item2 = [UIBarButtonExtern buttonWithImage:@"info_personal" target:self andSelector:@selector(showPersonalInfoViewController)];
+        UIBarButtonItem *item2 = [UIBarButtonExtern buttonWithImage:@"Info_personal" target:self andSelector:@selector(showPersonalInfoViewController)];
         self.navigationItem.rightBarButtonItem = item2;
         
         [self.chatSessionInputBarControl setInputBarType:RCChatSessionInputBarControlDefaultType style:RC_CHAT_INPUT_BAR_STYLE_SWITCH_CONTAINER_EXTENTION];
@@ -141,7 +142,7 @@
             BOOL isOnLocal = [localValue boolValue];
             if (_isMindOpen != isOnLocal) {
                 self.isMindOpen = isOnLocal;
-                [self messageMindStateChanged:groupId andIsOpen:isOnLocal];
+                [self messageMindStateChanged:groupId andIsBlock:!isOnLocal];
             }
         }
         
@@ -154,12 +155,12 @@
     }];
 }
 
-- (void)messageMindStateChanged:(NSString *)groupId andIsOpen:(BOOL)isOpen
+- (void)messageMindStateChanged:(NSString *)groupId andIsBlock:(BOOL)isBlock
 {
     __weakSelf;
-    [[RCIMClient sharedRCIMClient] setConversationNotificationStatus:ConversationType_GROUP targetId:groupId isBlocked:isOpen success:^(RCConversationNotificationStatus nStatus) {
+    [[RCIMClient sharedRCIMClient] setConversationNotificationStatus:ConversationType_GROUP targetId:groupId isBlocked:isBlock success:^(RCConversationNotificationStatus nStatus) {
         NSLog(@"valueChanged:%ld", (long)nStatus);
-        [HTUserDefaults setValue:@(isOpen) forKey:groupId];
+        [HTUserDefaults setValue:@(!isBlock) forKey:groupId];
         [HTUserDefaults synchronize];
         
     } error:^(RCErrorCode status) {
@@ -199,13 +200,15 @@
 {
     self.functionView.bottom = self.view.top + 64;
     [self.view addSubview:self.functionView];
+    [self refreshMindButtonState];
     
     [UIView animateWithDuration:.65 delay:.0 usingSpringWithDamping:.7 initialSpringVelocity:.3 options:UIViewAnimationOptionCurveLinear animations:^{
         
         self.functionView.userInteractionEnabled = NO;
-        self.functionView.top = self.view.top + 64;
+        self.functionView.top = self.view.top + 60;
         
     } completion:^(BOOL finished) {
+        self.functionView.top = self.view.top + 60;
         self.functionView.userInteractionEnabled = YES;
     }];
 }
@@ -234,6 +237,7 @@
 
 - (void)showGroupJoinerListView
 {
+    // back bar button 占空间太大~
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     [self.navigationItem setBackBarButtonItem:backItem];
     
@@ -480,20 +484,25 @@
         _functionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, APPScreenWidth, 84)];
         _functionView.backgroundColor = HTHexColor(0x4bb174);
         
-        FunctionButton *searchButton = [self functionButton:@"搜索" andImage:@"talk_search"];
-        searchButton.left = 0;
+        CGFloat width = APPScreenWidth / 4.0f;
         
+        FunctionButton *searchButton = [self functionButton:@"搜索" andImage:@"talk_search"];
+        searchButton.width = width;
+        searchButton.left = 0;
         [_functionView addSubview:searchButton];
         
-        FunctionButton *mindButton = self.mindButton;
-        [self refreshMindButtonState];
-        mindButton.left = searchButton.right;
+        self.mindButton.left = searchButton.right;
+        self.mindButton.width = width;
+        [_functionView addSubview:self.mindButton];
         
-        [_functionView addSubview:mindButton];
+        FunctionButton *shareButton = [self functionButton:@"分享" andImage:@"share"];
+        shareButton.width = width;
+        shareButton.left = self.mindButton.right;
+        [_functionView addSubview:shareButton];
         
         FunctionButton *quiteButton = [self functionButton:@"退出" andImage:@"talk_quite"];
-        quiteButton.left = mindButton.right;
-        
+        quiteButton.width = width;
+        quiteButton.left = shareButton.right;
         [_functionView addSubview:quiteButton];
         
         __weakSelf;
@@ -506,11 +515,15 @@
             [weakSelf.navigationController pushViewController:controller animated:YES];
         }];
         
-        [mindButton setTouchBlock:^(FunctionButton *button) {
+        [self.mindButton setTouchBlock:^(FunctionButton *button) {
             weakSelf.isMindOpen = !weakSelf.isMindOpen;
             
-            [weakSelf messageMindStateChanged:[_groupTitle toMD5] andIsOpen:weakSelf.isMindOpen];
+            [weakSelf messageMindStateChanged:[weakSelf.groupTitle toMD5] andIsBlock:!weakSelf.isMindOpen];
             [weakSelf refreshMindButtonState];
+        }];
+        
+        [shareButton setTouchBlock:^(FunctionButton *button) {
+            [weakSelf inviteFriends];
         }];
         
         [quiteButton setTouchBlock:^(FunctionButton *button) {
@@ -556,6 +569,29 @@
     }];
 }
 
+
+#pragma mark - 
+#pragma mark Share Method
+- (void)inviteFriends
+{
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:UMengAppKey
+                                      shareText:@"Hello,I am JTalk, http://xxxxTalk.com  -- test ^^"
+                                     shareImage:[UIImage imageNamed:@"personal1"]
+                                shareToSnsNames:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToSina]
+                                       delegate:self];
+}
+
+//实现回调方法（可选）：
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的微博平台名
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
+}
 
 
 @end

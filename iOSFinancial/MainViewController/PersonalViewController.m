@@ -492,11 +492,24 @@
 
 - (void)showPullBackList
 {
-    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                             delegate:self
-                                                    cancelButtonTitle:@"取消"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"屏蔽并举报", @"屏蔽", nil];
+    UIActionSheet *choiceSheet = nil;
+    
+    if (self.balckType != 0) {
+        choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                  delegate:self
+                                         cancelButtonTitle:@"取消"
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:@"取消拉黑", nil];
+        
+    }else {
+        choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                  delegate:self
+                                         cancelButtonTitle:@"取消"
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:@"拉黑并举报", @"屏蔽", nil];
+    
+    }
+    
     choiceSheet.tag = pullBackListTag;
     
     [choiceSheet showInView:self.view];
@@ -509,20 +522,28 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (actionSheet.tag == pullBackListTag) {
-        if (buttonIndex == 0) {
-            //  屏蔽并举报
-            UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                                     delegate:self
-                                                            cancelButtonTitle:@"取消"
-                                                       destructiveButtonTitle:nil
-                                                            otherButtonTitles: @"淫秽色情", @"垃圾广告", @"骚扰", @"诈骗", nil];
-            choiceSheet.tag = pullBackResionTag;
+        
+        if (self.balckType == 0) {
             
-            [choiceSheet showInView:self.view];
-            
-        }else if (buttonIndex == 1){
-            //
-            [self pullToBlackList];
+            if (buttonIndex == 0) {
+                //  拉黑并举报
+                UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                         delegate:self
+                                                                cancelButtonTitle:@"取消"
+                                                           destructiveButtonTitle:nil
+                                                                otherButtonTitles: @"淫秽色情", @"垃圾广告", @"骚扰", @"诈骗", nil];
+                choiceSheet.tag = pullBackResionTag;
+                
+                [choiceSheet showInView:self.view];
+            }else if (buttonIndex == 1) {
+                // 拉黑
+                [self pullToBlackList];
+            }
+        
+        }else{
+            //  取消拉黑
+            [self removeUserFromePullBackList];
+
         }
         
     }else {
@@ -534,6 +555,28 @@
         }
     }
 }
+
+//  取消拉黑
+- (void)removeUserFromePullBackList
+{
+    HTBaseRequest *request = [HTBaseRequest removeUserFromBlackList:_userId];
+    
+    [self showHudWaitingView:PromptTypeLoading];
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
+        NSDictionary *dic = [request responseJSONObject];
+        NSInteger code = [[dic stringIntForKey:@"code"] integerValue];
+        
+        if (code == 200) {
+            [self removeHudInManaual];
+            
+            self.balckType = 0;
+            [self.tableView reloadData];
+        }
+        
+    }];
+}
+
 
 - (void)pullToBlackList
 {
@@ -578,8 +621,14 @@
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dic = request.responseJSONObject;
         NSInteger code = [[dic stringIntForKey:@"code"] integerValue];
-        if (code == 200 && prompt) {
-            [self showHudSuccessView:@"屏蔽成功"];
+        if (code == 200) {
+            
+            if (prompt) {
+                [self showHudSuccessView:@"屏蔽成功"];
+            }
+
+            self.balckType = 1;
+            [self.tableView reloadData];
         }
         
     } failure:^(YTKBaseRequest *request) {

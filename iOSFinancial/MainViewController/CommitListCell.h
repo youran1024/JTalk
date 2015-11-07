@@ -11,7 +11,11 @@
 @interface CommitListCell : HTBaseCell
 
 @property (nonatomic, weak) IBOutlet UIImageView *headImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *sexImageView;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *promptLabel;
+
+- (void)parseWithDic:(NSDictionary *)dic;
+- (void)parseWithDic_pullBlack:(NSDictionary *)dic;
 
 @end

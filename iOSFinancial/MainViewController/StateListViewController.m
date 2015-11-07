@@ -20,6 +20,7 @@
 #import "SystemConfig.h"
 #import "NSDate+BFExtension.h"
 #import <CoreText/CoreText.h>
+#import "DetailWebViewController.h"
 
 
 @interface StateListViewController () <UITextFieldDelegate>
@@ -201,6 +202,11 @@
     }
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.dataArray.count;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section != 0) {
@@ -216,11 +222,6 @@
     [backView addSubview:self.refreshLabel];
     
     return backView;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -267,12 +268,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"stateListCell";
-    HTBaseCell *cell = (HTBaseCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (!cell) {
-        cell = [[HTBaseCell alloc] init];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         cell.contentView.backgroundColor = [UIColor clearColor];
         cell.backgroundColor = [UIColor clearColor];
         
@@ -292,9 +293,12 @@
     
     SignListView *listView = (SignListView *)[cell viewWithTag:__SignListCellTag];
     
-    [listView refreWithModel:[self.dataArray objectAtIndex:indexPath.section]];
+    SignListModel *model = [self.dataArray objectAtIndex:indexPath.section];
+
+    [listView refreWithModel:model];
     
     __weakSelf;
+    
     //  单击了标签
     [listView setSignClickBlock:^(SignModel *model, UIButton *button) {
         //  创建聊天室
@@ -308,8 +312,35 @@
         
     }];
     
+    [listView setSignListViewTouchBlcok:^(SignListModel *model, SignListView *signView) {
+        [self showDetailWebViewController:model];
+    }];
+    
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+- (void)showDetailWebViewController:(SignListModel *)model
+{
+    if (model.signViewType == SignViewTypeImage) {
+        NSString *webUrl = [model.showSignDic stringForKey:@"web_url"];
+        NSString *title = [model.showSignDic stringForKey:@"title"];
+        
+        DetailWebViewController *detail = [[DetailWebViewController alloc] init];
+        detail.talkTopic = title;
+        detail.titleStr = HTSTR(@"[卧]%@", title);
+        detail.url = HTURL(webUrl);
+        detail.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:detail animated:YES];
+    }
+
+}
+
 
 //  MARK:创建并加入聊天室
 - (void)createGroupWithTitle:(NSString *)title
@@ -348,7 +379,8 @@
     [[RCIMClient sharedRCIMClient] joinGroup:groupId groupName:groupName success:^{
         [weakSelf removeHudInManaual];
         
-        [weakSelf recoderUserClickWord:groupName];
+        /* 接口已经停止使用 */
+        //[weakSelf recoderUserClickWord:groupName];
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             [weakSelf showTalkListViewController:groupName];

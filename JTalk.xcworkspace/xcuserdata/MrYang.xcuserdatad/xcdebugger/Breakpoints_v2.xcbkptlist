@@ -147,22 +147,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iOSFinancial/MainViewController/TalkSettingViewController.m"
-            timestampString = "464938126.237079"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "-switchValueChanged:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "iOSFinancial/MainViewController/BaseViewController/HTTabBarController.m"
             timestampString = "466051413.586967"
             startingColumnNumber = "9223372036854775807"
@@ -244,7 +228,7 @@
                   moduleName = "JTalk"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/MrYang/Developer/JTalk/iOSFinancial/AppDelegate.m"
-                  timestampString = "468301558.366165"
+                  timestampString = "468566286.38766"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "251"
@@ -259,7 +243,7 @@
                   moduleName = "JTalk"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/MrYang/Developer/JTalk/iOSFinancial/AppDelegate.m"
-                  timestampString = "468301558.366373"
+                  timestampString = "468566286.38788"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "251"

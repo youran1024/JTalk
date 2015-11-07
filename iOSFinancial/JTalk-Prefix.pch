@@ -27,6 +27,7 @@
 #import "NSString+BFExtension.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ServerHostConfig.h"
+#import "UIView+BorderColor.h"
 
 
 /*--------------------------- 全局变量 ---------------------------*/

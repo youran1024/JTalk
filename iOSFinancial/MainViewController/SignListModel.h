@@ -6,16 +6,26 @@
 //  Copyright (c) 2015年 Mr.Yang. All rights reserved.
 //
 
-#import "HTBaseModel.h"
+#import "SignBase.h"
 
-@interface SignListModel : HTBaseModel <NSCoding>
+@interface SignListModel : SignBase <NSCoding>
 
-@property (nonatomic, assign)   NSInteger signType;
+typedef NS_ENUM(NSInteger, SignViewType) {
+    //  标签列表
+    SignViewTypeLabel,
+    
+    //  卧谈会
+    SignViewTypeImage
+};
 
-@property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, assign) SignViewType signViewType;
 
 //  正在显示的标签数组
 @property (nonatomic, strong, readonly) NSArray *showSignList;
+
+//  正在显示的卧谈会
+@property (nonatomic, strong)   NSDictionary *showSignDic;
 
 //  个人页面的解析
 - (void)parseWithPersonalArray:(NSArray *)array;
