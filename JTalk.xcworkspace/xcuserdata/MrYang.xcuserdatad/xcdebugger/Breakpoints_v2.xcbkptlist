@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSFinancial/MainViewController/TalkListViewController.m"
-            timestampString = "468148232.894488"
+            timestampString = "468570624.649229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "-addContentViewController"
             landmarkType = "5">
          </BreakpointContent>
@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSFinancial/MainViewController/TalkListViewController.m"
-            timestampString = "468148232.894488"
+            timestampString = "468570624.649229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "-viewWillLayoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
@@ -228,7 +228,7 @@
                   moduleName = "JTalk"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/MrYang/Developer/JTalk/iOSFinancial/AppDelegate.m"
-                  timestampString = "468566286.38766"
+                  timestampString = "468729451.846877"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "251"
@@ -243,7 +243,7 @@
                   moduleName = "JTalk"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/MrYang/Developer/JTalk/iOSFinancial/AppDelegate.m"
-                  timestampString = "468566286.38788"
+                  timestampString = "468729451.847162"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "251"
@@ -282,6 +282,22 @@
             startingLineNumber = "82"
             endingLineNumber = "82"
             landmarkName = "-parseWithDictionary:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOSFinancial/MainViewController/PersonalViewController.m"
+            timestampString = "468569100.907181"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "524"
+            endingLineNumber = "524"
+            landmarkName = "-actionSheet:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

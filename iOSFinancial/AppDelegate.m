@@ -319,10 +319,9 @@
     [UMSocialData setAppKey:UMengAppKey];
     [UMSocialSinaHandler openSSOWithRedirectURL:_SinaShareSDKCallBackURL_];
     
-    [UMSocialWechatHandler setWXAppId:WeChatAppKey appSecret:WeChatAppSecret url:_WeChatCallBackURL_];
+    [UMSocialWechatHandler setWXAppId:WeChatAppKey appSecret:WeChatAppSecret url:_JTalkCallBackURL_];
     
-    [UMSocialQQHandler setQQWithAppId:QQAppId appKey:QQAppKey url:_WeChatCallBackURL_];
-    
+    [UMSocialQQHandler setQQWithAppId:QQAppId appKey:QQAppKey url:_JTalkCallBackURL_];
 }
 
 - (void)initUmengUserFeedBack

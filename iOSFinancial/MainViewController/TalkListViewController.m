@@ -66,7 +66,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidDissmiss) name:UIKeyboardDidHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidDissmiss) name:UIKeyboardWillHideNotification object:nil];
-    
 }
 
 - (void)keyboardDidDissmiss

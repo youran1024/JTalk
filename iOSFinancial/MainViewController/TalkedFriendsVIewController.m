@@ -317,7 +317,7 @@
 
 - (NSString *)title
 {
-    return @"聊天";
+    return @"消息";
 }
 
 @end

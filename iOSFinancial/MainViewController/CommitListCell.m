@@ -76,6 +76,8 @@
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
+    
     [self.nameLabel sizeToFit];
     
     self.sexImageView.left = self.nameLabel.right + 3;

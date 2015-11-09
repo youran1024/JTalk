@@ -64,6 +64,9 @@ static NSString *const kJTalkMessageStoreKey = @"kJTalkMessageStoreKey";
 //  评价地址
 static NSString *const kApplicationEvaluateURL = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%1041310652";
 
+//  网页下载链接
+//http://itunes.apple.com/cn/app/id1041310652
+
 
 /*----------------第三方AppKey--------------------------*/
 
@@ -96,9 +99,8 @@ static NSString *const kApplicationEvaluateURL = @"itms-apps://ax.itunes.apple.c
 
 #endif
 
-
 #define _SinaShareSDKCallBackURL_   @"http://sns.whalecloud.com/sina2/callback"
-#define _WeChatCallBackURL_         @"http://www.umeng.com/social"
+#define _JTalkCallBackURL_         @"http://www.xxxxTalk.com"
 
 /*-----------------  错误码  ------------------------*/
 

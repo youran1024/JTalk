@@ -542,8 +542,9 @@
         
         }else{
             //  取消拉黑
-            [self removeUserFromePullBackList];
-
+            if (buttonIndex == 0) {
+                [self removeUserFromePullBackList];
+            }
         }
         
     }else {
@@ -556,7 +557,7 @@
     }
 }
 
-//  取消拉黑
+//  MARK:取消拉黑
 - (void)removeUserFromePullBackList
 {
     HTBaseRequest *request = [HTBaseRequest removeUserFromBlackList:_userId];

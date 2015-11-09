@@ -242,11 +242,10 @@ static NSString *userPhone;
     }
     
     //  检查用户手机号有没有注册
-
     [self showHudWaitingView:@"请稍候..."];
     [self isUserRegister:tel];
-
-   }
+    
+}
 
 - (void)isUserRegister:(NSString *)userId
 {
@@ -255,7 +254,7 @@ static NSString *userPhone;
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         
         NSInteger code = [[request.responseJSONObject stringIntForKey:@"code"] integerValue];
-        if (code == 40006) {
+        if (code == 410001) {
             [self removeHudInManaual];
             [self showAlert:@"用户已经存在"];
             
