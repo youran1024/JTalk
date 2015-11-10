@@ -21,6 +21,7 @@
 #import "NSDate+BFExtension.h"
 #import <CoreText/CoreText.h>
 #import "DetailWebViewController.h"
+#import "SignDetailViewController.h"
 
 
 @interface StateListViewController () <UITextFieldDelegate>
@@ -312,11 +313,27 @@
         
     }];
     
+    //  单击了某个详细的分类
+    [listView setTitleTouchBlock:^(NSInteger signType, NSString *title) {
+        [weakSelf signLabelDetailViewController:signType andTitle:title];
+        
+    }];
+    
     [listView setSignListViewTouchBlcok:^(SignListModel *model, SignListView *signView) {
         [self showDetailWebViewController:model];
     }];
     
     return cell;
+}
+
+- (void)signLabelDetailViewController:(NSInteger)signType andTitle:(NSString *)title
+{
+    SignDetailViewController *detail = [[SignDetailViewController alloc] init];
+    detail.signType = signType;
+    detail.title = title;
+    
+    detail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

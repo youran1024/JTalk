@@ -110,6 +110,12 @@
     [self setDisplayUserNameInCell:YES];
     
     [self readMessageMindOpenState];
+    
+    __weakSelf;
+    [self.transparentView setTouchBlock:^{
+        [weakSelf removeFunctionView];
+    }];
+    
 }
 
 - (void)notifyUpdateUnreadMessageCount
@@ -196,8 +202,21 @@
     }
 }
 
+- (void)showAlphaView
+{
+    self.transparentView.frame = self.view.bounds;
+    [self.view addSubview:self.transparentView];
+}
+
+- (void)removeAlphaView
+{
+    [self.transparentView removeFromSuperview];
+}
+
 - (void)showFunctionView
 {
+    [self showAlphaView];
+    
     self.functionView.bottom = self.view.top + 64;
     [self.view addSubview:self.functionView];
     [self refreshMindButtonState];
@@ -215,6 +234,7 @@
 
 - (void)removeFunctionView
 {
+    [self removeAlphaView];
     [UIView animateWithDuration:.65 delay:.0 usingSpringWithDamping:.7 initialSpringVelocity:.3 options:UIViewAnimationOptionCurveLinear animations:^{
         
         self.functionView.userInteractionEnabled = NO;

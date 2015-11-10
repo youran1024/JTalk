@@ -10,9 +10,12 @@
 #import "TalkListViewController.h"
 #import "TalkViewController.h"
 
+
+
 @interface SearchHistoryViewController ()
 
 @property (nonatomic, strong)   NSMutableArray *dataArray;
+@property (nonatomic, assign)   NSInteger pageNumber;
 
 @end
 
@@ -36,6 +39,7 @@
     */
     
     self.showRefreshHeaderView = YES;
+    self.showRefreshFooterView = YES;
     
     [self.refreshHeaderView beginRefreshing];
     
@@ -53,12 +57,18 @@
 
 - (void)refreshViewBeginRefresh:(MJRefreshBaseView *)baseView
 {
+    if (baseView.refreshType == MJRefreshTypeLoadMore) {
+        _pageNumber++;
+    }else {
+        _pageNumber = 0;
+    }
+    
     [self requestUserSearchList];
 }
 
 - (void)requestUserSearchList
 {
-    HTBaseRequest *request = [HTBaseRequest fetchUserSearchList];
+    HTBaseRequest *request = [HTBaseRequest fetchUserSearchList:_pageNumber];
     
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         [self endRefresh];

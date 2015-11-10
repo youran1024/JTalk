@@ -15,7 +15,7 @@
 
 @interface SignListView ()
 
-@property (nonatomic, weak) SignListModel *signListModel;
+@property (nonatomic, weak)   SignListModel *signListModel;
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIButton *changeButton;
@@ -222,9 +222,19 @@
         _titleLabel.textColor = HTHexColor(0xc0c0c0);
         _titleLabel.font = HTFont(15);
         
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleLabelClicked)];
+        [_titleLabel addGestureRecognizer:tap];
+        _titleLabel.userInteractionEnabled = YES;
     }
 
     return _titleLabel;
+}
+
+- (void)titleLabelClicked
+{
+    if (_titleTouchBlock) {
+        _titleTouchBlock(self.signListModel.signType, self.titleLabel.text);
+    }
 }
 
 - (UIButton *)changeButton

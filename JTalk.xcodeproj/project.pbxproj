@@ -17,6 +17,7 @@
 		846EE5031B020C2700F0AE4E /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 846EE5021B020C2700F0AE4E /* libstdc++.dylib */; };
 		846EE5051B020C3200F0AE4E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 846EE5041B020C3200F0AE4E /* libz.dylib */; };
 		84D9FB051AE77DC500C5AAA8 /* AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9FB041AE77DC500C5AAA8 /* AttributedLabel.m */; };
+		92089EB71BF1995400B65EF2 /* SignDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92089EB61BF1995400B65EF2 /* SignDetailViewController.m */; };
 		920C09881B74975000A8CC30 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 920C09871B74975000A8CC30 /* QuartzCore.framework */; };
 		920C098A1B74977400A8CC30 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 920C09891B74977400A8CC30 /* libicucore.dylib */; };
 		920C098C1B74979000A8CC30 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 920C098B1B74979000A8CC30 /* JavaScriptCore.framework */; };
@@ -218,6 +219,8 @@
 		846EE5041B020C3200F0AE4E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		84D9FB031AE77DC500C5AAA8 /* AttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttributedLabel.h; path = ../../MainViewController/LogIn/AttributedLabel.h; sourceTree = "<group>"; };
 		84D9FB041AE77DC500C5AAA8 /* AttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttributedLabel.m; path = ../../MainViewController/LogIn/AttributedLabel.m; sourceTree = "<group>"; };
+		92089EB51BF1995400B65EF2 /* SignDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignDetailViewController.h; sourceTree = "<group>"; };
+		92089EB61BF1995400B65EF2 /* SignDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignDetailViewController.m; sourceTree = "<group>"; };
 		920C09871B74975000A8CC30 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		920C09891B74977400A8CC30 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		920C098B1B74979000A8CC30 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -604,6 +607,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92089EB81BF1995C00B65EF2 /* SignDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				92089EB51BF1995400B65EF2 /* SignDetailViewController.h */,
+				92089EB61BF1995400B65EF2 /* SignDetailViewController.m */,
+			);
+			name = SignDetailViewController;
+			sourceTree = "<group>";
+		};
 		920C09941B74C0A700A8CC30 /* SMS_SDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1135,6 +1147,7 @@
 		928C97491B8439EF00D4CDD5 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				92089EB81BF1995C00B65EF2 /* SignDetailViewController */,
 				92442FD61B82E184006E3290 /* TalkListViewController */,
 				9229E7551BE9FFA80035F9FE /* DetailWebViewController.h */,
 				9229E7561BE9FFA80035F9FE /* DetailWebViewController.m */,
@@ -1751,6 +1764,7 @@
 				92B47FFE1B6F611C00AF9A2D /* UIBarButtonItem+Badge.m in Sources */,
 				92442FDA1B82E216006E3290 /* TalkListToolBar.m in Sources */,
 				921DD2EB1AEB67AF0004251F /* NSDictionary+JSONEXtern.m in Sources */,
+				92089EB71BF1995400B65EF2 /* SignDetailViewController.m in Sources */,
 				9217C91F1BC6659500938A9E /* JTSImageInfo.m in Sources */,
 				92EB85481AC5132700A80E03 /* User.m in Sources */,
 				921DD2931AEB65C80004251F /* HTBaseView.m in Sources */,

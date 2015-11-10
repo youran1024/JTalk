@@ -170,7 +170,6 @@ static inline BOOL isEmpty(id thing) {
  *  if DEBUG > 1 LogError ie enabled
  */
 
-
 #if !defined(DEBUG) || DEBUG == 0
 #define NSLog(...) do {} while (0)
 #define DLog(fmt, ...)

@@ -13,6 +13,7 @@
 
 @interface SignListView : HTBaseView
 
+@property (nonatomic, copy) void(^titleTouchBlock)(NSInteger signType, NSString *title);
 @property (nonatomic, copy) void(^changeAnotherBlock)(UIButton *button);
 @property (nonatomic, copy) void(^signClickBlock)(SignModel *model, UIButton *button);
 @property (nonatomic, copy) void(^signListViewTouchBlcok)(SignListModel *model,  SignListView *signView);

@@ -13,8 +13,11 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic)  HTTabBarController *tabBarController;
+@property (strong, nonatomic, nonnull) UIWindow *window;
+@property (strong, nonatomic, nullable)  HTTabBarController *tabBarController;
+
+@property (strong, nonatomic, nonnull) UIView *windowView;
+@property (strong, nonatomic, nullable) NSArray <__kindof UIView *> *array;
 
 @end
 

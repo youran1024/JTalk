@@ -108,6 +108,15 @@
     return request;
 }
 
++ (HTBaseRequest *)hotWordDetailList:(NSInteger)type andPageNum:(NSInteger)pageNum
+{
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/main/words");
+    [request addPostValue:@(type) forKey:@"type"];
+    [request addPostValue:@(pageNum) forKey:@"page_index"];
+    
+    return request;
+}
+
 /**
  *    拉黑
  */
@@ -156,9 +165,10 @@
 }
 
 //  查询个人检索词历史
-+ (HTBaseRequest *)fetchUserSearchList
++ (HTBaseRequest *)fetchUserSearchList:(NSInteger)pageNum
 {
     HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/group/list");
+    [request addPostValue:@(pageNum) forKey:@"page_index"];
     
     return request;
 }

@@ -28,6 +28,10 @@
 //  首页热门词汇
 + (HTBaseRequest *)hotWordList;
 
+//  某一类的详细的词条
++ (HTBaseRequest *)hotWordDetailList:(NSInteger)type andPageNum:(NSInteger)pageNum;
+
+
 /**
  *    拉黑
  */
@@ -49,7 +53,7 @@
 + (HTBaseRequest *)recoderUserSearchWord:(NSString *)word;
 
 //  查询个人检索词历史
-+ (HTBaseRequest *)fetchUserSearchList;
++ (HTBaseRequest *)fetchUserSearchList:(NSInteger)pageNum;
 
 //  删除个人查询的词汇
 + (HTBaseRequest *)deleteUserSearchWord:(NSString *)word;
