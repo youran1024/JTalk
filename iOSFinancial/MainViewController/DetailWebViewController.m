@@ -9,6 +9,7 @@
 #import "DetailWebViewController.h"
 #import "TalkViewController.h"
 
+NSString *groupPeople;
 
 @interface DetailWebViewController ()
 
@@ -76,15 +77,15 @@
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dict = request.responseJSONObject;
         NSInteger code = [[dict stringIntForKey:@"code"] integerValue];
-        groupPeople = [dict stringForKey:@"group_user_count"];
+        dict = [dict dictionaryForKey:@"result"];
+        NSString *_groupPeople_ = [dict stringForKey:@"group_user_count"];
+        groupPeople = [_groupPeople_ copy];
         if (code == 200) {
             [weakSelf joinGroupByGroupId:[title toMD5] andGroupName:title];
         }
         
     }];
 }
-
-static NSString *groupPeople = nil;
 
 //  加入群组
 - (void)joinGroupByGroupId:(NSString *)groupId andGroupName:(NSString *)groupName

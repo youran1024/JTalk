@@ -38,7 +38,7 @@
     if (!_switchButton) {
         _switchButton = [[UISwitch alloc] init];
         [_switchButton addTarget:self action:@selector(switchButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        _switchButton.on = [RCIM sharedRCIM].disableMessageNotificaiton;
+        _switchButton.on = ![RCIM sharedRCIM].disableMessageNotificaiton;
     }
     
     return _switchButton;
@@ -47,12 +47,12 @@
 //  消息接收事件
 - (void)switchButtonClicked:(UISwitch*)switchbutton
 {
-    BOOL isOpen = switchbutton.on;
-    [HTUserDefaults setValue:@(isOpen) forKey:kJTalkMessageStoreKey];
+    BOOL isShutDown = !switchbutton.on;
+    [HTUserDefaults setValue:@(!isShutDown) forKey:kJTalkMessageStoreKey];
     [HTUserDefaults synchronize];
     
-    [RCIM sharedRCIM].disableMessageNotificaiton = isOpen;
-    [RCIM sharedRCIM].disableMessageAlertSound = isOpen;
+    [RCIM sharedRCIM].disableMessageNotificaiton = isShutDown;
+    [RCIM sharedRCIM].disableMessageAlertSound = isShutDown;
 }
 
 #pragma mark - 
@@ -135,7 +135,6 @@
     if (indexPath.section == 0 ||
         (indexPath.section == 1 && (indexPath.row != 1))) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
     }
     
     if (indexPath.section != 0) {
@@ -217,9 +216,9 @@
 {
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:UMengAppKey
-                                      shareText:@"Hello,I am JTalk, http://xxxxTalk.com  -- test ^^"
-                                     shareImage:[UIImage imageNamed:@"personal1"]
-                                shareToSnsNames:@[UMShareToQQ, UMShareToWechatSession, UMShareToWechatTimeline,UMShareToSina]
+                                      shareText:@"我在交言上聊得好嗨！来[交言]，发现此刻和你想法相同的人"
+                                     shareImage:HTImage(@"share_SoftWareShare_Image")
+                                shareToSnsNames:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToSina]
                                        delegate:self];
 }
 

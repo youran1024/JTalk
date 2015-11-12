@@ -134,6 +134,8 @@
 		92871C7D1AF75D6E002EC9F6 /* selectionGray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92871C781AF75D6E002EC9F6 /* selectionGray@2x.png */; };
 		92871C811AF75D85002EC9F6 /* HTBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92871C801AF75D85002EC9F6 /* HTBaseRequest.m */; };
 		92871C841AF761C3002EC9F6 /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92871C831AF761C3002EC9F6 /* LoginRequest.m */; };
+		928776531BF45FE300596AC1 /* PeopleCountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928776521BF45FE300596AC1 /* PeopleCountView.m */; };
+		928776551BF4601900596AC1 /* PeopleCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 928776541BF4601900596AC1 /* PeopleCountView.xib */; };
 		928860E61B297F810060502D /* UILabel+FlickerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 928860E51B297F810060502D /* UILabel+FlickerNumber.m */; };
 		928C97521B85834900D4CDD5 /* UIView+LabelSign.m in Sources */ = {isa = PBXBuildFile; fileRef = 928C97511B85834900D4CDD5 /* UIView+LabelSign.m */; };
 		9296B25C1B70C9680053B157 /* ShareTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9296B25B1B70C9670053B157 /* ShareTitleView.m */; };
@@ -438,6 +440,9 @@
 		92871C801AF75D85002EC9F6 /* HTBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTBaseRequest.m; sourceTree = "<group>"; };
 		92871C821AF761C3002EC9F6 /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = "<group>"; };
 		92871C831AF761C3002EC9F6 /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
+		928776511BF45FE300596AC1 /* PeopleCountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeopleCountView.h; sourceTree = "<group>"; };
+		928776521BF45FE300596AC1 /* PeopleCountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeopleCountView.m; sourceTree = "<group>"; };
+		928776541BF4601900596AC1 /* PeopleCountView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleCountView.xib; sourceTree = "<group>"; };
 		928860E41B297F810060502D /* UILabel+FlickerNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FlickerNumber.h"; sourceTree = "<group>"; };
 		928860E51B297F810060502D /* UILabel+FlickerNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FlickerNumber.m"; sourceTree = "<group>"; };
 		928C97501B85834900D4CDD5 /* UIView+LabelSign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LabelSign.h"; sourceTree = "<group>"; };
@@ -947,6 +952,9 @@
 				92442FEB1B82E76C006E3290 /* TalkViewController.m */,
 				92FCF5B31B9550C200644EEA /* TalkSettingViewController.h */,
 				92FCF5B41B9550C200644EEA /* TalkSettingViewController.m */,
+				928776511BF45FE300596AC1 /* PeopleCountView.h */,
+				928776521BF45FE300596AC1 /* PeopleCountView.m */,
+				928776541BF4601900596AC1 /* PeopleCountView.xib */,
 			);
 			name = TalkViewController;
 			sourceTree = "<group>";
@@ -1692,6 +1700,7 @@
 				9278486A1B7454D00021562A /* LoginViewController.xib in Resources */,
 				9296B25F1B70CBCC0053B157 /* ChatRoomCell.xib in Resources */,
 				92616C391BE20F77000E067A /* UMSCommentInputControlleriPad.xib in Resources */,
+				928776551BF4601900596AC1 /* PeopleCountView.xib in Resources */,
 				92442FDC1B82E22D006E3290 /* TalkListToolBar.xib in Resources */,
 				92871C7D1AF75D6E002EC9F6 /* selectionGray@2x.png in Resources */,
 				920C09991B74C0A700A8CC30 /* SMS_SDKLocalizable.strings in Resources */,
@@ -1785,6 +1794,7 @@
 				920C09931B74ABD600A8CC30 /* SetNewPassViewController.m in Sources */,
 				9217C9211BC6659500938A9E /* JTSSimpleImageDownloader.m in Sources */,
 				922CB5A81AC9789700C4A438 /* MJRefreshHeaderView.m in Sources */,
+				928776531BF45FE300596AC1 /* PeopleCountView.m in Sources */,
 				9275A64E1BEB494B0012B129 /* UserPullBackListViewController.m in Sources */,
 				921DD2F61AEB67AF0004251F /* UIView+Prompting.m in Sources */,
 				92F559111AE9F3F10074A52A /* HTVersionManager.m in Sources */,

@@ -73,7 +73,7 @@
             dic = [dic dictionaryForKey:@"result"];
             NSString *groupName = [dic stringForKey:@"group_name"];
             NSString *group_id = [dic stringForKey:@"group_id"];
-            NSString *photoURI = [dic stringForKey:@"group_image"];
+            NSString *photoURI = [dic stringForKey:@"group_icon"];
             
             RCGroup *group = [[RCGroup alloc] initWithGroupId:group_id groupName:groupName portraitUri:photoURI];
             

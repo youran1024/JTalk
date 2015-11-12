@@ -24,6 +24,8 @@
 #import "SignDetailViewController.h"
 
 
+NSString *groupPeople;
+
 @interface StateListViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong)   SearchBarView *searchBarView;
@@ -369,7 +371,8 @@
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dict = request.responseJSONObject;
         NSInteger code = [[dict stringIntForKey:@"code"] integerValue];
-        
+        dict = [dict dictionaryForKey:@"result"];
+        groupPeople = [dict stringForKey:@"group_user_count"];
         if (code == 200) {
             [weakSelf joinGroupByGroupId:[title toMD5] andGroupName:title];
         }
@@ -429,6 +432,7 @@
     conversationVC.userName = title;
     conversationVC.title = title; // 会话的 title。
     conversationVC.groupTitle = title;
+    conversationVC.groupPeople = groupPeople;
     
     conversationVC.hidesBottomBarWhenPushed = YES;
     

@@ -19,6 +19,7 @@
 #import "FunctionButton.h"
 #import "NSString+URLEncoding.h"
 #import "UMSocial.h"
+#import "PeopleCountView.h"
 
 
 @interface TalkViewController () <UIActionSheetDelegate, UMSocialUIDelegate>
@@ -33,6 +34,8 @@
 @property (nonatomic, strong)   FunctionButton *mindButton;
 //  消息提醒状态
 @property (nonatomic, assign)   BOOL isMindOpen;
+
+@property (nonatomic, strong)   PeopleCountView *countView;
 
 @end
 
@@ -115,12 +118,49 @@
     [self.transparentView setTouchBlock:^{
         [weakSelf removeFunctionView];
     }];
+    
+    if ([_groupPeople integerValue]) {
+        [self showGroupPeople];
+    }
+    
 }
 
 - (void)showGroupPeople
 {
+    [self.view addSubview:self.countView];
+    [self.view bringSubviewToFront:self.chatSessionInputBarControl];
+    self.countView.top = self.chatSessionInputBarControl.top;
+
+    self.countView.titleLabel.text = HTSTR(@"当前聊天室人数 %@人",self.groupPeople);
     
+    [UIView animateWithDuration:.65 delay:.0 usingSpringWithDamping:.7 initialSpringVelocity:.3 options:UIViewAnimationOptionCurveLinear animations:^{
+        
+        self.countView.bottom = self.chatSessionInputBarControl.top;
+        
+    } completion:^(BOOL finished) {
+        
+        [self performSelector:@selector(hideGroupPeople) withObject:nil afterDelay:1.5];
+        
+    }];
+}
+
+- (void)hideGroupPeople
+{
+    [UIView animateWithDuration:.25 animations:^{
+        self.countView.top = self.chatSessionInputBarControl.top;
+    } completion:^(BOOL finished) {
+        [self.countView removeFromSuperview];
+    }];
+}
+
+- (PeopleCountView *)countView
+{
+    if (!_countView) {
+        _countView = [PeopleCountView xibView];
+        _countView.width = APPScreenWidth;
+    }
     
+    return _countView;
 }
 
 - (void)notifyUpdateUnreadMessageCount
@@ -205,6 +245,11 @@
     }else {
         [self showFunctionView];
     }
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    
 }
 
 - (void)showAlphaView
@@ -538,6 +583,8 @@
             controller.url = HTURL(HTSTR(@"http://www.baidu.com/s?wd=%@", [_groupTitle URLEncodedString]));
             
             [weakSelf.navigationController pushViewController:controller animated:YES];
+            
+            [weakSelf removeFunctionView];
         }];
         
         [self.mindButton setTouchBlock:^(FunctionButton *button) {
@@ -545,10 +592,14 @@
             
             [weakSelf messageMindStateChanged:[weakSelf.groupTitle toMD5] andIsBlock:!weakSelf.isMindOpen];
             [weakSelf refreshMindButtonState];
+            
+            [weakSelf removeFunctionView];
         }];
         
         [shareButton setTouchBlock:^(FunctionButton *button) {
             [weakSelf inviteFriends];
+            
+            [weakSelf removeFunctionView];
         }];
         
         [quiteButton setTouchBlock:^(FunctionButton *button) {
@@ -594,15 +645,14 @@
     }];
 }
 
-
 #pragma mark - 
 #pragma mark Share Method
 - (void)inviteFriends
 {
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:UMengAppKey
-                                      shareText:@"Hello,I am JTalk, http://xxxxTalk.com  -- test ^^"
-                                     shareImage:[UIImage imageNamed:@"personal1"]
+                                      shareText:@"我在交言上聊得好嗨！来[交言]，发现此刻和你想法相同的人"
+                                     shareImage:HTImage(@"share_SoftWareShare_Image")
                                 shareToSnsNames:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToSina]
                                        delegate:self];
 }

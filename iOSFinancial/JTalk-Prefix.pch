@@ -100,7 +100,7 @@ static NSString *const kApplicationEvaluateURL = @"itms-apps://ax.itunes.apple.c
 #endif
 
 #define _SinaShareSDKCallBackURL_   @"http://sns.whalecloud.com/sina2/callback"
-#define _JTalkCallBackURL_         @"http://www.xxxxTalk.com"
+#define _JTalkCallBackURL_         @"http://mp.weixin.qq.com/s?__biz=MzA3NjQ2MTY3Mw==&mid=212282040&idx=1&sn=f79e38d0c86aca44f33a4684645a341a#rd"
 
 /*-----------------  错误码  ------------------------*/
 

@@ -49,7 +49,7 @@
     button.titleLabel.font = [UIFont systemFontOfSize:16.0f];
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [button setTitleShadowColor:[UIColor jt_lightBlackTextColor] forState:UIControlStateHighlighted];
+    [button setTitleShadowColor:[UIColor jt_backgroudColor] forState:UIControlStateHighlighted];
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     [button sizeToFit];
     
@@ -59,10 +59,11 @@
 + (UIBarButtonItem *)buttonWithImage:(NSString *)imageStr target:(id)target andSelector:(SEL)selector
 {
     UIImage *image = HTImage(imageStr);
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button sizeToFit];
     [button setImage:image forState:UIControlStateNormal];
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    [button sizeToFit];
     
     return [[UIBarButtonItem alloc] initWithCustomView:button];
 }

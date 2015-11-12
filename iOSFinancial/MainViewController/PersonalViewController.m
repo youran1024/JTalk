@@ -22,6 +22,8 @@
 
 #define __HeaderView_Height_Offset   100
 
+NSString *groupPeople;
+
 @interface PersonalViewController () <UIActionSheetDelegate>
 
 @property (nonatomic, strong)   UIImageView *backImageView;
@@ -353,7 +355,8 @@
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dict = request.responseJSONObject;
         NSInteger code = [[dict stringIntForKey:@"code"] integerValue];
-        
+        dict = [dict dictionaryForKey:@"result"];
+        groupPeople = [dict stringForKey:@"user_count"];
         if (code == 200) {
             [weakSelf joinGroupByGroupId:[title toMD5] andGroupName:title];
         }
@@ -400,9 +403,9 @@
     conversationVC.userName = title;
     conversationVC.title = title; // 会话的 title。
     conversationVC.groupTitle = title;
+    conversationVC.groupPeople = groupPeople;
     
     conversationVC.hidesBottomBarWhenPushed = YES;
-    
     [self.navigationController pushViewController:conversationVC animated:YES];
 }
 
