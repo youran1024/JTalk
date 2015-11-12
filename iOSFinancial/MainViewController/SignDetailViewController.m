@@ -119,11 +119,12 @@
     
     HTBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
-        cell = [HTBaseCell new];
+        cell = [[HTBaseCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
     }
     
     NSDictionary *dict = [self.signArray objectAtIndex:indexPath.row];
     cell.textLabel.text = [dict stringForKey:@"word"];
+    cell.detailTextLabel.text = HTSTR(@"%@人", [dict stringForKey:@"user_count"]);
     
     return cell;
 }
@@ -214,9 +215,7 @@
     conversationVC.groupTitle = title;
     
     conversationVC.hidesBottomBarWhenPushed = YES;
-    
     [self.navigationController pushViewController:conversationVC animated:YES];
 }
-
 
 @end

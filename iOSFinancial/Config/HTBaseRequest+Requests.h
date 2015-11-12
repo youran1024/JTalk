@@ -69,7 +69,7 @@
 + (HTBaseRequest *)requestGroupInfoById:(NSString *)groupId;
 
 //  获取群组内的成员列表
-+ (HTBaseRequest *)groupUserList:(NSString *)groupId andPageIndex:(NSInteger)index;
++ (HTBaseRequest *)groupUserList:(NSString *)groupId andPageIndex:(NSInteger)index andUserType:(NSInteger)userType;
 
 //  举报用户
 + (HTBaseRequest *)reportUserInGroup:(NSString *)groupId andReporterId:(NSString *)reportUserId andReportType:(NSInteger)type;

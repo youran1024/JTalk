@@ -115,6 +115,11 @@
     [self.transparentView setTouchBlock:^{
         [weakSelf removeFunctionView];
     }];
+}
+
+- (void)showGroupPeople
+{
+    
     
 }
 

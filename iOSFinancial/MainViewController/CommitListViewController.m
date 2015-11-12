@@ -11,12 +11,14 @@
 #import "PersonalViewController.h"
 #import "NSString+BFExtension.h"
 #import "NSDate+BFExtension.h"
+#import "UIBarButtonExtern.h"
 
 
-@interface CommitListViewController ()
+@interface CommitListViewController () <UIActionSheetDelegate>
 
 @property (nonatomic, strong)   NSMutableArray *users;
 @property (nonatomic, assign)   NSInteger pageIndex;
+@property (nonatomic, assign)   NSInteger userType;
 
 @end
 
@@ -51,9 +53,12 @@
 {
     [super viewDidLoad];
     
-    self.showRefreshHeaderView = YES;
-    self.showRefreshFooterView = YES;
+    UIBarButtonItem *item2 = [UIBarButtonExtern buttonWithImage:@"Info_personal" target:self andSelector:@selector(showActionSheet)];
+    self.navigationItem.rightBarButtonItem = item2;
     
+    self.showRefreshHeaderView = YES;
+    
+    _userType = 0;
     _pageIndex = 0;
     
     [self requestTalkListPeople];
@@ -65,9 +70,10 @@
     [self requestTalkListPeople];
 }
 
+//  1 男 2 女
 - (void)requestTalkListPeople
 {
-    HTBaseRequest *request = [HTBaseRequest groupUserList:[_groupTitle toMD5] andPageIndex:_pageIndex];
+    HTBaseRequest *request = [HTBaseRequest groupUserList:[_groupTitle toMD5] andPageIndex:_pageIndex andUserType:_userType];
     
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         [self removeHudInManaual];
@@ -86,7 +92,6 @@
         [self endRefresh];
         
     }];
-    
 }
 
 - (void)handleRequestSuccess:(NSArray *)array clearOrAppend:(BOOL)clear
@@ -96,6 +101,10 @@
     }
     
     [self.users addObjectsFromArray:array];
+    
+    if (self.users.count > 20) {
+        self.showRefreshFooterView = YES;
+    }
     
 }
 
@@ -135,5 +144,27 @@
     [self.navigationController pushViewController:personal animated:YES];
 }
 
+#pragma mark - 
+#pragma mark ActionSheet
+- (void)showActionSheet
+{
+    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"全部", @"男", @"女", nil];
+    
+    [choiceSheet showInView:self.view];
+    
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != 3) {
+        _pageIndex = 0;
+        _userType = buttonIndex;
+        [self requestTalkListPeople];
+    }
+}
 
 @end

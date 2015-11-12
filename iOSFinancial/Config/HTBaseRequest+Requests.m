@@ -205,9 +205,15 @@
 }
 
 // 群成员列表
-+ (HTBaseRequest *)groupUserList:(NSString *)groupId andPageIndex:(NSInteger)index
++ (HTBaseRequest *)groupUserList:(NSString *)groupId andPageIndex:(NSInteger)index andUserType:(NSInteger)userType
 {
+    //  2 女， 1 男， 其它全部
     HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/group/user/list");
+    
+    if (userType == 1 || userType == 2) {
+        [request addPostValue:@(userType) forKey:@"sex"];
+    }
+    
     [request addPostValue:groupId forKey:@"group_id"];
     [request addPostValue:@(index) forKey:@"page_index"];
     

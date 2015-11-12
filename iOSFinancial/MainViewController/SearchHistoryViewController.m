@@ -121,7 +121,8 @@
         cell = [[HTBaseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    cell.textLabel.text = [self.dataArray objectAtIndex:indexPath.row];
+    NSDictionary *dic = [self.dataArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [dic stringIntForKey:@"group_name"];
     
     return cell;
 }

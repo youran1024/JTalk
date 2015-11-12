@@ -23,5 +23,8 @@
 //  聊天群组标题
 @property (nonatomic, copy) NSString *groupTitle;
 
+//  群组人数
+@property (nonatomic, copy) NSString *groupPeople;
+
 
 @end
