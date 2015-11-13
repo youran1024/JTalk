@@ -12,7 +12,6 @@
 #import "HTVersionManager.h"
 #import "UIAlertView+RWBlock.h"
 
-#import "UMessage.h"
 #import <Bugly/CrashReporter.h>
 #import <SMS_SDK/SMS_SDK.h>
 #import "UMSocial.h"
@@ -390,27 +389,5 @@
     
     [self rongYunConnection];
 }
-
-//  MARK:UMeng Key and setting
-- (void)initUmengPush:(NSDictionary *)launchOptions
-{
-    //set AppKey and AppSecret
-    [UMessage startWithAppkey:@"54f52161fd98c52c280001a0" launchOptions:launchOptions];
-    [UMessage setAutoAlert:NO];
-    
-    if(UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")){
-        
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
-        [UMessage registerRemoteNotificationAndUserNotificationSettings:settings];
-        
-    }else {
-        
-        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
-         |UIRemoteNotificationTypeSound
-         |UIRemoteNotificationTypeAlert];
-    }
-    
-}
-
 
 @end

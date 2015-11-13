@@ -628,7 +628,7 @@ NSString *groupPeople;
         if (code == 200) {
             
             if (prompt) {
-                [self showHudSuccessView:@"屏蔽成功"];
+                [self showHudSuccessView:@"拉黑成功"];
             }
 
             self.balckType = 1;
@@ -638,7 +638,7 @@ NSString *groupPeople;
     } failure:^(YTKBaseRequest *request) {
         
         if (prompt) {
-            [self showHudErrorView:@"屏蔽失败"];
+            [self showHudErrorView:@"拉黑失败"];
         }
         
     }];

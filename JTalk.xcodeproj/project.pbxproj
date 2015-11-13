@@ -172,7 +172,6 @@
 		92D2A2911AC3DF7B00C9A4AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92D2A2901AC3DF7B00C9A4AE /* Images.xcassets */; };
 		92DA92761B3C050000AACF1D /* UIView+Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = 92DA92751B3C050000AACF1D /* UIView+Layer.m */; };
 		92DA92791B3C164800AACF1D /* UIView+NoneDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92DA92781B3C164800AACF1D /* UIView+NoneDataView.m */; };
-		92DA92E21B414ED200AACF1D /* libUMessage_Sdk_1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DA92E01B414ED200AACF1D /* libUMessage_Sdk_1.1.0.a */; };
 		92DA92E51B42511900AACF1D /* UIViewController+ViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = 92DA92E41B42511900AACF1D /* UIViewController+ViewControllers.m */; };
 		92DDD2751BA6DA5700FB68FF /* LongTapUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92DDD2741BA6DA5700FB68FF /* LongTapUserView.m */; };
 		92DDD2771BA6DA6700FB68FF /* LongTapUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92DDD2761BA6DA6700FB68FF /* LongTapUserView.xib */; };
@@ -507,8 +506,6 @@
 		92DA92751B3C050000AACF1D /* UIView+Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layer.m"; sourceTree = "<group>"; };
 		92DA92771B3C164800AACF1D /* UIView+NoneDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NoneDataView.h"; sourceTree = "<group>"; };
 		92DA92781B3C164800AACF1D /* UIView+NoneDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NoneDataView.m"; sourceTree = "<group>"; };
-		92DA92E01B414ED200AACF1D /* libUMessage_Sdk_1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.1.0.a; sourceTree = "<group>"; };
-		92DA92E11B414ED200AACF1D /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		92DA92E31B42511900AACF1D /* UIViewController+ViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ViewControllers.h"; sourceTree = "<group>"; };
 		92DA92E41B42511900AACF1D /* UIViewController+ViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ViewControllers.m"; sourceTree = "<group>"; };
 		92DDD2731BA6DA5700FB68FF /* LongTapUserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongTapUserView.h; sourceTree = "<group>"; };
@@ -602,7 +599,6 @@
 				846EE4FB1B020BF600F0AE4E /* SystemConfiguration.framework in Frameworks */,
 				846EE4F91B020BED00F0AE4E /* libiconv.dylib in Frameworks */,
 				846EE4F71B020BE100F0AE4E /* Security.framework in Frameworks */,
-				92DA92E21B414ED200AACF1D /* libUMessage_Sdk_1.1.0.a in Frameworks */,
 				92616C351BE20F77000E067A /* libUMSocial_Sdk_4.3.a in Frameworks */,
 				92CD091A1B147232005F9F81 /* Bugly.framework in Frameworks */,
 				4AB285645092B631D67316E3 /* libPods.a in Frameworks */,
@@ -1420,7 +1416,6 @@
 				92FCF5961B9405AB00644EEA /* FMDB */,
 				9211AF721B7AF74D00B7FD9F /* VPImageCropper */,
 				920C09941B74C0A700A8CC30 /* SMS_SDK */,
-				92DA92DF1B414ED200AACF1D /* UMessage_Sdk_1.1.0 */,
 				921DD2F71AEB68070004251F /* CustomIOS7AlertView.h */,
 				921DD2F81AEB68070004251F /* CustomIOS7AlertView.m */,
 				922CB5991AC9789700C4A438 /* MJRefresh */,
@@ -1447,15 +1442,6 @@
 			);
 			name = MainController;
 			path = MainViewController;
-			sourceTree = "<group>";
-		};
-		92DA92DF1B414ED200AACF1D /* UMessage_Sdk_1.1.0 */ = {
-			isa = PBXGroup;
-			children = (
-				92DA92E01B414ED200AACF1D /* libUMessage_Sdk_1.1.0.a */,
-				92DA92E11B414ED200AACF1D /* UMessage.h */,
-			);
-			path = UMessage_Sdk_1.1.0;
 			sourceTree = "<group>";
 		};
 		92DDD2721BA6DA3200FB68FF /* View */ = {
@@ -2011,32 +1997,21 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Connection",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Core",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/QQConnectSDK",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/UI",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/SMS_SDK",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMSocial_Sdk_4.3/TencentOpenAPI",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/iOSFinancial/JTalk-Prefix.pch";
 				INFOPLIST_FILE = iOSFinancial/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_4.2.2",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/Wechat",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/Sina",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMessage_Sdk_1.1.0",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/SinaWeiboSDK",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMSocial_Sdk_4.3",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMSocial_Sdk_4.3/Sina",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMSocial_Sdk_4.3/Wechat",
@@ -2061,29 +2036,17 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Connection",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Core",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/QQConnectSDK",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/UI",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/SMS_SDK",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMSocial_Sdk_4.3/TencentOpenAPI",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/iOSFinancial/JTalk-Prefix.pch";
 				INFOPLIST_FILE = iOSFinancial/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_4.2.2",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/Wechat",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMengShare/UMSocial_Sdk_Extra_Frameworks/Sina",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMessage_Sdk_1.1.0",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/SinaWeiboSDK",
-					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMSocial_Sdk_4.3",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMSocial_Sdk_4.3/Sina",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMSocial_Sdk_4.3/Wechat",

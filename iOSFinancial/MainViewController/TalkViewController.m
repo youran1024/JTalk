@@ -432,7 +432,7 @@
                                                              delegate:self
                                                     cancelButtonTitle:@"取消"
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"屏蔽并举报", @"屏蔽", nil];
+                                                    otherButtonTitles:@"拉黑并举报", @"拉黑", nil];
     choiceSheet.tag = pullBackListTag;
     
     [choiceSheet showInView:self.view];
@@ -534,13 +534,13 @@
         NSDictionary *dic = request.responseJSONObject;
         NSInteger code = [[dic stringIntForKey:@"code"] integerValue];
         if (code == 200 && prompt) {
-            [self.view showHudSuccessView:@"屏蔽成功"];
+            [self.view showHudSuccessView:@"拉黑成功"];
         }
         
     } failure:^(YTKBaseRequest *request) {
         
         if (prompt) {
-            [self.view showHudErrorView:@"屏蔽失败"];
+            [self.view showHudErrorView:@"拉黑失败"];
         }
         
     }];
