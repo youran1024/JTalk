@@ -19,6 +19,7 @@
 #import "PersonalViewController.h"
 #import "HTBaseRequest+Requests.h"
 #import "UIView+NoneDataView.h"
+#import <MobClick.h>
 
 
 @interface TalkedFriendsVIewController ()
@@ -29,11 +30,21 @@
 
 @implementation TalkedFriendsVIewController
 
+#define __selfClassName__   NSStringFromClass([self class])
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     [self notifyUpdateUnreadMessageCount];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // 页面关闭时间统计
+    [MobClick endLogPageView:__selfClassName__];
 }
 
 - (void)showEmptyConversationView
@@ -51,22 +62,17 @@
     
     [super updateConnectionStatusOnNavigatorBar];
     
+    // 页面开启时间统计
+    [MobClick beginLogPageView:__selfClassName__];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-//    UIView *view = [self.view showNoneDataView];
-//    self.emptyConversationView = view;
-//    [view removeFromSuperview];
-//    
-//    [self resetConversationListBackgroundViewIfNeeded];
-    
     [self setConversationAvatarStyle:RC_USER_AVATAR_CYCLE];
     
     self.conversationListTableView.tableFooterView = [[UIView alloc] init];
-    
     
     NSArray *dataSource = [[RCIMClient sharedRCIMClient] getConversationList:@[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_APPSERVICE), @(ConversationType_PUBLICSERVICE),@(ConversationType_GROUP),@(ConversationType_SYSTEM)]];
     for (RCConversation *obj in dataSource) {

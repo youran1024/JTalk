@@ -36,6 +36,9 @@
  *    拉黑
  */
 
+//  实时搜索
++ (HTBaseRequest *)userSearchOnTime:(NSString *)word;
+
 //  拉黑用户
 + (HTBaseRequest *)pullUserToBlackList:(NSString *)userId;
 

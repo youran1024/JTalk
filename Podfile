@@ -12,6 +12,7 @@ pod 'MJExtension'
 
 #  友盟统计 无IDFA版SDK
 pod 'UMengAnalytics-NO-IDFA'
+
 #   融云
 pod 'RongCloudIMKit'
 

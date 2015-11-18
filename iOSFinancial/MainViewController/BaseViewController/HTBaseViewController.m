@@ -708,33 +708,30 @@ typedef void (^AlertViewBlock)(UIAlertView *alertView, NSInteger buttonIndex);
     return UIInterfaceOrientationMaskPortrait;
 }
 
+
 #pragma mark -
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    //NSLog(@"%@ view will appear", NSStringFromClass([self class]));
-    
-    // 页面开启时间统计
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
+#define __selfClassName__   NSStringFromClass([self class])
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    //NSLog(@"%@ view did appear", NSStringFromClass([self class]));
+    // 页面开启时间统计
+    [MobClick beginLogPageView:__selfClassName__];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    //NSLog(@"%@ view will disappear", NSStringFromClass([self class]));
-    
     // 页面关闭时间统计
-    [MobClick endLogPageView:NSStringFromClass([self class])];
+    [MobClick endLogPageView:__selfClassName__];
+}
+
+- (NSString *)selfClassName
+{
+    return NSStringFromClass([self class]);
 }
 
 //- (NSString *)getPageName
@@ -744,13 +741,6 @@ typedef void (^AlertViewBlock)(UIAlertView *alertView, NSInteger buttonIndex);
 //    
 //    return HTSTR(@"%@(%@)", pageKey, pageNameStr);
 //}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    //NSLog(@"%@ view did disappear", NSStringFromClass([self class]));
-}
 
 - (void)viewWillLayoutSubviews
 {

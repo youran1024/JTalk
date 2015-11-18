@@ -22,6 +22,7 @@
 #import <CoreText/CoreText.h>
 #import "DetailWebViewController.h"
 #import "SignDetailViewController.h"
+#import "SearchDisplayViewController.h"
 
 
 NSString *groupPeople;
@@ -165,9 +166,25 @@ NSString *groupPeople;
 #pragma mark -
 #pragma mark UITextFieldDelegate
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [self showSearchDisplayViewController];
+    
+    return NO;
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [self.searchBarView makeEditing:YES];
+    //[self.searchBarView makeEditing:YES];
+    //[self showSearchDisplayViewController];
+}
+
+- (void)showSearchDisplayViewController
+{
+    SearchDisplayViewController *search = [[SearchDisplayViewController alloc] init];
+    HTNavigationController *nav = [[HTNavigationController alloc] initWithRootViewController:search];
+    
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -359,7 +376,6 @@ NSString *groupPeople;
     }
 
 }
-
 
 //  MARK:创建并加入聊天室
 - (void)createGroupWithTitle:(NSString *)title

@@ -9,6 +9,8 @@
 #import "HTBaseRequest+Requests.h"
 #import "ServerHostConfig.h"
 #import "NSString+URLEncoding.h"
+#import <MobClick.h>
+
 
 #define HTRequestWithUserInfoByURL(__url_)  [[HTBaseRequest requestWithURL:__url_] addUserId]
 
@@ -153,6 +155,16 @@
  */
 //------------------------------------
 
++ (HTBaseRequest *)userSearchOnTime:(NSString *)word
+{
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/word/searching");
+    [request addPostValue:word forKey:@"word"];
+    
+    request.shouldShowErrorMsg = NO;
+    
+    return request;
+}
+
 //  记录用户检索词汇
 + (HTBaseRequest *)recoderUserSearchWord:(NSString *)word
 {
@@ -190,8 +202,16 @@
 //  创建群组
 + (HTBaseRequest *)createGroupWithGroupName:(NSString *)groupName
 {
+    if (groupName.length == 0) {
+        return nil;
+    }
+    
     HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/group/create");
     [request addPostValue:groupName forKey:@"word"];
+    
+    if (groupName) {
+        [MobClick event:@"chat_room_click" attributes:@{@"word" : groupName}];
+    }
     
     return request;
 }

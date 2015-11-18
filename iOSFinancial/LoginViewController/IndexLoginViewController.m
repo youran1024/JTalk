@@ -11,6 +11,7 @@
 #import "SystemConfig.h"
 #import "UMSocial.h"
 #import "EditInfoViewController.h"
+#import <MobClick.h>
 
 
 @interface IndexLoginViewController ()
@@ -209,8 +210,23 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:__USER_LOGIN_SUCCESS object:nil];
             
             [self dismissViewControllerAnimated:YES completion:nil];
+            
+            NSString *loginType = nil;
+            switch ([User sharedUser].userInfoModelTmp.userLoginType) {
+                case UserLoginTypeQQ:loginType = @"QQ";break;
+                case UserLoginTypePhone:loginType = @"Phone";break;
+                case UserLoginTypeWeibo:loginType = @"Weibo";break;
+                case UserLoginTypeWeChat:loginType = @"WeiChat";break;
+                default:
+                    loginType = @"Phone";break;
+            }
+            
+            [MobClick event:@"_login" attributes:@{@"loginType": loginType}];
+            
+        }else {
+            
+            [MobClick event:@"_loginFaile" attributes:@{@"faileCode" : request.responseString, @"faileReason" : @(request.responseStatusCode)}];
         }
-        
     }];
 }
 

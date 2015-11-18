@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "HTBaseViewController.h"
 #import "NSString+Encrypto.h"
-
+#import <MobClick.h>
 
 @interface HTBaseRequest () <YTKRequestDelegate>
 
@@ -54,6 +54,9 @@
     
     if (responseCode != 200 && _shouldShowErrorMsg) {
         
+        NSString *requestUrl = HTSTR(@"%@ -> %@", request.baseUrl, request.requestUrl);
+        [MobClick event:@"_request_url_faile" attributes:@{@"requestURL" : requestUrl, @"faileReason" : request.responseString, @"faileCode" : @(request.responseStatusCode)}];
+        
         NSLog(@"requestError:%@%@", request.baseUrl, request.requestUrl);
         HTBaseViewController *viewController = [self viewControllerOnScreen];
         NSString *message = [request.responseJSONObject stringForKey:@"message"];
@@ -64,6 +67,9 @@
 - (void)requestFailed:(YTKBaseRequest *)request
 {
     NSLog(@"requestFalied:%@%@", request.baseUrl, request.requestUrl);
+    
+    NSString *requestUrl = HTSTR(@"%@ -> %@", request.baseUrl, request.requestUrl);
+    [MobClick event:@"_request_url_faile" attributes:@{@"requestURL" : requestUrl, @"faileReason" : request.responseString, @"faileCode" : @(request.responseStatusCode)}];
     
     HTBaseViewController *viewController = [self viewControllerOnScreen];
     
@@ -224,6 +230,9 @@
 
 - (void)startWithCompletionBlockWithSuccess:(void (^)(YTKBaseRequest *request))success
 {
+    NSString *requestUrl = HTSTR(@"%@ -> %@", self.baseUrl, self.requestUrl);
+    [MobClick event:@"_request_url" attributes:@{@"requestURL" : requestUrl}];
+    
     [self setCompletionBlockWithSuccess:success failure:nil];
     [self start];
 }

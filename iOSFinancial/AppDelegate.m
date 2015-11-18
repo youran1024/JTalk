@@ -18,6 +18,7 @@
 #import "UMSocialSinaHandler.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
+#import <MobClick.h>
 
 /* 融云 */
 #import <RongIMKit/RongIMKit.h>
@@ -305,12 +306,21 @@
     //  MARK:短信
     [self initSMS_SDK];
     
+    //  MARK:友盟统计
+    [self initUmengAnalytics];
+    
     //  MARK:友盟分享
     [self initUmengShare];
     
     //  MARK:友盟用户反馈
     [self initUmengUserFeedBack];
     
+}
+
+- (void)initUmengAnalytics
+{
+    [MobClick startWithAppkey:UMengAppKey reportPolicy:BATCH channelId:@"itunes"];
+    [MobClick setEncryptEnabled:YES];
 }
 
 - (void)initUmengShare

@@ -94,6 +94,8 @@
 		92442FF61B831FC4006E3290 /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92442FF51B831FC4006E3290 /* PersonalViewController.m */; };
 		92442FFA1B832027006E3290 /* PersonalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92442FF91B832027006E3290 /* PersonalInfoView.m */; };
 		92442FFC1B83203B006E3290 /* PersonalInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92442FFB1B83203B006E3290 /* PersonalInfoView.xib */; };
+		92504E3E1BFB42FC0065508F /* SearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92504E3D1BFB42FC0065508F /* SearchDisplayViewController.m */; };
+		92504E411BFB50AD0065508F /* CustomerSearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92504E401BFB50AD0065508F /* CustomerSearchBarView.m */; };
 		9253F7531BAA6C750007BD88 /* IndexLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9253F7521BAA6C750007BD88 /* IndexLoginViewController.xib */; };
 		92616C341BE20F77000E067A /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 92616C191BE20F77000E067A /* UMSocialLocalizable.strings */; };
 		92616C351BE20F77000E067A /* libUMSocial_Sdk_4.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92616C271BE20F77000E067A /* libUMSocial_Sdk_4.3.a */; };
@@ -137,6 +139,7 @@
 		928776531BF45FE300596AC1 /* PeopleCountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928776521BF45FE300596AC1 /* PeopleCountView.m */; };
 		928776551BF4601900596AC1 /* PeopleCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 928776541BF4601900596AC1 /* PeopleCountView.xib */; };
 		928860E61B297F810060502D /* UILabel+FlickerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 928860E51B297F810060502D /* UILabel+FlickerNumber.m */; };
+		9288F67B1BFCAAF10009FE22 /* CustomerSearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9288F67A1BFCAAF10009FE22 /* CustomerSearchBarView.xib */; };
 		928C97521B85834900D4CDD5 /* UIView+LabelSign.m in Sources */ = {isa = PBXBuildFile; fileRef = 928C97511B85834900D4CDD5 /* UIView+LabelSign.m */; };
 		9296B25C1B70C9680053B157 /* ShareTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9296B25B1B70C9670053B157 /* ShareTitleView.m */; };
 		9296B25F1B70CBCC0053B157 /* ChatRoomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9296B25E1B70CBCC0053B157 /* ChatRoomCell.xib */; };
@@ -365,6 +368,10 @@
 		92442FF81B832027006E3290 /* PersonalInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoView.h; sourceTree = "<group>"; };
 		92442FF91B832027006E3290 /* PersonalInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoView.m; sourceTree = "<group>"; };
 		92442FFB1B83203B006E3290 /* PersonalInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalInfoView.xib; sourceTree = "<group>"; };
+		92504E3C1BFB42FC0065508F /* SearchDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchDisplayViewController.h; sourceTree = "<group>"; };
+		92504E3D1BFB42FC0065508F /* SearchDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDisplayViewController.m; sourceTree = "<group>"; };
+		92504E3F1BFB50AD0065508F /* CustomerSearchBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerSearchBarView.h; sourceTree = "<group>"; };
+		92504E401BFB50AD0065508F /* CustomerSearchBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerSearchBarView.m; sourceTree = "<group>"; };
 		9253F7521BAA6C750007BD88 /* IndexLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexLoginViewController.xib; sourceTree = "<group>"; };
 		92616C1A1BE20F77000E067A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
 		92616C1C1BE20F77000E067A /* UMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocial.h; sourceTree = "<group>"; };
@@ -444,6 +451,7 @@
 		928776541BF4601900596AC1 /* PeopleCountView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleCountView.xib; sourceTree = "<group>"; };
 		928860E41B297F810060502D /* UILabel+FlickerNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FlickerNumber.h"; sourceTree = "<group>"; };
 		928860E51B297F810060502D /* UILabel+FlickerNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FlickerNumber.m"; sourceTree = "<group>"; };
+		9288F67A1BFCAAF10009FE22 /* CustomerSearchBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerSearchBarView.xib; sourceTree = "<group>"; };
 		928C97501B85834900D4CDD5 /* UIView+LabelSign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LabelSign.h"; sourceTree = "<group>"; };
 		928C97511B85834900D4CDD5 /* UIView+LabelSign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LabelSign.m"; sourceTree = "<group>"; };
 		9296B25A1B70C9670053B157 /* ShareTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareTitleView.h; sourceTree = "<group>"; };
@@ -1279,6 +1287,11 @@
 				928C97491B8439EF00D4CDD5 /* ViewController */,
 				92B47FD71B6F095800AF9A2D /* StateListViewController.h */,
 				92B47FD81B6F095800AF9A2D /* StateListViewController.m */,
+				92504E3F1BFB50AD0065508F /* CustomerSearchBarView.h */,
+				92504E401BFB50AD0065508F /* CustomerSearchBarView.m */,
+				9288F67A1BFCAAF10009FE22 /* CustomerSearchBarView.xib */,
+				92504E3C1BFB42FC0065508F /* SearchDisplayViewController.h */,
+				92504E3D1BFB42FC0065508F /* SearchDisplayViewController.m */,
 			);
 			name = StateListViewController;
 			sourceTree = "<group>";
@@ -1692,6 +1705,7 @@
 				920C09991B74C0A700A8CC30 /* SMS_SDKLocalizable.strings in Resources */,
 				92D2A2911AC3DF7B00C9A4AE /* Images.xcassets in Resources */,
 				9228C9891B72FA0D008E3608 /* city.plist in Resources */,
+				9288F67B1BFCAAF10009FE22 /* CustomerSearchBarView.xib in Resources */,
 				92FFE41C1B79DB76003B57A9 /* citydict.plist in Resources */,
 				92DDD2771BA6DA6700FB68FF /* LongTapUserView.xib in Resources */,
 				92616C341BE20F77000E067A /* UMSocialLocalizable.strings in Resources */,
@@ -1802,6 +1816,7 @@
 				92442FD21B81DD4D006E3290 /* SignModel.m in Sources */,
 				92871C791AF75D6E002EC9F6 /* HTSectionView.m in Sources */,
 				926811C51ADE571E00FAB0A2 /* HTUserDefault.m in Sources */,
+				92504E3E1BFB42FC0065508F /* SearchDisplayViewController.m in Sources */,
 				9217C9231BC6659500938A9E /* UIImage+JTSImageEffects.m in Sources */,
 				921DD2EE1AEB67AF0004251F /* NSString+LunchName.m in Sources */,
 				92442FC01B81B4DC006E3290 /* HTBaseRequest+Requests.m in Sources */,
@@ -1853,6 +1868,7 @@
 				927848691B7454D00021562A /* LoginViewController.m in Sources */,
 				92442FF61B831FC4006E3290 /* PersonalViewController.m in Sources */,
 				92DA92791B3C164800AACF1D /* UIView+NoneDataView.m in Sources */,
+				92504E411BFB50AD0065508F /* CustomerSearchBarView.m in Sources */,
 				92A41EE31B26D4030036DC58 /* HTADScrollView.m in Sources */,
 				9229E7541BE9EA780035F9FE /* SignViewModel.m in Sources */,
 				92B47FD51B6F093000AF9A2D /* ChatRoomJoinerList.m in Sources */,

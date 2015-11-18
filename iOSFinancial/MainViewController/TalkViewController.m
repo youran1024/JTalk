@@ -20,6 +20,7 @@
 #import "NSString+URLEncoding.h"
 #import "UMSocial.h"
 #import "PeopleCountView.h"
+#import <MobClick.h>
 
 
 @interface TalkViewController () <UIActionSheetDelegate, UMSocialUIDelegate>
@@ -41,6 +42,8 @@
 
 @implementation TalkViewController
 
+#define __selfClassName__   NSStringFromClass([self class])
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -53,6 +56,17 @@
     [super viewDidAppear:animated];
     
     [self revertNavigationBar];
+    
+    // 页面开启时间统计
+    [MobClick beginLogPageView:__selfClassName__];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // 页面关闭时间统计
+    [MobClick endLogPageView:__selfClassName__];
 }
 
 - (void)revertNavigationBar
