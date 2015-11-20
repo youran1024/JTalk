@@ -15,7 +15,7 @@
 #import "UIColor+Colors.h"
 #import "AppDelegate.h"
 #import "UIAlertView+RWBlock.h"
-#import "MobClick.h"
+#import  <MobClick.h>
 
 
 typedef void (^AlertViewBlock)(UIAlertView *alertView, NSInteger buttonIndex);
@@ -695,7 +695,6 @@ typedef void (^AlertViewBlock)(UIAlertView *alertView, NSInteger buttonIndex);
     
 }
 
-
 #pragma mark -  屏幕旋转
 
 - (BOOL)shouldAutorotate
@@ -718,7 +717,7 @@ typedef void (^AlertViewBlock)(UIAlertView *alertView, NSInteger buttonIndex);
     [super viewWillAppear:animated];
     
     // 页面开启时间统计
-    [MobClick beginLogPageView:__selfClassName__];
+    [MobClick beginLogPageView:[self selfClassName]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -726,7 +725,7 @@ typedef void (^AlertViewBlock)(UIAlertView *alertView, NSInteger buttonIndex);
     [super viewWillDisappear:animated];
     
     // 页面关闭时间统计
-    [MobClick endLogPageView:__selfClassName__];
+    [MobClick endLogPageView:[self selfClassName]];
 }
 
 - (NSString *)selfClassName

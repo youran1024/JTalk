@@ -228,12 +228,12 @@
                   moduleName = "JTalk"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/MrYang/Developer/JTalk/iOSFinancial/AppDelegate.m"
-                  timestampString = "469596353.462693"
+                  timestampString = "469685858.671442"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "251"
                   endingLineNumber = "251"
-                  offsetFromSymbolStart = "276">
+                  offsetFromSymbolStart = "308">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -243,12 +243,12 @@
                   moduleName = "JTalk"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/MrYang/Developer/JTalk/iOSFinancial/AppDelegate.m"
-                  timestampString = "469596353.462936"
+                  timestampString = "469685858.671668"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "251"
                   endingLineNumber = "251"
-                  offsetFromSymbolStart = "32">
+                  offsetFromSymbolStart = "40">
                </Location>
             </Locations>
          </BreakpointContent>

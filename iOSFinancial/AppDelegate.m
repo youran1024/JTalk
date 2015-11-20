@@ -325,7 +325,10 @@
 
 - (void)initUmengShare
 {
+    [UMSocialConfig hiddenNotInstallPlatforms:nil];
+    
     [UMSocialData setAppKey:UMengAppKey];
+    
     [UMSocialSinaHandler openSSOWithRedirectURL:_SinaShareSDKCallBackURL_];
     
     [UMSocialWechatHandler setWXAppId:WeChatAppKey appSecret:WeChatAppSecret url:_JTalkCallBackURL_];
@@ -367,7 +370,6 @@
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -160)
                                                          forBarMetrics:UIBarMetricsDefault];
 }
-
 
 //  设置bug报告
 - (void)initBuglyReport

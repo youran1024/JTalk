@@ -48,7 +48,16 @@ NSString *groupPeople;
     
     self.tableView.tableHeaderView = self.searchBarView;
     [self.searchBarView.searchField becomeFirstResponder];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange) name:UITextFieldTextDidChangeNotification object:nil];
+}
 
+- (void)textFieldDidChange
+{
+    if (self.searchBarView.searchField.text.length == 0) {
+        self.signArray = nil;
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - 
@@ -65,6 +74,15 @@ NSString *groupPeople;
         self.signArray = nil;
         [self.tableView reloadData];
     }
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSString *searchStr = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    [self createGroupWithTitle:searchStr];
     
     return YES;
 }
@@ -133,8 +151,8 @@ NSString *groupPeople;
     if (self.signArray.count == 0) {
         
         LoadMoreCell *cell = [LoadMoreCell newCell];
-        cell.loadingLabel.text = @"Let me go ~";
         cell.cellState = CellStateHaveNoMore;
+        
         
         return cell;
     }
@@ -167,6 +185,10 @@ NSString *groupPeople;
 //  MARK:创建并加入聊天室
 - (void)createGroupWithTitle:(NSString *)title
 {
+    if (isEmpty(title)) {
+        return;
+    }
+    
     [self showHudWaitingView:PromptTypeWating];
     HTBaseRequest *request = [HTBaseRequest createGroupWithGroupName:title];
     
@@ -175,11 +197,10 @@ NSString *groupPeople;
         NSDictionary *dict = request.responseJSONObject;
         NSInteger code = [[dict stringIntForKey:@"code"] integerValue];
         dict = [dict dictionaryForKey:@"result"];
-        groupPeople = [dict stringForKey:@"user_count"];
+        groupPeople = [dict stringForKey:@"group_user_count"];
         if (code == 200) {
             [weakSelf joinGroupByGroupId:[title toMD5] andGroupName:title];
         }
-        
     }];
 }
 
@@ -230,10 +251,10 @@ NSString *groupPeople;
 - (void)showTalkListViewController:(NSString *)title
 {
     TalkViewController *conversationVC = [[TalkViewController alloc] init];
-    conversationVC.conversationType = ConversationType_GROUP; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
-    conversationVC.targetId = [title toMD5]; // 接收者的 targetId，这里为举例。
+    conversationVC.conversationType = ConversationType_GROUP;  //会话类型，这里设置为 PRIVATE 即发起单聊会话
+    conversationVC.targetId = [title toMD5]; // 接收者的 targetId，这里为举例
     conversationVC.userName = title;
-    conversationVC.title = title; // 会话的 title。
+    conversationVC.title = title; // 会话的 title
     conversationVC.groupTitle = title;
     conversationVC.groupPeople = groupPeople;
     

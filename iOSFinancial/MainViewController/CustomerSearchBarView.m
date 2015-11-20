@@ -22,7 +22,7 @@
 
 - (void)awakeFromNib
 {
-    _searchField.returnKeyType = UIReturnKeySearch;
+    _searchField.returnKeyType = UIReturnKeyJoin;
     _searchField.placeholder = @"搜索此刻你想到的词";
     
     _lineView.backgroundColor = [UIColor jt_lineColor];
@@ -32,12 +32,14 @@
 {
     _searchDelegate = searchDelegate;
     _searchField.delegate = _searchDelegate;
-    
 }
 
 - (IBAction)clearButtonClicked:(id)sender
 {
     _searchField.text = @"";
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidChangeNotification object:nil];
+    
 }
 
 - (IBAction)cancleButtonClicked:(id)sender
