@@ -22,5 +22,6 @@ pod 'UMengFeedback', '~> 2.3.4'
 #   七牛云存储
 pod 'Qiniu', '~> 7.0'
 
+pod 'HTChineseHandle'
 
 

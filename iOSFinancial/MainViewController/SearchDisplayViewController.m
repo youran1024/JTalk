@@ -153,7 +153,6 @@ NSString *groupPeople;
         LoadMoreCell *cell = [LoadMoreCell newCell];
         cell.cellState = CellStateHaveNoMore;
         
-        
         return cell;
     }
     

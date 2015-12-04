@@ -24,6 +24,8 @@
     HTBaseRequest *request = [[HTBaseRequest alloc] initWithURL:detailURL];
     request.requestMethod = YTKRequestMethodPost;
     
+    [MobClick event:@"_request_url" attributes:@{@"requestURL" : request.requestUrl}];
+    
     return request;
 }
 
@@ -230,9 +232,6 @@
 
 - (void)startWithCompletionBlockWithSuccess:(void (^)(YTKBaseRequest *request))success
 {
-    NSString *requestUrl = HTSTR(@"%@ -> %@", self.baseUrl, self.requestUrl);
-    [MobClick event:@"_request_url" attributes:@{@"requestURL" : requestUrl}];
-    
     [self setCompletionBlockWithSuccess:success failure:nil];
     [self start];
 }

@@ -142,7 +142,7 @@ THE SOFTWARE.
 
 ## MJExtension
 
-Copyright (c) 2013-2014 MJExtension (https://github.com/CoderMJLee/MJExtension)
+Copyright (c) 2013-2015 MJExtension (https://github.com/CoderMJLee/MJExtension)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -189,7 +189,7 @@ THE SOFTWARE.
 
 The MIT License (MIT)
 
-Copyright (c) 2012-2014 qiniu.com
+Copyright (c) 2011-2015 qiniu.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -100,11 +100,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSFinancial/HTRequest/HTBaseRequest.m"
-            timestampString = "467796835.375861"
+            timestampString = "470024829.739115"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "-requestFinished:"
             landmarkType = "5">
          </BreakpointContent>
@@ -228,12 +228,12 @@
                   moduleName = "JTalk"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/MrYang/Developer/JTalk/iOSFinancial/AppDelegate.m"
-                  timestampString = "469685858.671442"
+                  timestampString = "470117206.120903"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "251"
                   endingLineNumber = "251"
-                  offsetFromSymbolStart = "308">
+                  offsetFromSymbolStart = "276">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -243,12 +243,12 @@
                   moduleName = "JTalk"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/MrYang/Developer/JTalk/iOSFinancial/AppDelegate.m"
-                  timestampString = "469685858.671668"
+                  timestampString = "470117206.121195"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "251"
                   endingLineNumber = "251"
-                  offsetFromSymbolStart = "40">
+                  offsetFromSymbolStart = "32">
                </Location>
             </Locations>
          </BreakpointContent>

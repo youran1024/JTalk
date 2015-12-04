@@ -1643,7 +1643,7 @@
 				TargetAttributes = {
 					92D2A27C1AC3DF7B00C9A4AE = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 3T4BLT5L4D;
+						DevelopmentTeam = WJ39GR2PR6;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2033,7 +2033,7 @@
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMSocial_Sdk_4.3/Wechat",
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMSocial_Sdk_4.3/TencentOpenAPI",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.xxxxtalk.JTalk1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxxxtalk.JTalk;
 				PRODUCT_NAME = JTalk;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2069,7 +2069,7 @@
 					"$(PROJECT_DIR)/iOSFinancial/ThirdPart/UMSocial_Sdk_4.3/TencentOpenAPI",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xxxxtalk.JTalk1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxxxtalk.JTalk;
 				PRODUCT_NAME = JTalk;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

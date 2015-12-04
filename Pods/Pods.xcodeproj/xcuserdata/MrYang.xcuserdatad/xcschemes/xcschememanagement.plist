@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>HTChineseHandle.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>HappyDNS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -77,12 +82,47 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0A1E73BDED8451993AEBD7C4FB8D6B33</key>
+		<key>0216718D4C367E8F118E179925E4684A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>14C670EB68BE0790B5BC6104ABF2AC3D</key>
+		<key>0581F6BAB3B4AA821CDD777D3FE5F737</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>08EEFC7EAE8213828DC888DA95173935</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0E8C1D5A5C2771B1BB421A2B35AB069B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1236A30AA2E13983DABE503976722310</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28D674FF943C7F809D9F6815D43020EB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2BBB985EC1D931DF5D63D5E352325CB3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4EB92CB6ECA1CE95D3C7F23C15B7B6CC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>50E67924BC27DAF846F6222E8FAD19FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,37 +132,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>59018A28E017549EBA8651CB147479A8</key>
+		<key>BE547FFA97E2607D900D6F7D75401173</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>776590C95A35A50FCFF4E1D201C07D69</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8063E34B5F8F7FB87B458213157198C4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8EF1D26821DBBADCC78717DC4CA0A142</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>94239B61BBDA0F6BB2811F47C9FF6F6E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A3DC853FB1CDE574FFA0420FCEFCCE43</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C1FD435359103D8663AED5FADEF64288</key>
+		<key>BF914868AD2A297577A649F435D753BB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,12 +152,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E6EFEB252D74C29F23B8B2570D30BBD0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F36FC12B3B2268042EA16D658902EA47</key>
+		<key>E8467B799499CB850B9C286882034992</key>
 		<dict>
 			<key>primary</key>
 			<true/>

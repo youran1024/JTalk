@@ -59,10 +59,10 @@ install_resource()
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "DateTools/DateTools/DateTools.bundle"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_0_stable/RongCloud.bundle"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_0_stable/en.lproj"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_0_stable/zh-Hans.lproj"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_0_stable/Emoji.plist"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_9_stable/RongCloud.bundle"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_9_stable/en.lproj"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_9_stable/zh-Hans.lproj"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_9_stable/Emoji.plist"
   install_resource "UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/zh-Hans.lproj/UMFeedbackLocalizable.strings"
   install_resource "UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/bubble_min@2x.png"
   install_resource "UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/cancel@2x.png"
@@ -83,10 +83,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "DateTools/DateTools/DateTools.bundle"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_0_stable/RongCloud.bundle"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_0_stable/en.lproj"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_0_stable/zh-Hans.lproj"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_0_stable/Emoji.plist"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_9_stable/RongCloud.bundle"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_9_stable/en.lproj"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_9_stable/zh-Hans.lproj"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_9_stable/Emoji.plist"
   install_resource "UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/zh-Hans.lproj/UMFeedbackLocalizable.strings"
   install_resource "UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/bubble_min@2x.png"
   install_resource "UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/cancel@2x.png"
