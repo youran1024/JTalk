@@ -23,6 +23,9 @@
 
 碎片化的时间里，随时，聊聊天。
 
+[iPhone下载](https://itunes.apple.com/cn/app/id1041310652)
+
+![iPhone](https://github.com/youran1024/JTalk/blob/master/Download/iPhone%20Download.png)
 
 
 \----------------------------------------
