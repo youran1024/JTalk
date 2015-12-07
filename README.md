@@ -29,7 +29,7 @@
 
 ![iPhone](https://github.com/youran1024/JTalk/blob/master/Download/iPhone%20Download.png)
 
-[交言]:一款聊天软件
+[交言]:http:www.xxxxtalk.com "聊天软件"
 \----------------------------------------
 
 
