@@ -59,7 +59,7 @@
 + (HTBaseRequest *)fetchUserSearchList:(NSInteger)pageNum;
 
 //  删除个人查询的词汇
-+ (HTBaseRequest *)deleteUserSearchWord:(NSString *)word;
++ (HTBaseRequest *)deleteUserSearchWord:(NSString *)groupId;
 
 /**
  *    群组聊天

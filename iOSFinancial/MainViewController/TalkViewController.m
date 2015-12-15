@@ -285,28 +285,28 @@
     [self.view addSubview:self.functionView];
     [self refreshMindButtonState];
     
-    [UIView animateWithDuration:.65 delay:.0 usingSpringWithDamping:.7 initialSpringVelocity:.3 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:.45 delay:.0 usingSpringWithDamping:.7 initialSpringVelocity:.3 options:UIViewAnimationOptionCurveLinear animations:^{
         
-        self.functionView.userInteractionEnabled = NO;
+        self.view.userInteractionEnabled = NO;
         self.functionView.top = self.view.top + 60;
         
     } completion:^(BOOL finished) {
         self.functionView.top = self.view.top + 60;
-        self.functionView.userInteractionEnabled = YES;
+        self.view.userInteractionEnabled = YES;
     }];
 }
 
 - (void)removeFunctionView
 {
     [self removeAlphaView];
-    [UIView animateWithDuration:.65 delay:.0 usingSpringWithDamping:.7 initialSpringVelocity:.3 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:.45 delay:.0 usingSpringWithDamping:.7 initialSpringVelocity:.3 options:UIViewAnimationOptionCurveLinear animations:^{
         
-        self.functionView.userInteractionEnabled = NO;
+        self.view.userInteractionEnabled = NO;
         self.functionView.bottom = self.view.top + 64;
         
     } completion:^(BOOL finished) {
         
-        self.functionView.userInteractionEnabled = YES;
+        self.view.userInteractionEnabled = YES;
         [self.functionView removeFromSuperview];
         
     }];

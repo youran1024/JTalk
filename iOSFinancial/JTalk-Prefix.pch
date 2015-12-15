@@ -34,7 +34,7 @@
 
 #ifdef __APP_TEST__
 
-#define __APP_CHANNEL  @"Test"
+#define __APP_CHANNEL  @"AppStoreReview"
 
 #else
 

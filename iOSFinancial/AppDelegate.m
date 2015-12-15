@@ -386,8 +386,8 @@
 
 - (void)initSMS_SDK
 {
-    [SMS_SDK registerApp:SMSAppKey withSecret:SMSAppSecret];
     [SMS_SDK enableAppContactFriends:NO];
+    [SMS_SDK registerApp:SMSAppKey withSecret:SMSAppSecret];
 }
 
 - (void)initRongYun

@@ -186,11 +186,11 @@
 }
 
 //  删除个人查询的词汇
-+ (HTBaseRequest *)deleteUserSearchWord:(NSString *)word
++ (HTBaseRequest *)deleteUserSearchWord:(NSString *)groupid
 {
-    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"words/delete");
+    HTBaseRequest *request = HTRequestWithUserInfoByURL(@"/user/group/delete");
     
-    [request addValue:word forKey:@"word"];
+    [request addValue:groupid forKey:@"group_id"];
     
     return request;
 }

@@ -71,7 +71,7 @@
     NSLog(@"requestFalied:%@%@", request.baseUrl, request.requestUrl);
     
     NSString *requestUrl = HTSTR(@"%@ -> %@", request.baseUrl, request.requestUrl);
-    [MobClick event:@"_request_url_faile" attributes:@{@"requestURL" : requestUrl, @"faileReason" : request.responseString, @"faileCode" : @(request.responseStatusCode)}];
+    [MobClick event:@"_request_url_faile" attributes:@{@"requestURL" : requestUrl, @"faileReason" : HTSTR(@"%@", request.responseString), @"faileCode" : HTSTR(@"%ld", request.responseStatusCode)}];
     
     HTBaseViewController *viewController = [self viewControllerOnScreen];
     

@@ -123,6 +123,9 @@
     
     NSDictionary *dic = [self.dataArray objectAtIndex:indexPath.row];
     cell.textLabel.text = [dic stringIntForKey:@"group_name"];
+    /*
+    [cell.imageView sd_setImageWithURL:HTURL([dic stringForKey:@"group_icon"]) placeholderImage:nil];
+    */
     
     return cell;
 }
@@ -141,11 +144,11 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSString *title = [self.dataArray objectAtIndex:indexPath.row];
+    NSDictionary *userDic = [self.dataArray objectAtIndex:indexPath.row];
+    NSString *title = [userDic stringForKey:@"group_name"];
     TalkViewController *conversationVC = [[TalkViewController alloc] init];
     conversationVC.conversationType = ConversationType_GROUP; //会话类型，这里设置为 PRIVATE 即发起单聊会话。
     conversationVC.targetId = [title toMD5]; // 接收者的 targetId，这里为举例。
-    conversationVC.userName = title;
     conversationVC.title = title; // 会话的 title。
     conversationVC.groupTitle = title;
     
@@ -156,15 +159,16 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *word = [self.dataArray objectAtIndex:indexPath.row];
-    [self removeUserSearchWord:word withIndexPath:indexPath];
+    NSDictionary *dic = [self.dataArray objectAtIndex:indexPath.row];
+    NSString *groupId = [dic stringForKey:@"group_id"];
+    [self removeUserSearchWord:groupId withIndexPath:indexPath];
 }
 
-- (void)removeUserSearchWord:(NSString *)word withIndexPath:(NSIndexPath *)indexPath
+- (void)removeUserSearchWord:(NSString *)groupId withIndexPath:(NSIndexPath *)indexPath
 {
     [self showHudWaitingView:PromptTypeWating];
     
-    HTBaseRequest *request = [HTBaseRequest deleteUserSearchWord:word];
+    HTBaseRequest *request = [HTBaseRequest deleteUserSearchWord:groupId];
     
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         
