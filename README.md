@@ -23,7 +23,13 @@
 
 碎片化的时间里，随时，聊聊天。
 
-<font color=red> **因为苹果政策，被拒了，我们会尽快上线。**</font>
+[image1](https://github.com/youran1024/JTalk/blob/master/Download/iPhone/guideImage0)
+[image2](https://github.com/youran1024/JTalk/blob/master/Download/iPhone/guideImage1)
+[image3](https://github.com/youran1024/JTalk/blob/master/Download/iPhone/guideImage2)
+[image4](https://github.com/youran1024/JTalk/blob/master/Download/iPhone/guideImage3)
+
+
+<font color=red> **我们已经上线。**</font>
 
 [iPhone下载](https://itunes.apple.com/cn/app/id1041310652)
 
