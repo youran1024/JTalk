@@ -23,10 +23,10 @@
 
 碎片化的时间里，随时，聊聊天。
 
-![image1](https://github.com/youran1024/JTalk/blob/master/Download/iPhone/guideImage0)
-![image2](https://github.com/youran1024/JTalk/blob/master/Download/iPhone/guideImage1)
-![image3](https://github.com/youran1024/JTalk/blob/master/Download/iPhone/guideImage2)
-![image4](https://github.com/youran1024/JTalk/blob/master/Download/iPhone/guideImage3)
+![image1](https://github.com/youran1024/JTalk/blob/master/Download/guideImage0.png)
+![image2](https://github.com/youran1024/JTalk/blob/master/Download/guideImage1.png)
+![image3](https://github.com/youran1024/JTalk/blob/master/Download/guideImage2.png)
+![image4](https://github.com/youran1024/JTalk/blob/master/Download/guideImage3.png)
 
 
 <font color=red> **我们已经上线。**</font>
