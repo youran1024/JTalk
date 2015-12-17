@@ -23,13 +23,13 @@
 
 碎片化的时间里，随时，聊聊天。
 
-<font color=red> **因为苹果政策，被拒了，我们会尽快上线。**</font>
+<font color=red> **我们上线了**</font>
 
-[iPhone下载](https://itunes.apple.com/cn/app/id1041310652)
+[AppStore 下载](https://itunes.apple.com/cn/app/id1041310652)
 
 ![iPhone](https://github.com/youran1024/JTalk/blob/master/Download/iPhone%20Download.png)
 
-[交言]:http:www.xxxxtalk.com "聊天软件"
+[交言]:http:www.xxxxtalk.com "开森聊聊看"
 \----------------------------------------
 
 
